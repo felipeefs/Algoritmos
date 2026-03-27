@@ -21,8 +21,7 @@ class BaseTask:
         self.continue_on_error = continue_on_error
         self.only_matching = only_matching
         self.tested_cases = set()
-        self.passed_cases = s        self.passed_cases = set()
-et()
+        self.passed_cases = set()
         self.tested_units = set()
         self.passed_units = set()
         self.number_cases = 0
