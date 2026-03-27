@@ -46,4 +46,9 @@ elif tipo_bac == "Termófilo":
     else: 
         print(f"Taxa de crescimento por minuto: {taxa}")           
 
-
+#CASO EXISTA OU NÃO CRESCIMENTO EXPONENCIAL
+if taxa < 1:
+        print("Não há crescimento exponencial, ajuste a temperatura.")
+else:
+        temp_dup = ((math.log10(2)) / math.log10(taxa))
+        print (f"Tempo de duplicação: {temp_dup} minutos")
