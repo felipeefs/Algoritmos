@@ -1,11 +1,3 @@
-''' entradas: tipo de bacteria / valor da temperatura
-1 - inserir tipo da bacteria
-2 - inserir valor da temperatura
-3- temperatura ideial = 0
-
-se tipo == psicrófilos and temp == 10 and taxa
-    mostrar
-'''
 import math
 
 tipo_bac = input("Tipo de bactéria: ")
@@ -25,7 +17,7 @@ if tipo_bac == "Psicrófilos":
             print("Temperatura muito alta, resfrie a incubadora.")
     else: 
         print(f"Taxa de crescimento por minuto: {taxa}")
-        if taxa < 1: 
+        if taxa < 1:  #CASO EXISTA OU NÃO CRESCIMENTO EXPONENCIAL
                 print("Não há crescimento exponencial, ajuste a temperatura.")
         else:
               temp_dup = ((math.log10(2)) / math.log10(taxa))
@@ -42,7 +34,7 @@ elif tipo_bac == "Mesófilos":
             print("Temperatura muito alta, resfrie a incubadora.")
     else: 
         print(f"Taxa de crescimento por minuto: {taxa}")
-        if taxa < 1: 
+        if taxa < 1:  #CASO EXISTA OU NÃO CRESCIMENTO EXPONENCIAL
                 print("Não há crescimento exponencial, ajuste a temperatura.")
         else:
               temp_dup = ((math.log10(2)) / math.log10(taxa))
@@ -59,18 +51,8 @@ elif tipo_bac == "Termófilo":
             print("Temperatura muito alta, resfrie a incubadora.")
     else: 
         print(f"Taxa de crescimento por minuto: {taxa}") 
-        if taxa < 1: 
+        if taxa < 1:  #CASO EXISTA OU NÃO CRESCIMENTO EXPONENCIAL
                 print("Não há crescimento exponencial, ajuste a temperatura.")
         else:
               temp_dup = ((math.log10(2)) / math.log10(taxa))
               print (f"Tempo de duplicação: {temp_dup} minutos")  
-
-
-#CASO EXISTA OU NÃO CRESCIMENTO EXPONENCIAL
-'''
-if taxa < 1:
-        print("Não há crescimento exponencial, ajuste a temperatura.")
-else:
-        temp_dup = ((math.log10(2)) / math.log10(taxa))
-        print (f"Tempo de duplicação: {temp_dup} minutos")
-        '''
