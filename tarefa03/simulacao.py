@@ -24,56 +24,52 @@ elif tipo_bac == "Termófilo":
     temp_ide = 75
 taxa = r_max * math.e**(-((temp_amb - temp_ide)**2 ) / (temp_ide**2))
 
-
-saturacao = True
-
-while saturacao:
-    popu_ini = popu_fin
-    evaporacao = satur_fin * a #aw
-    nutrientes = b * popu_ini # bn
+if popu_fin == 0:
+    print("População extinta.")
     
-    if satur_fin < 1 and satur_fin > 0:
-        print(f"Após {temporizador} minutos: {popu_fin}")
-        popu_fin = math.floor((popu_ini) * (satur_fin) *  (taxa)) #quando w < 1 ele entra na conta, se nao a gente faz a conta sem ele
-
-        satur_fin = (evaporacao) - (nutrientes)
-
-        if nutrientes > evaporacao:
-            satur_fin = 0
-            
-        if popu_ini  == 0: 
-            saturacao = False
-
-        elif temporizador >= duracao:
-            saturacao = False
-
-        elif popu_fin < 1:
-            saturacao = False
-            print ("População extinta.")
-
-
-
-    elif satur_fin >= 1:
-        print(f"Após {temporizador} minutos: {popu_fin}")
+else:
+    saturacao = True
+    while saturacao:
+        popu_ini = popu_fin
+        evaporacao = satur_fin * a #aw
+        nutrientes = b * popu_ini # bn
         
-        satur_fin = (evaporacao) - (nutrientes)
-        popu_fin = math.floor((popu_ini) *  (taxa)) 
+        if satur_fin < 1 and satur_fin > 0:
+            print(f"Após {temporizador} minutos: {popu_fin}")
+            popu_fin = math.floor((popu_ini) * (satur_fin) *  (taxa)) #quando w < 1 ele entra na conta, se nao a gente faz a conta sem ele
 
-        if nutrientes > evaporacao:
-            satur_fin = 0
+            satur_fin = (evaporacao) - (nutrientes)
 
-        if popu_ini == 0:
-            saturacao = False
+            if nutrientes > evaporacao:
+                satur_fin = 0
 
-        elif temporizador >= duracao:
-            saturacao = False
+            if temporizador >= duracao:
+                saturacao = False
 
-        elif popu_fin < 1:
-            saturacao = False
-            print ("População extinta.")
+            elif popu_fin < 1:
+                saturacao = False
+                print ("População extinta.")
 
 
-    temporizador += 1
+
+        elif satur_fin >= 1:
+            print(f"Após {temporizador} minutos: {popu_fin}")
+            
+            satur_fin = (evaporacao) - (nutrientes)
+            popu_fin = math.floor((popu_ini) *  (taxa)) 
+
+            if nutrientes > evaporacao:
+                satur_fin = 0
+
+            if temporizador >= duracao:
+                saturacao = False
+
+            elif popu_fin < 1:
+                saturacao = False
+                print ("População extinta.")
+
+
+        temporizador += 1
 
 
 
