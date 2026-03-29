@@ -1,10 +1,10 @@
 import math
 
-tipo_bac = input("Digite o tipo de bactéria: ")
-duracao = float(input("Digite a duração do experimento: "))
-temp_amb = float(input("Digite a temperatura ambiente: "))
-satur = float(input("Digite a saturação inicial: ")) #saturação = w
-popu_ini = float(input("Digite a população inicial: ")) #população inicial = n
+tipo_bac = input()
+duracao = int(input())
+temp_amb = float(input())
+satur = float(input()) #saturação = w
+popu_ini = int(input()) #população inicial = n
 satur_fin = satur
 popu_fin = popu_ini
 temporizador = 0
@@ -22,21 +22,21 @@ elif tipo_bac == "Mesófilos":
 
 elif tipo_bac == "Termófilo":
     temp_ide = 75
-taxa = r_max * math.exp(-((temp_amb - temp_ide)**2 ) / (temp_ide**2))
+taxa = r_max * math.e**(-((temp_amb - temp_ide)**2 ) / (temp_ide**2))
 
 
 saturacao = True
 
 while saturacao:
-    if satur < 1 and saturacao:
+    popu_ini = popu_fin
+    evaporacao = satur_fin * a #aw
+    nutrientes = b * popu_ini # bn
+    
+    if satur_fin < 1 and satur_fin > 0:
         print(f"Após {temporizador} minutos: {popu_fin}")
-
-        popu_ini = popu_fin
-        evaporacao = satur_fin * a #aw
-        nutrientes = b * popu_ini # bn
+        popu_fin = math.floor((popu_ini) * (satur_fin) *  (taxa)) #quando w < 1 ele entra na conta, se nao a gente faz a conta sem ele
 
         satur_fin = (evaporacao) - (nutrientes)
-        popu_fin = math.floor((popu_ini) * (satur_fin) *  (taxa)) #quando w < 1 ele entra na conta, se nao a gente faz a conta sem ele
 
         temporizador += 1
         duracao = duracao - 1
@@ -44,20 +44,21 @@ while saturacao:
         if nutrientes > evaporacao:
             satur_fin = 0
 
-        elif popu_fin < 1 or temporizador > duracao:
+        elif popu_fin <= 0 or temporizador == duracao:
             saturacao = False
-            
-    else: 
+
+    elif satur_fin >= 1:
         print(f"Após {temporizador} minutos: {popu_fin}")
-        popu_ini = popu_fin
+        
+        satur_fin = (evaporacao) - (nutrientes)
         popu_fin = math.floor((popu_ini) *  (taxa)) 
+
         temporizador += 1
         duracao = duracao - 1
 
-        if popu_fin < 1 or temporizador > duracao:
+        if popu_fin <= 0 or temporizador == duracao:
             saturacao = False
-
-
+        
 
 
 
