@@ -27,7 +27,7 @@ taxa = r_max * math.e**(-((temp_amb - temp_ide)**2 ) / (temp_ide**2))
 
 saturacao = True
 
-while saturacao and temporizador <= duracao:
+while saturacao:
     popu_ini = popu_fin
     evaporacao = satur_fin * a #aw
     nutrientes = b * popu_ini # bn
@@ -40,6 +40,12 @@ while saturacao and temporizador <= duracao:
 
         if nutrientes > evaporacao:
             satur_fin = 0
+            
+        if popu_ini  == 0: 
+            saturacao = False
+
+        elif temporizador >= duracao:
+            saturacao = False
 
         elif popu_fin < 1:
             saturacao = False
@@ -56,7 +62,13 @@ while saturacao and temporizador <= duracao:
         if nutrientes > evaporacao:
             satur_fin = 0
 
-        if popu_fin < 1:
+        if popu_ini == 0:
+            saturacao = False
+
+        elif temporizador >= duracao:
+            saturacao = False
+
+        elif popu_fin < 1:
             saturacao = False
             print ("População extinta.")
 
