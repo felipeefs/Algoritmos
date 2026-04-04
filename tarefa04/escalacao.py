@@ -15,10 +15,10 @@ while i < jogos:
 
 jogad_finais = input().split()
 
+# MELHOR PLACAR RECENTE
 data_atual = lista_datas[0] #data atual começa na primeira data
 soma_data = 0
 placar = 0
-
 for i in range(jogos):
     if data_atual == lista_datas[i]:
         soma_data += lista_gols[i]
@@ -30,22 +30,13 @@ for i in range(jogos):
 
 if soma_data > placar:
     placar = soma_data
-
 print(f"Melhor placar recente: {placar}")
 
-
-'''
-
-
-
-print(lista_gols) 
-print(jogadores)
-print(lista_datas)
-
-#for data in lista_datas:
-    
-MELHOR PLACAR RECENTE (ta errado!!!):
-melhor_placar = sum(lista_gols) // jogos
-print(f"Melhor placar recente: {melhor_placar}")
-print(jogadores)
-'''
+# GOLS ESPERADOS
+gols_esp = 0
+jogad_atual = jogadores[0]
+soma_gols = 0
+divisao = 0
+for i in range(jogos):
+    if jogad_atual == jogadores[i]:
+        soma_gols += lista_gols[i]
