@@ -1,8 +1,9 @@
+import math
 jogos = int(input())
 jogadores = []
 lista_gols = []
 lista_datas = []
-j = 0 # lista atual
+lista_finais = []
 i = 0
 
 while i < jogos:
@@ -14,6 +15,7 @@ while i < jogos:
     i += 1
 
 jogad_finais = input().split()
+lista_finais.append(jogad_finais)
 
 # MELHOR PLACAR RECENTE
 data_atual = lista_datas[0] #data atual começa na primeira data
@@ -22,21 +24,27 @@ placar = 0
 for i in range(jogos):
     if data_atual == lista_datas[i]:
         soma_data += lista_gols[i]
-    else: #data atual e soma mudando 
+    else: #data atual e soma mudando
         data_atual = lista_datas[i]
         soma_data = lista_gols[i]
-        if soma_data > placar:
-            placar = soma_data
-
+        
 if soma_data > placar:
     placar = soma_data
 print(f"Melhor placar recente: {placar}")
 
 # GOLS ESPERADOS
 gols_esp = 0
-jogad_atual = jogadores[0]
 soma_gols = 0
 divisao = 0
-for i in range(jogos):
-    if jogad_atual == jogadores[i]:
-        soma_gols += lista_gols[i]
+for jogad_finais in lista_finais:
+    for i in range(jogos):
+        if jogad_finais == jogadores[i]:
+            soma_gols += lista_gols[i]
+            divisao += 1 
+    if divisao > 0:
+        media = soma_gols / divisao
+    else:
+        media = 0
+    gols_esp += media
+
+print(f"Número de gols esperados: {gols_esp}")
