@@ -15,15 +15,22 @@ while entradas:
         entradas = False
 
 maior_gol = 0
+jogad_gol = 0
 for i in range(len(lista_gols)):
     if lista_gols[maior_gol] < lista_gols[i]:
         maior_gol = i
-print(lista_gols[maior_gol])
+        jogad_gol = i
 
 maior_assis = -1
+jogad_assis = -1
 for i in range(len(lista_assis)):           
     if i != maior_gol:
         if maior_assis == -1 or lista_assis[maior_assis] < lista_assis[i]:
             maior_assis = i
+            jogad_assis = i
    
-print (lista_assis[maior_assis])
+
+if lista_assis[maior_assis] > lista_gols[maior_gol]:
+    print(f"Melhor dupla tem {jogadores[jogad_assis]} e {jogadores[jogad_gol]} com {lista_gols[maior_gol]} gols esperados.")
+else: 
+    print(f"Melhor dupla tem {jogadores[jogad_assis]} e {jogadores[jogad_gol]} com {lista_assis[maior_assis]} gols esperados.")
