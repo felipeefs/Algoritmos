@@ -21,9 +21,9 @@ for i in range(len(lista_gols)):
         maior_gol = i
         jogad_gol = i
 
-maior_assis = -1
+maior_assis = -1 # -1 porque pode começar sendo igual no 0
 jogad_assis = -1
-for i in range(len(lista_assis)):           
+for i in range(len(lista_assis)):          
     if i != maior_gol:
         if maior_assis == -1 or lista_assis[maior_assis] < lista_assis[i]:
             maior_assis = i
