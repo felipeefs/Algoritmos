@@ -1,3 +1,5 @@
+import math
+
 def ler_trajetoria():
     """
     Lê os dados de telemetria da entrada padrão.
@@ -7,7 +9,20 @@ def ler_trajetoria():
 
     Exemplo de uso: v_max, leituras = ler_trajetoria()
     """
-
+    n_leituras = int(input())
+    v_max = float(input())
+    i = 0
+    leituras = []
+    while n_leituras != i:
+        t, x, y = input().split()
+        t = float(t)
+        x = float(x)
+        y = float(y)
+        i += 1
+        leituras_tupla = (t, x, y) 
+        leituras.append(leituras_tupla)  # PRECISA SER LISTAS DIFERENTES????
+    return v_max
+    return leituras
 
 def distancia(x1, y1, x2, y2):
     """
@@ -28,6 +43,8 @@ def detectar_corrompidas(leituras, v_max):
 
     Exemplo de uso: corrompidas = detectar_corrompidas(leituras, v_max)
     """
+
+
 
 
 def interpolar(xa, ya, ta, xb, yb, tb, t):
