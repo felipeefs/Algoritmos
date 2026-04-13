@@ -1,6 +1,5 @@
 import telemetria
-
-
+    
 def mensagem_padrao(nome_da_funcao):
     return "Resultado errado na função " + nome_da_funcao
 

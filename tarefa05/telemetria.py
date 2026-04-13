@@ -20,9 +20,8 @@ def ler_trajetoria():
         y = float(y)
         i += 1
         leituras_tupla = (t, x, y) 
-        leituras.append(leituras_tupla)  # PRECISA SER LISTAS DIFERENTES????
-    return v_max
-    return leituras
+        leituras.append(leituras_tupla) 
+    return v_max, leituras
 
 def distancia(x1, y1, x2, y2):
     """
@@ -31,6 +30,8 @@ def distancia(x1, y1, x2, y2):
 
     Exemplo: distancia(0, 0, 3, 4) devolve 5.0.
     """
+
+    
 
 
 def detectar_corrompidas(leituras, v_max):
@@ -44,6 +45,22 @@ def detectar_corrompidas(leituras, v_max):
     Exemplo de uso: corrompidas = detectar_corrompidas(leituras, v_max)
     """
 
+    corrompidas = []
+    t_a, x_a, y_a = leituras[0] #começa na primeira posição e vai passando quando for uma posição valida
+
+    for i in range(len(leituras)):
+
+        if i == 0 or i == len(leituras) - 1: #diferente do primeira hora e ultima hora (leituras sempre validas)
+            corrompidas.append(False)
+        else:
+            t, x, y = leituras[i]
+            v_med = math.sqrt((x - x_a)**2 + (y - y_a)**2) / (t - t_a)
+            if v_med > v_max:
+                corrompidas.append(True)
+            else:
+                corrompidas.append(False)
+                t_a, x_a, y_a = t, x, y # Se não é corrompida o t_a, x_a e y_a recebem a posição atual que é valida
+    return corrompidas
 
 
 
@@ -80,3 +97,12 @@ def max_variacao(valores):
     Exemplo: max_variacao([1.0, 3.0, 2.0, 5.0]) devolve 3.0,
     pois |5.0 - 2.0| = 3.0 é a maior variação consecutiva.
     """
+
+def main():
+    v_max, leituras = ler_trajetoria() 
+    print(v_max)
+    print(leituras)
+    corrompidas = detectar_corrompidas(leituras, v_max)
+    print(corrompidas)
+        
+main()
