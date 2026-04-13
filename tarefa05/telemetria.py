@@ -30,7 +30,7 @@ def distancia(x1, y1, x2, y2):
 
     Exemplo: distancia(0, 0, 3, 4) devolve 5.0.
     """
-
+    #tentar pegar essas coordenadas ja estabelcidas na função detectar
     
 
 
