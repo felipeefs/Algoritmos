@@ -57,4 +57,3 @@ def teste_unidade_05_max_variacao():
     mensagem = mensagem_padrao("max_variacao")
     assert telemetria.max_variacao([1.0, 3.0, 2.0, 5.0]) == 3.0, mensagem
 
-

@@ -30,8 +30,10 @@ def distancia(x1, y1, x2, y2):
 
     Exemplo: distancia(0, 0, 3, 4) devolve 5.0.
     """
-    #tentar pegar essas coordenadas ja estabelcidas na função detectar
+    distancia = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    return distancia
     
+
 
 
 def detectar_corrompidas(leituras, v_max):
@@ -44,9 +46,8 @@ def detectar_corrompidas(leituras, v_max):
 
     Exemplo de uso: corrompidas = detectar_corrompidas(leituras, v_max)
     """
-
     corrompidas = []
-    t_a, x_a, y_a = leituras[0] #começa na primeira posição e vai passando quando for uma posição valida
+    ta, xa, ya = leituras[0] #começa na primeira posição e vai passando quando for uma posição valida
 
     for i in range(len(leituras)):
 
@@ -54,12 +55,12 @@ def detectar_corrompidas(leituras, v_max):
             corrompidas.append(False)
         else:
             t, x, y = leituras[i]
-            v_med = math.sqrt((x - x_a)**2 + (y - y_a)**2) / (t - t_a)
+            v_med = math.sqrt((x - xa)**2 + (y - ya)**2) / (t - ta)
             if v_med > v_max:
                 corrompidas.append(True)
             else:
                 corrompidas.append(False)
-                t_a, x_a, y_a = t, x, y # Se não é corrompida o t_a, x_a e y_a recebem a posição atual que é valida
+                ta, xa, ya = t, x, y #Se não é corrompida o t_a, x_a e y_a recebem a posição atual que é valida
     return corrompidas
 
 
@@ -73,6 +74,9 @@ def interpolar(xa, ya, ta, xb, yb, tb, t):
 
     Exemplo: interpolar(0, 0, 0, 10, 10, 4, 2) devolve 5.0, 5.0.
     """
+    x = xa + ((xb - xa) * ((t - ta) / (tb - ta)))
+    y = xa + ((yb - ya) * ((t - ta) / (tb - ta)))
+    return x, y
 
 
 def reconstruir(leituras, corrompidas):
@@ -86,6 +90,27 @@ def reconstruir(leituras, corrompidas):
 
     Exemplo de uso: corrigida = reconstruir(leituras, corrompidas)
     """
+    corrigida = []
+    ta, xa, ya = leituras[0]
+    
+    for i in range(len(leituras)):
+        if not corrompidas[i]:
+            corrigida.append(leituras[i])
+            ta, xa ,ya = leituras[i]        #Atualização das varialveis "a"
+            
+        else:
+            j = i + 1
+            t, x, y = leituras[i]
+            while corrompidas[j]:           #Loop para as variaveis "b" ganharem seu valor
+                j += 1   
+            tb, xb, yb = leituras[j]
+
+            x_corri = xa + ((xb - xa) * ((t - ta) / (tb - ta)))
+            y_corri = ya + ((yb - ya) * ((t - ta) / (tb - ta)))
+            nova_tupla = (t, x_corri, y_corri)
+            corrigida.append(nova_tupla)
+            
+    return corrigida
 
 
 def max_variacao(valores):
@@ -97,12 +122,44 @@ def max_variacao(valores):
     Exemplo: max_variacao([1.0, 3.0, 2.0, 5.0]) devolve 3.0,
     pois |5.0 - 2.0| = 3.0 é a maior variação consecutiva.
     """
+    lista_subtracao = []
+    for i in range(len(valores) -1 ):
+        j = i + 1
+        if valores[i] < valores[j]:
+            subtracao = valores[j] - valores [i]
+        else:
+            subtracao = valores[i] - valores [j]
+        lista_subtracao.append(subtracao)
+    
+    diferenca = 0
+    for i in range(len(lista_subtracao) - 1):
+        j = i + 1
+        if lista_subtracao[i] > lista_subtracao[j]:
+            diferenca = lista_subtracao[i]
+        else:
+            diferenca = lista_subtracao[j]
 
+    return diferenca
+            
+'''
 def main():
     v_max, leituras = ler_trajetoria() 
     print(v_max)
     print(leituras)
+
     corrompidas = detectar_corrompidas(leituras, v_max)
     print(corrompidas)
-        
+
+    distancia_test = distancia(0, 0, 3, 4)
+    print(distancia_test)
+
+    interpolar_test = interpolar(0, 0, 0, 10, 10, 4, 2)
+    print(interpolar_test)
+    
+    corrigida_test = reconstruir(leituras, corrompidas)
+    print(corrigida_test)
+
+    variacao = max_variacao([1.0, 3.0, 2.0, 5.0])
+    print(variacao)
 main()
+'''
