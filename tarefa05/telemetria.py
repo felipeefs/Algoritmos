@@ -141,25 +141,3 @@ def max_variacao(valores):
 
     return diferenca
             
-'''
-def main():
-    v_max, leituras = ler_trajetoria() 
-    print(v_max)
-    print(leituras)
-
-    corrompidas = detectar_corrompidas(leituras, v_max)
-    print(corrompidas)
-
-    distancia_test = distancia(0, 0, 3, 4)
-    print(distancia_test)
-
-    interpolar_test = interpolar(0, 0, 0, 10, 10, 4, 2)
-    print(interpolar_test)
-    
-    corrigida_test = reconstruir(leituras, corrompidas)
-    print(corrigida_test)
-
-    variacao = max_variacao([1.0, 3.0, 2.0, 5.0])
-    print(variacao)
-main()
-'''
