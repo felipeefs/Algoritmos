@@ -1,11 +1,14 @@
-def vendas_para_lista():
+def arquivos_para_lista():
     '''1 – função que recebe os arquivos selecionados (vendas) e depois tranforma os itens em listas, separando cada item pelas virgulas com o split()
     '''
-    lista_hora_vendas = []
-    lista_codigos = []
-
+    #AVISO: POR ENQUANTO SO ESTOU TRANFORMANDO ALGUNS ITENS EM LISTA AQUI, TALVEZ DEPOIS OUTROS PRECISEM VIRAR TAMBÉM
     arquivo_vendas = input()
     arquivo_logs = input()
+
+    lista_hora_vendas = []
+    lista_codigos = []
+    lista_hora_logs = []
+
     with open(arquivo_vendas) as vendas:
         for linha in vendas:
             hora_ven, codigo, brinq, valor_ven = linha.split(",")
@@ -15,14 +18,25 @@ def vendas_para_lista():
     with open(arquivo_logs) as logs:
         for linha in logs:
             hora_logs, dino, carro, valor_logs = linha.split(",")
+            lista_hora_logs.append(hora_logs)
             
-    return lista_hora_vendas, lista_codigos
+    return lista_hora_vendas, lista_codigos, lista_hora_logs
 
-def logs_para_lista():
-    ''' 2- função que recebe os arquivos (logs) e transforma os itens em listas '''
 
-def horas_vagas(lista_hora_vendas, lista_hora_logs):
+def horas_vagas_func(lista_hora_vendas, lista_hora_logs):
     ''' Função para Criar uma lista com horas que estão em log, mas nao estao em vendas (horas_vagas)'''
+    horas_vagas = []
+    j = 0
+    atual = lista_hora_logs[j]
+    
+    for i in lista_hora_vendas:
+        if i == atual:
+            atual = lista_hora_logs[j+1]
+        else:
+            horas_vagas.append(atual)
+
+    return horas_vagas
+
 
 def items_engracados(parametro):
     ''' 4- função para analisar cada item da lista_codigos e diz se podem existir itens engraçados entre eles. Adiciona esses engraçados em uma lista.'''
@@ -40,9 +54,14 @@ def imprime_resultado():
 def main():
     '''Realizará todas as funções em ordem para que o problema seja resolvido'''
 
-    lista_hora_vendas, lista_codigos = vendas_para_lista()
+    lista_hora_vendas, lista_codigos, lista_hora_logs = arquivos_para_lista()
     print(lista_hora_vendas)
     print(lista_codigos)
+    print(lista_hora_logs)
+
+    horas_vagas = horas_vagas_func(lista_hora_vendas, lista_hora_logs)
+    print(horas_vagas)
+
 
 main()
 
