@@ -28,16 +28,11 @@ def arquivos_para_lista():
 def horas_vagas_func(lista_hora_vendas, lista_hora_logs):
     ''' Função para Criar uma lista com horas que estão em log, mas nao estao em vendas (horas_vagas)'''
     horas_vagas = []
-    j = 0
-    atual = lista_hora_logs[j]
     
-    for item in lista_hora_vendas:
-        if item == atual:
-            atual = lista_hora_logs[j+1] #nao é igual recebe o proximo valor, para testar novamente, até nao ser igual
-        else:
-            horas_vagas.append(atual)
-            atual = lista_hora_logs[j+1]
-
+    for item in lista_hora_logs:
+        if item not in lista_hora_vendas:
+            horas_vagas.append(item)
+           
     return horas_vagas
 
 def diz_num_engracado():
