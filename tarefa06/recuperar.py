@@ -25,10 +25,10 @@ def arquivos_para_lista():
             hora_logs, dino, carro, valor_logs = linha.split(",")
             lista_hora_logs.append(hora_logs)
             lista_preco_logs.append(valor_logs)
-            lista_dino.append(carro)
-            lista_carro.append(dino)
+            lista_dino.append(dino)
+            lista_carro.append(carro)
             
-    return lista_hora_vendas, lista_codigos, lista_hora_logs, lista_preco_logs
+    return lista_hora_vendas, lista_codigos, lista_hora_logs, lista_preco_logs, lista_dino, lista_carro
 
 
 def horas_vagas_func(lista_hora_vendas, lista_hora_logs):
@@ -44,50 +44,77 @@ def horas_vagas_func(lista_hora_vendas, lista_hora_logs):
 
 def items_engracados(lista_codigos):
     ''' 4- função para analisar cada dois itens da lista_codigos e diz se podem existir itens engraçados entre eles. Adiciona esses engraçados em uma lista.'''
-    # VAI DAR ERRO NO TESTE4, PORQUE QUANDO ELE PEGA UM ITEM E ADICIONA NA LISTA O LOOP PARA NO INTERVALO
+    i = 0
+    atual = int(lista_codigos[i])
+    ultimo = int(lista_codigos[len(lista_codigos)-1])
+    lista_codigos_engracados = []
+
+    while atual < ultimo:
+        atual += 1
+        codigo_str = str(atual)
+        caracteres = len(codigo_str)
+        metad_caracteres = caracteres // 2
+
+        if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
+                lista_codigos_engracados.append(atual)
+                break
+
+    for i in range(len(lista_codigos)-1):
+        proximo = int(lista_codigos[i+1])
+        atual_eng = lista_codigos_engracados[i]
+
+        while atual_eng < proximo:
+            atual_eng += 1
+            codigo_str = str(atual_eng)
+            caracteres = len(codigo_str)
+            metad_caracteres = caracteres // 2
+
+            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
+                lista_codigos_engracados.append(atual_eng)
+                break
+        
+    return lista_codigos_engracados
+
+    '''
     i = 0
     j = 1
     atual = int(lista_codigos[i])
+    proximo = int(lista_codigos[j])
     lista_codigos_engracados = []
+
     for i in range(len(lista_codigos)-1):
         atual = atual
-        proximo = int(lista_codigos[j])
+        
         while atual < proximo:
             atual = int(atual)
             atual += 1
             codigo_str = str(atual)
             caracteres = len(codigo_str)
             metad_caracteres = caracteres // 2
+
             if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
                 lista_codigos_engracados.append(atual)
-                j += 1
+
+        
                 break
-
-    '''
-    lista_codigos_engracados = []
-    for i in range(len(lista_codigos) -1):
-        atual = int(lista_codigos[i])
-        proximo = int(lista_codigos[i+1])
-        while atual < proximo:
-            atual = int(atual)
-            atual += 1
-            codigo_str = str(atual)
-            caracteres = len(codigo_str)
-            metad_caracteres = caracteres // 2
-            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
-                lista_codigos_engracados.append(atual)
-                break
-     '''           
-    return lista_codigos_engracados
+    '''           
 
 
-def listas_certas():
-    ''' função para que cada item em horas_vagas consilia-lo a lista_codigos_engracados, ou seja essa função ira criar duas listas(lista_certa_hora e lista_certa_codigo) que terá essa hora e esse codigo – eles estarão no mesmo indice logo fica facil imprimir'''
-
-def achar_brinquedo(lista_preco_logs, horas_vagas, lista_dino, lista_carro):
+def achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro):
     '''função que verifica se a quantidade de carro ou de dinossauro (apos o item da lista horas_vagas, quando a hora for igual , pode-se usar uma comparação de horas pelo indice) caso diminuiu de uma lista logs para a outra, se diminuiu adiciona o outro item na lista_brinquedo'''
 
-
+    lista_brinquedo = []
+    for i in range(len(lista_hora_logs)):
+        for item in horas_vagas:
+            if item == lista_hora_logs[i]:
+                "resolve para verificar os brinquedos"
+                if lista_dino[i] != lista_dino[i-1]:
+                    lista_brinquedo.append("dinossauro")
+                elif lista_carro[i] != lista_carro[i-1]:
+                    lista_brinquedo.append("carro")                    
+            else: 
+                continue
+    return lista_brinquedo
 
 def valor_item():
     "Função que irá descobrir o preço do item que foi apagado"
@@ -99,7 +126,7 @@ def imprime_resultado():
 def main():
     '''Realizará todas as funções em ordem para que o problema seja resolvido'''
 
-    lista_hora_vendas, lista_codigos, lista_hora_logs, lista_preco_logs = arquivos_para_lista()
+    lista_hora_vendas, lista_codigos, lista_hora_logs, lista_preco_logs, lista_dino, lista_carro = arquivos_para_lista()
     print(lista_hora_vendas)
     print(lista_codigos)
     print(lista_hora_logs)
@@ -111,5 +138,7 @@ def main():
     lista_codigos_engracados = items_engracados(lista_codigos)
     print(lista_codigos_engracados)
 
+    brinquedo = achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro)
+    print(brinquedo)
 main()
 
