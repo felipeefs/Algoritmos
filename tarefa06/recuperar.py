@@ -44,6 +44,29 @@ def horas_vagas_func(lista_hora_vendas, lista_hora_logs):
 
 def items_engracados(lista_codigos):
     ''' 4- função para analisar cada dois itens da lista_codigos e diz se podem existir itens engraçados entre eles. Adiciona esses engraçados em uma lista.'''
+    lista_codigos_engracados = []
+    quantidade = len(lista_codigos)
+    u = 0
+    k = 1
+    for i in range(quantidade // 2):      
+        atual = int(lista_codigos[i + u])
+        proximo = int(lista_codigos[i + k])
+        u += 2
+        k += 1
+        while atual < proximo:
+            atual = int(atual)
+            atual += 1
+            codigo_str = str(atual)
+            caracteres = len(codigo_str)
+            metad_caracteres = caracteres // 2
+
+            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
+                lista_codigos_engracados.append(atual)
+                break
+        
+        
+
+    '''
     i = 0
     atual = int(lista_codigos[i])
     ultimo = int(lista_codigos[len(lista_codigos)-1])
@@ -73,9 +96,8 @@ def items_engracados(lista_codigos):
                 lista_codigos_engracados.append(atual_eng)
                 break
         
-    return lista_codigos_engracados
 
-    '''
+    
     i = 0
     j = 1
     atual = int(lista_codigos[i])
@@ -94,10 +116,10 @@ def items_engracados(lista_codigos):
 
             if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
                 lista_codigos_engracados.append(atual)
-
-        
+                        
                 break
-    '''           
+      '''         
+    return lista_codigos_engracados
 
 
 def achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro):
@@ -138,8 +160,6 @@ def imprime_resultado(horas_vagas, lista_codigos_engracados, precos_apagados, li
     '''7 -  Função para imprimir horas vagas, codigo_eng, brinquedo e valor (de cadad lista correspondente)'''
     
 
-
-
 def main():
     '''Realizará todas as funções em ordem para que o problema seja resolvido'''
 
@@ -149,7 +169,7 @@ def main():
     print(lista_codigos)
     print(lista_hora_logs)
     print(lista_preco_logs)
-'''
+    '''
     horas_vagas = horas_vagas_func(lista_hora_vendas, lista_hora_logs)
     '''
     print(horas_vagas)
@@ -169,7 +189,7 @@ def main():
     '''
     print(apagados)
     '''
-
+    # talvez seja necessario criar uma função, porque se eles não tiveram a mesma quantidade em tamanho irá dar problema
     for i in range(len(horas_vagas)):
         print(f"{horas_vagas[i]},{lista_codigos_engracados[i]},{brinquedo[i]},{apagados[i]:.2f}")
     
