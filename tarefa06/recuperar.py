@@ -117,8 +117,16 @@ def achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro):
     return lista_brinquedo
 
 def valor_item():
-    "Função que irá descobrir o preço do item que foi apagado"
-    
+    "Função que irá descobrir o preço do item que foi apagado, verificando a hora vaga presente na lista_hora_logs, pelo mesmo indice do lista_hora_vagas, será necessário subtrair o lista_preco_logs[i] pelo lista_preco_logs[i-1]"
+
+    preco_apagado = []
+
+    for i in range(len(lista_hora_logs)):
+        for hora in horas_vagas:
+            
+
+
+
 
 def imprime_resultado():
     '''7 -  Função para imprimir a lista_certa_hora lista_certa_codigo  e  lista_brinquedo'''
