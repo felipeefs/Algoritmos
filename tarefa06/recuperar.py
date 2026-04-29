@@ -116,38 +116,62 @@ def achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro):
                 continue
     return lista_brinquedo
 
-def valor_item():
+def valor_item(lista_preco_logs, horas_vagas, lista_hora_logs):
     "Função que irá descobrir o preço do item que foi apagado, verificando a hora vaga presente na lista_hora_logs, pelo mesmo indice do lista_hora_vagas, será necessário subtrair o lista_preco_logs[i] pelo lista_preco_logs[i-1]"
 
-    preco_apagado = []
+    precos_apagados = []
 
     for i in range(len(lista_hora_logs)):
+        atual = float(lista_preco_logs[i])
+        proximo = float(lista_preco_logs[i-1])
         for hora in horas_vagas:
-            
+            if hora == lista_hora_logs[i]:
+                preco = atual - proximo
+                precos_apagados.append(preco)
 
+            else:
+                continue 
 
+    return precos_apagados
 
+def imprime_resultado(horas_vagas, lista_codigos_engracados, precos_apagados, lista_brinquedo):
+    '''7 -  Função para imprimir horas vagas, codigo_eng, brinquedo e valor (de cadad lista correspondente)'''
+    
 
-def imprime_resultado():
-    '''7 -  Função para imprimir a lista_certa_hora lista_certa_codigo  e  lista_brinquedo'''
 
 
 def main():
     '''Realizará todas as funções em ordem para que o problema seja resolvido'''
 
     lista_hora_vendas, lista_codigos, lista_hora_logs, lista_preco_logs, lista_dino, lista_carro = arquivos_para_lista()
+    '''
     print(lista_hora_vendas)
     print(lista_codigos)
     print(lista_hora_logs)
     print(lista_preco_logs)
-
+'''
     horas_vagas = horas_vagas_func(lista_hora_vendas, lista_hora_logs)
+    '''
     print(horas_vagas)
+    '''
 
     lista_codigos_engracados = items_engracados(lista_codigos)
+    '''
     print(lista_codigos_engracados)
+    '''
 
     brinquedo = achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro)
+    '''
     print(brinquedo)
+    '''
+
+    apagados = valor_item(lista_preco_logs, horas_vagas, lista_hora_logs)
+    '''
+    print(apagados)
+    '''
+
+    for i in range(len(horas_vagas)):
+        print(f"{horas_vagas[i]},{lista_codigos_engracados[i]},{brinquedo[i]},{apagados[i]:.2f}")
+    
 main()
 
