@@ -111,13 +111,14 @@ def achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro):
                 if lista_dino[i] != lista_dino[i-1]:
                     lista_brinquedo.append("dinossauro")
                 elif lista_carro[i] != lista_carro[i-1]:
-                    lista_brinquedo.append("carro")                    
+                    lista_brinquedo.append("carro")           
             else: 
                 continue
     return lista_brinquedo
 
 def valor_item():
     "Função que irá descobrir o preço do item que foi apagado"
+    
 
 def imprime_resultado():
     '''7 -  Função para imprimir a lista_certa_hora lista_certa_codigo  e  lista_brinquedo'''
