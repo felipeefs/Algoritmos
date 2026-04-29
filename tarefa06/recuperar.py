@@ -48,11 +48,9 @@ def items_engracados(lista_codigos):
     quantidade = len(lista_codigos)
     u = 0
     k = 1
-    for i in range(quantidade // 2):      
+    for i in range((quantidade // 2)):      
         atual = int(lista_codigos[i + u])
         proximo = int(lista_codigos[i + k])
-        u += 2
-        k += 1
         while atual < proximo:
             atual = int(atual)
             atual += 1
@@ -62,7 +60,10 @@ def items_engracados(lista_codigos):
 
             if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
                 lista_codigos_engracados.append(atual)
-                break
+                continue
+        u += 2
+        k += 1
+                
         
         
 
@@ -176,9 +177,9 @@ def main():
     '''
 
     lista_codigos_engracados = items_engracados(lista_codigos)
-    '''
+    
     print(lista_codigos_engracados)
-    '''
+
 
     brinquedo = achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro)
     '''
