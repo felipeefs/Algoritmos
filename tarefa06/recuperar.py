@@ -122,15 +122,15 @@ def main():
     '''
 
     lista_codigos_engracados = items_engracados(lista_codigos)
-    print(lista_codigos_engracados)
+    "print(lista_codigos_engracados)"
 
     brinquedo = achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro)
     
-    print(brinquedo)
+    "print(brinquedo)"
     
     apagados = valor_item(lista_preco_logs, horas_vagas, lista_hora_logs)
     
-    print(apagados)
+    "print(apagados)"
     
     # talvez seja necessario criar uma função, porque se eles não tiveram a mesma quantidade em tamanho irá dar problema
     for i in range(len(horas_vagas)):
