@@ -64,62 +64,7 @@ def items_engracados(lista_codigos):
         u += 1
         k += 1
                 
-        
-        
-
-    '''
-    i = 0
-    atual = int(lista_codigos[i])
-    ultimo = int(lista_codigos[len(lista_codigos)-1])
-    lista_codigos_engracados = []
-
-    while atual < ultimo:
-        atual += 1
-        codigo_str = str(atual)
-        caracteres = len(codigo_str)
-        metad_caracteres = caracteres // 2
-
-        if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
-                lista_codigos_engracados.append(atual)
-                break
-
-    for i in range(len(lista_codigos)-1):
-        proximo = int(lista_codigos[i+1])
-        atual_eng = lista_codigos_engracados[i]
-
-        while atual_eng < proximo:
-            atual_eng += 1
-            codigo_str = str(atual_eng)
-            caracteres = len(codigo_str)
-            metad_caracteres = caracteres // 2
-
-            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
-                lista_codigos_engracados.append(atual_eng)
-                break
-        
-
-    
-    i = 0
-    j = 1
-    atual = int(lista_codigos[i])
-    proximo = int(lista_codigos[j])
-    lista_codigos_engracados = []
-
-    for i in range(len(lista_codigos)-1):
-        atual = atual
-        
-        while atual < proximo:
-            atual = int(atual)
-            atual += 1
-            codigo_str = str(atual)
-            caracteres = len(codigo_str)
-            metad_caracteres = caracteres // 2
-
-            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
-                lista_codigos_engracados.append(atual)
-                        
-                break
-      '''         
+          
     return lista_codigos_engracados
 
 
@@ -177,20 +122,18 @@ def main():
     '''
 
     lista_codigos_engracados = items_engracados(lista_codigos)
-
+    print(lista_codigos_engracados)
 
     brinquedo = achar_brinquedo(lista_hora_logs, horas_vagas, lista_dino, lista_carro)
-    '''
+    
     print(brinquedo)
-    '''
-
+    
     apagados = valor_item(lista_preco_logs, horas_vagas, lista_hora_logs)
-    '''
+    
     print(apagados)
-    '''
+    
     # talvez seja necessario criar uma função, porque se eles não tiveram a mesma quantidade em tamanho irá dar problema
     for i in range(len(horas_vagas)):
         print(f"{horas_vagas[i]},{lista_codigos_engracados[i]},{brinquedo[i]},{apagados[i]:.2f}")
     
 main()
-
