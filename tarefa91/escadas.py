@@ -40,10 +40,25 @@ def escada():
         else:
             final = final * 10 + 0
         
-    while divisor < final:
+    while divisor <= final:
         divisor = divisor * 10
-        print(final)
-        print(divisor)
+    divisor = divisor // 10
+
+    while divisor > 0:
+        escada = final // divisor
+
+        if escada == 1:
+            print(f"{numero} é um escada")
+        else:
+            print(f"{numero} não é um escada")
+
+        divisor = divisor // 10
+        final = final % divisor
+
+
+
+
+
     
       
 escada()
