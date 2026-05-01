@@ -12,11 +12,14 @@ def escada():
         ant_ultimo = numero // 10
         #Mudar para a ant_numero ate ser menor que 10
         while diferenca:
-            subtracao = math.modulo(ant_ultimo - ultimo)
-            if subtracao == 1:
+            subtracao = ant_ultimo - ultimo
+            subtracao2 = ultimo - ant_ultimo
+            if subtracao == 1 or subtracao2 == 1:
                 print(f"{numero} é um escada")
-             
-    
-      
+                break
+            else:
+                print(f"{numero} não é um escada")
+                break
+                 
 escada()
 
