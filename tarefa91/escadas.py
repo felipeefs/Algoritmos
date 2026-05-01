@@ -5,27 +5,26 @@ def escada():
       Se a diferenca do modulo desses dois numeros for 1, eles são escadas
     '''
     digitos = int(input())
-    resultado = True
-    for i in range(digitos):
-        while resultado:
-            numero = int(input())
-            ultimo = numero % 10
-            proximo = numero // 10
-            if proximo > 10:
-                while proximo > 10:
-                    p_ultimo = proximo % 10
-                    if ultimo - p_ultimo == 1 or p_ultimo - ultimo == 1:                
-                        ultimo = p_ultimo
-                        proximo = proximo // 10
-                        continue
-                    else:
-                        resultado = False
+    for i in range(digitos): 
+        numero = int(input())
+        ultimo = numero % 10
+        proximo = numero // 10
+        if proximo > 10:
+            while proximo > 10:
+                p_ultimo = proximo % 10
+                if ultimo - p_ultimo == 1 or p_ultimo - ultimo == 1:               
+                    ultimo = p_ultimo
+                    proximo = proximo // 10
+                    continue
+                else:
+                    break
                         
-            
-        if ultimo - proximo == 1 or proximo - ultimo == 1:
-                    print(f"{numero} é um escada")
+        if numero == 1:
+            print(f"{numero} é um escada")    
+        elif ultimo - proximo == 1 or proximo - ultimo == 1:
+            print(f"{numero} é um escada")
         else:
-                    print(f"{numero} não é um escada")
+            print(f"{numero} não é um escada")
 
       
 escada()
