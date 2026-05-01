@@ -52,8 +52,9 @@ def escada():
         else:
             print(f"{numero} não é um escada")
 
-        divisor = divisor // 10
         final = final % divisor
+        divisor = divisor // 10
+
 
 
 
