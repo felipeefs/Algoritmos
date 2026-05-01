@@ -1,32 +1,12 @@
 def escada():
-    '''analisa se o numero é uma escada  
-    1,
-    10, 12,
-    21, 23,
-    aumenta 2 se (for impar), depois aumenta 9(se par)
+    '''Divide o número por 10, o resto será o ultimo digito (guarda na memoria)
+      divide de novo por 10 (guarda na memoria)
+      Se a diferenca do modulo desses dois numeros for 1, eles são escadas
     '''
     digitos = int(input())
 
     for i in range(digitos):
-        numeros = int(input())
-        num_escada = numeros
-
-        if numeros == 1:
-            print(f"{num_escada} é um escada")
-             
-        else:
-            while numeros > 1:
-                if numeros % 2 != 0:
-                    numeros = numeros - 9
-                elif numeros % 2 == 0:
-                    numeros = numeros -2
-
-            if numeros == 1:
-                print(f"{num_escada} é um escada")
-            else:
-                print(f"{num_escada} não é um escada")
-
-    return num_escada
+    
       
 escada()
 
