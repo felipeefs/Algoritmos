@@ -5,7 +5,13 @@ def entradas():
     texto_lista = []
     with open(texto) as arquivo:
         for linha in arquivo:
-            texto_lista.append(linha)
+            texto_lista = linha.split()
+    
+    print(texto_lista)
     return texto_lista, largura
+
+def separador(texto_lista):
+    pass
+
 
 entradas()
