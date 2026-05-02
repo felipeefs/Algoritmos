@@ -20,6 +20,7 @@ def escada():
     digitos = int(input())
     divisor = 1
     final = 0
+    soma_numeros = 0
     for i in range(digitos): 
         numero = int(input())
         ultimo = numero % 10
@@ -37,8 +38,10 @@ def escada():
         if numero == 1 or ultimo - proximo == 1 or proximo - ultimo == 1:
             # 1 será os escadas e 0 não escada
             final = final *10 + 1
+            soma_numeros += numero
         else:
             final = final * 10 + 0
+            soma_numeros += numero
         
     while divisor <= final:
         divisor = divisor * 10
@@ -56,11 +59,7 @@ def escada():
         divisor = divisor // 10
 
 
-
-
-
-
     
-      
+     
 escada()
 
