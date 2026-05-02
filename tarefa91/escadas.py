@@ -1,22 +1,4 @@
 def escada():
-    '''Divide o número por 10, o resto será o ultimo digito (guarda na memoria)
-      divide de novo por 10 (guarda na memoria)
-      Se a diferenca do modulo desses dois numeros for 1, eles são escadas
-
-
-
-      PARA A SAIDA: 
-      criar variavel que divide conforme o tamanho da variavel final
-      final recebe 1 se num é escada
-      final recebe 0 se num não é escada
-      divisor é multiplicado por 10 até ser maior que o final
-      divide o final pelo divisor, 
-        se for 1,imprime é escada
-        se não, imprime não é escada
-    -atualiza o divisor
-    
-    '''
-    
     digitos = int(input())
     divisor = 1
     divisor_num = 1
@@ -50,7 +32,7 @@ def escada():
 
     while divisor_num <= soma_numeros:
         divisor_num = divisor_num * 10000000000000
-    divisor_num = divisor_num // 1000000000000
+    divisor_num = divisor_num // 10000000000000
 
     while divisor > 0:
         escada = final // divisor
@@ -65,12 +47,7 @@ def escada():
         divisor = divisor // 10
 
         soma_numeros = soma_numeros % divisor_num
-        divisor_num = divisor_num // 1000000000000
-
-
-
-
-    
-     
+        divisor_num = divisor_num // 10000000000000
+    # Sei que pode dar problema se o número for muito maior do que foi programado, o dividor_num não ia aguentar numeros muitos maiores
 escada()
 
