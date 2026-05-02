@@ -19,6 +19,7 @@ def escada():
     
     digitos = int(input())
     divisor = 1
+    divisor_num = 1
     final = 0
     soma_numeros = 0
     for i in range(digitos): 
@@ -38,25 +39,35 @@ def escada():
         if numero == 1 or ultimo - proximo == 1 or proximo - ultimo == 1:
             # 1 será os escadas e 0 não escada
             final = final *10 + 1
-            soma_numeros += numero
+            soma_numeros = soma_numeros * 10000000000000 + numero
         else:
             final = final * 10 + 0
-            soma_numeros += numero
+            soma_numeros = soma_numeros * 10000000000000 + numero
         
     while divisor <= final:
         divisor = divisor * 10
     divisor = divisor // 10
 
+    while divisor_num <= soma_numeros:
+        divisor_num = divisor_num * 10000000000000
+    divisor_num = divisor_num // 1000000000000
+
     while divisor > 0:
         escada = final // divisor
+        impresso = soma_numeros // divisor_num
 
         if escada == 1:
-            print(f"{numero} é um escada")
+            print(f"{impresso} é um escada")
         else:
-            print(f"{numero} não é um escada")
+            print(f"{impresso} não é um escada")
 
         final = final % divisor
         divisor = divisor // 10
+
+        soma_numeros = soma_numeros % divisor_num
+        divisor_num = divisor_num // 1000000000000
+
+
 
 
     
