@@ -10,6 +10,7 @@ def entradas():
             for itens in linhas:
                 texto_lista.append(itens)
     
+    print(texto_lista)
     return texto_lista, largura
 
 def adição(texto_lista, largura):
@@ -20,15 +21,26 @@ def adição(texto_lista, largura):
     i = 0
     while i < len(lista_grande):
         while k < tamanho:
-            if len(texto_lista[k]) < max:
-                lista_grande[i] = lista_grande[i] + " " + texto_lista[k]             
-                max -= len(texto_lista[k]) + 1 # precisa do 1 porque conta os espaços tbm
-                k +=1
+            if lista_grande[i] == "":
+                if len(texto_lista[k]) < max:
+                    lista_grande[i] = lista_grande[i] + texto_lista[k]             
+                    max -= len(texto_lista[k]) 
+                    k +=1
+                else:
+                    #adicona itens vazios nas extremidades (a fazer)
+                    lista_grande.append("")
+                    max = largura
+                    break
             else:
-                #adicona itens vazios nas extremidades (a fazer)
-                lista_grande.append("")
-                max = largura
-                break
+                 if len(texto_lista[k]) < max:
+                    lista_grande[i] = lista_grande[i] + " " + texto_lista[k]             
+                    max -= len(texto_lista[k]) + 1 # precisa do 1 porque conta os espaços tbm
+                    k +=1
+                 else:
+                    #adicona itens vazios nas extremidades (a fazer)
+                    lista_grande.append("")
+                    max = largura
+                    break
         i += 1
 
     print(lista_grande)
