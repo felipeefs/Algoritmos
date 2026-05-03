@@ -73,19 +73,32 @@ def adição(texto_lista, largura, quebradores):
 
 def espacos(lista_grande, largura):
     '''Adiciona os espaços nas linhas necessarias'''
+    lista_espaco = []
     for verso in lista_grande:
         if verso != " ":
-            while len(verso) < largura:
-                verso += " "
-            
+            if len(verso) < largura:
+                verso = verso + " "
+                while len(verso) < largura:
+                    verso = " " + verso
+                    if len(verso) == largura:
+                        break
+                    else:
+                        verso = verso + " "
 
+                lista_espaco.append(verso)
+            else:
+                lista_espaco.append(verso)
 
+        else: # Para adicionar o verso do espaço vazio
+            lista_espaco.append(verso)
 
+    return lista_espaco
+                
 
 texto_lista, largura = entradas()
 quebradores = quebrador(texto_lista)
 lista_grande = adição(texto_lista, largura, quebradores) 
 espacos(lista_grande, largura)
 
-for item in lista_grande:
-    print(item)
+lista_espaco = espacos(lista_grande, largura)
+print(lista_espaco)
