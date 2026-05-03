@@ -13,7 +13,16 @@ def entradas():
     print(texto_lista)
     return texto_lista, largura
 
-def adição(texto_lista, largura):
+def quebrador(texto_lista):
+    "Função que analisa se uma palavra é quebradora, uma quebradora é uma palavra que tem dois pontos (:) nela, e após ela quebar, ela adiciona uma linha em branco embaixo"
+    quebradores = []
+    for item in texto_lista:
+        if ":" in item:
+            quebradores.append(item)
+
+    return quebradores            
+
+def adição(texto_lista, largura, quebradores):
     max = largura
     lista_grande = [""]
     tamanho = len(texto_lista)
@@ -55,5 +64,10 @@ def espacos(lista_grande):
 
 
 texto_lista, largura = entradas()
+'''
 lista_grande = adição(texto_lista, largura) 
 espacos(lista_grande)
+'''
+
+quebradores = quebrador(texto_lista)
+print(quebradores)
