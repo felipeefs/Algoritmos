@@ -34,10 +34,10 @@ def adição(texto_lista, largura, quebradores):
 
                 if len(texto_lista[k]) < max:
                     lista_grande[i] = lista_grande[i] + texto_lista[k]
-                    if texto_lista[k] in quebradores:
+                    if texto_lista[k] in quebradores: #Se existir itens com (:) ele quebra a linha
                         lista_grande.append(" ")
                         lista_grande.append("")
-                        i += 1
+                        i += 1 # quando houver o espaço ia ter que ser i += 2
                         k +=1
                         max = max + 1 
                         break             
@@ -45,7 +45,6 @@ def adição(texto_lista, largura, quebradores):
                     k +=1
                
                 else:
-                    #adicona itens vazios nas extremidades (a fazer)
                     lista_grande.append("")
                     max = largura
                     break
@@ -53,10 +52,10 @@ def adição(texto_lista, largura, quebradores):
             else:
                 if len(texto_lista[k]) < max:
                     lista_grande[i] = lista_grande[i] + " " + texto_lista[k]
-                    if texto_lista[k] in quebradores:
+                    if texto_lista[k] in quebradores: #Se existir itens com (:) ele quebra a linha
                         lista_grande.append(" ")
                         lista_grande.append("")
-                        i += 1
+                        i += 1 # quando houver o espaço ia ter que ser i += 2
                         k +=1
                         max = max + 1
                         break
@@ -64,26 +63,29 @@ def adição(texto_lista, largura, quebradores):
                     k +=1
    
                 else:
-                    #adicona itens vazios nas extremidades (a fazer)
                     lista_grande.append("")
                     max = largura
                     break
-        i += 1 # quando houver o espaço ia ter que ser i += 2
+        i += 1 
 
     print(lista_grande)
     return lista_grande
-    #depois apendd esse itens nos indices da lista grande
+
+def espacos(lista_grande, largura):
+    '''Adiciona os espaços nas linhas necessarias'''
+    for verso in lista_grande:
+        if verso != " ":
+            while len(verso) < largura:
+                verso += " "
+            
 
 
-def espacos(lista_grande):
-    for itens in lista_grande:
-        print(itens)
-    "Adiciona os espaços nas linhas necessarias"
 
 
 texto_lista, largura = entradas()
 quebradores = quebrador(texto_lista)
 lista_grande = adição(texto_lista, largura, quebradores) 
-espacos(lista_grande)
+espacos(lista_grande, largura)
 
-print(quebradores)
+for item in lista_grande:
+    print(item)
