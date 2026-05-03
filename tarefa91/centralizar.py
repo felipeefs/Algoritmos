@@ -10,7 +10,6 @@ def entradas():
             for itens in linhas:
                 texto_lista.append(itens)
     
-    print(texto_lista)
     return texto_lista, largura
 
 def quebrador(texto_lista):
@@ -68,7 +67,6 @@ def adição(texto_lista, largura, quebradores):
                     break
         i += 1 
 
-    print(lista_grande)
     return lista_grande
 
 def espacos(lista_grande, largura):
@@ -93,12 +91,15 @@ def espacos(lista_grande, largura):
             lista_espaco.append(verso)
 
     return lista_espaco
-                
 
-texto_lista, largura = entradas()
-quebradores = quebrador(texto_lista)
-lista_grande = adição(texto_lista, largura, quebradores) 
-espacos(lista_grande, largura)
 
-lista_espaco = espacos(lista_grande, largura)
-print(lista_espaco)
+def main():
+    texto_lista, largura = entradas()
+    quebradores = quebrador(texto_lista)
+    lista_grande = adição(texto_lista, largura, quebradores) 
+    lista_espaco = espacos(lista_grande, largura)   
+
+    for item in lista_espaco:
+        print(item)
+
+main()
