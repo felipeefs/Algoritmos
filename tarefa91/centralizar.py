@@ -3,9 +3,12 @@ def entradas():
     texto = input()
     largura = int(input())
     texto_lista = []
+    linhas = []
     with open(texto) as arquivo:
         for linha in arquivo:
-            texto_lista = linha.split()
+            linhas = linha.split()
+            for itens in linhas:
+                texto_lista.append(itens)
     
     return texto_lista, largura
 
@@ -19,7 +22,7 @@ def adição(texto_lista, largura):
         while k < tamanho:
             if len(texto_lista[k]) < max:
                 lista_grande[i] = lista_grande[i] + " " + texto_lista[k]             
-                max -= len(texto_lista[k])
+                max -= len(texto_lista[k]) + 1 # precisa do 1 porque conta os espaços tbm
                 k +=1
             else:
                 #adicona itens vazios nas extremidades (a fazer)
@@ -32,9 +35,13 @@ def adição(texto_lista, largura):
     return lista_grande
     #depois apendd esse itens nos indices da lista grande
 
-texto_lista, largura = entradas()
-adição(texto_lista, largura) 
 
-
-def espacos():
+def espacos(lista_grande):
+    for itens in lista_grande:
+        print(itens)
     "Adiciona os espaços nas linhas necessarias"
+
+
+texto_lista, largura = entradas()
+lista_grande = adição(texto_lista, largura) 
+espacos(lista_grande)
