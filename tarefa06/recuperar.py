@@ -5,6 +5,8 @@ def arquivos_para_lista():
     arquivo_vendas = input()
     arquivo_logs = input()
 
+    lista_codigos = []
+
     lista_hora_logs = []   
     lista_valor_logs = []
     lista_carros = []
@@ -13,6 +15,7 @@ def arquivos_para_lista():
     with open(arquivo_vendas) as vendas:
         for linha in vendas:
             hora_ven, codigo, brinq, valor_ven = linha.split(",")
+            lista_codigos.append(codigo)
         
     with open(arquivo_logs) as logs:
         for linha in logs:
@@ -23,22 +26,21 @@ def arquivos_para_lista():
             lista_dinos.append(dino)
 
                   
-    return lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos
+    return lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos
 
 
 def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
     "Função que vai pegar cada linhas de logs, analisar e ver qual é o horario, brinquedo e valor ---- > colocar em tuplas esse trio"
     #VALORES
     lista_precos = []
-    #lista_precos.append(float(lista_valor_logs[0]))  SE O PRIMEIRO SEMPRE É VALIDO NÃO PRECISA DISSO
+    #lista_precos.append(float(lista_valor_logs[0]))
     for i in range(len(lista_valor_logs) -1):
         preco = float(lista_valor_logs[i+1]) - float(lista_valor_logs[i])
         lista_precos.append(preco)
 
     #BRINQUEDOS
     lista_brinquedos = []
-    for i in range(len(lista_carros)-1):
-        i += 1
+    for i in range(1,len(lista_carros)):
         if lista_carros[i] != lista_carros[i-1]:
             lista_brinquedos.append("carro")
         elif lista_dinos[i] != lista_dinos[i-1]:
@@ -46,7 +48,7 @@ def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
             
     #JUNTOS NA TUPLA
     lista_vendas = []
-    for i in range(len(lista_hora_logs) - 1):
+    for i in range(len(lista_hora_logs) -1):
         venda = (lista_hora_logs[i+1], lista_brinquedos[i], lista_precos[i])
         lista_vendas.append(venda)
 
@@ -57,11 +59,28 @@ def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
     print(lista_vendas)
 
 
-def codigo_engracados():
+def codigo_engracados(lista_codigos):
     "Acha todos os codigos engraçados entre dois numeros na lista de codigo e coloca em uma lista(de 1 em 1)"
+    lista_codigosEngracados = []
+    for i in range(1, len(lista_codigos)):
+        atual = int(lista_codigos[i-1])
+        proximo = int(lista_codigos[i])
+        while atual < proximo:
+            atual += 1
+            codigo_str = str(atual)
+            caracteres = len(codigo_str)
+            metad_caracteres = caracteres // 2
+
+            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
+                lista_codigosEngracados.append(atual)
+
+    print(lista_codigosEngracados)   
 
 def comparar():
-    "Irá comparar todas essa nova lista criada pelos logs e se ela for diferente das que estão em vendas, ganhará um codigo engrçado para ser impressa"
+    "Irá comparar toda essa nova lista criada pelos logs e se ela for diferente das que estão em vendas, ganhará um codigo engrçado para ser impressa"
 
-lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos = arquivos_para_lista()
+
+lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos = arquivos_para_lista()
 logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos)
+
+codigo_engracados(lista_codigos)
