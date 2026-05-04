@@ -13,7 +13,7 @@ def ler_trajetoria():
     v_max = float(input())
     i = 0
     leituras = []
-    while n_leituras != i:
+    while n_leituras > i:
         t, x, y = input().split()
         t = float(t)
         x = float(x)
@@ -51,7 +51,7 @@ def detectar_corrompidas(leituras, v_max):
 
     for i in range(len(leituras)):
 
-        if i == 0 or i == len(leituras) - 1: #diferente do primeira hora e ultima hora (leituras sempre validas)
+        if i == 0 or i == len(leituras) - 1: #diferente da primeira hora e ultima hora (leituras sempre validas)
             corrompidas.append(False)
         else:
             t, x, y = leituras[i]
