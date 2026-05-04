@@ -6,6 +6,9 @@ def arquivos_para_lista():
     arquivo_logs = input()
 
     lista_codigos = []
+    lista_hora_vendas = []
+    lista_brinquedos_vendas = []
+    lista_valor_vendas = []
 
     lista_hora_logs = []   
     lista_valor_logs = []
@@ -16,6 +19,9 @@ def arquivos_para_lista():
         for linha in vendas:
             hora_ven, codigo, brinq, valor_ven = linha.split(",")
             lista_codigos.append(codigo)
+            lista_hora_vendas.append(hora_ven)
+            lista_brinquedos_vendas.append(brinq)
+            lista_valor_vendas.append(valor_ven)
         
     with open(arquivo_logs) as logs:
         for linha in logs:
@@ -26,7 +32,7 @@ def arquivos_para_lista():
             lista_dinos.append(dino)
 
                   
-    return lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos
+    return lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos, lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas
 
 
 def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
@@ -47,16 +53,41 @@ def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
             lista_brinquedos.append("dinossauro")
             
     #JUNTOS NA TUPLA
-    lista_vendas = []
+    lista_vendas_logs = []
     for i in range(len(lista_hora_logs) -1):
         venda = (lista_hora_logs[i+1], lista_brinquedos[i], lista_precos[i])
-        lista_vendas.append(venda)
+        lista_vendas_logs.append(venda)
+
+    print(lista_vendas_logs)
+    return lista_vendas_logs
 
 
 
-    print(lista_precos)
-    print(lista_brinquedos)
-    print(lista_vendas)
+def vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas):
+    "Vai pegar as linhas de vendas (exceto a primeira sempre valida) e coloca em uma lista de tuplas, para ser comparada depois na função que compara"
+    #HORAS
+    lista_horas = []
+    for i in range(1, len(lista_hora_vendas)): #pula o primeiro porque sempre é valido
+        lista_horas.append((lista_hora_vendas[i]))
+
+    #Brinquedos
+    lista_brinquedos = []
+    for i in range(1, len(lista_brinquedos_vendas)):
+        lista_brinquedos.append(lista_brinquedos_vendas[i])
+
+    #PRECO DAS VENDAS
+    precos = []
+    for i in range(1, len(lista_valor_vendas)):
+        precos.append(float(lista_valor_vendas[i]))
+
+    #TUPLAS
+    lista_vendas_tuplas = []
+    for i in range(len(lista_hora_vendas) -1):
+        vendas_tuplas = (lista_horas[i], lista_brinquedos[i], precos[i])
+        lista_vendas_tuplas.append(vendas_tuplas)
+
+    print(lista_vendas_tuplas)
+    return lista_vendas_tuplas
 
 
 def codigo_engracados(lista_codigos):
@@ -76,11 +107,16 @@ def codigo_engracados(lista_codigos):
 
     print(lista_codigosEngracados)   
 
-def comparar():
+def comparar(lista_vendas):
     "Irá comparar toda essa nova lista criada pelos logs e se ela for diferente das que estão em vendas, ganhará um codigo engrçado para ser impressa"
+    
 
 
-lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos = arquivos_para_lista()
+
+lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos, lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas = arquivos_para_lista()
+
 logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos)
 
 codigo_engracados(lista_codigos)
+
+vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas)
