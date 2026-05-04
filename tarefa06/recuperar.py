@@ -30,16 +30,31 @@ def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
     "Função que vai pegar cada linhas de logs, analisar e ver qual é o horario, brinquedo e valor ---- > colocar em tuplas esse trio"
     #VALORES
     lista_precos = []
-    lista_precos.append(float(lista_valor_logs[0])) # o primerio sempre valido
+    #lista_precos.append(float(lista_valor_logs[0]))  SE O PRIMEIRO SEMPRE É VALIDO NÃO PRECISA DISSO
     for i in range(len(lista_valor_logs) -1):
         preco = float(lista_valor_logs[i+1]) - float(lista_valor_logs[i])
         lista_precos.append(preco)
 
     #BRINQUEDOS
     lista_brinquedos = []
-    
+    for i in range(len(lista_carros)-1):
+        i += 1
+        if lista_carros[i] != lista_carros[i-1]:
+            lista_brinquedos.append("carro")
+        elif lista_dinos[i] != lista_dinos[i-1]:
+            lista_brinquedos.append("dinossauro")
+            
+    #JUNTOS NA TUPLA
+    lista_vendas = []
+    for i in range(len(lista_hora_logs) - 1):
+        venda = (lista_hora_logs[i+1], lista_brinquedos[i], lista_precos[i])
+        lista_vendas.append(venda)
+
+
 
     print(lista_precos)
+    print(lista_brinquedos)
+    print(lista_vendas)
 
 
 def codigo_engracados():
