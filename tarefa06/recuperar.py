@@ -58,7 +58,6 @@ def logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos):
         venda = (lista_hora_logs[i+1], lista_brinquedos[i], lista_precos[i])
         lista_vendas_logs.append(venda)
 
-    print(lista_vendas_logs)
     return lista_vendas_logs
 
 
@@ -86,12 +85,35 @@ def vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vend
         vendas_tuplas = (lista_horas[i], lista_brinquedos[i], precos[i])
         lista_vendas_tuplas.append(vendas_tuplas)
 
-    print(lista_vendas_tuplas)
     return lista_vendas_tuplas
 
 
 def codigo_engracados(lista_codigos):
     "Acha todos os codigos engraçados entre dois numeros na lista de codigo e coloca em uma lista(de 1 em 1)"
+
+    lista_codigosEngracados = []
+    quantidade = len(lista_codigos)
+    u = 0
+    k = 1
+    for i in range((quantidade // 2)):      
+        atual = int(lista_codigos[i + u])
+        proximo = int(lista_codigos[i + k])
+        while atual < proximo:
+            atual += 1
+            codigo_str = str(atual)
+            caracteres = len(codigo_str)
+            metad_caracteres = caracteres // 2
+
+            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
+                lista_codigosEngracados.append(atual)
+                continue
+        u += 1
+        k += 1
+
+    return lista_codigosEngracados           
+
+
+    '''
     lista_codigosEngracados = []
     for i in range(1, len(lista_codigos)):
         atual = int(lista_codigos[i-1])
@@ -106,10 +128,8 @@ def codigo_engracados(lista_codigos):
                 lista_codigosEngracados.append(atual)
 
     return lista_codigosEngracados           
-            
+       '''     
 
-
-    print(lista_codigosEngracados) 
 
 def comparar(lista_vendas_tuplas, lista_vendas_logs, lista_codigosEngracados):
     "Irá comparar toda essa nova lista criada pelos logs e se ela for diferente das que estão em vendas, ganhará um codigo engrçado para ser impressa"
@@ -118,24 +138,22 @@ def comparar(lista_vendas_tuplas, lista_vendas_logs, lista_codigosEngracados):
         if item not in lista_vendas_tuplas:
             impressos = item
             hora, brinquedo, valor = impressos
-            print(f"{hora}, {lista_codigosEngracados[i]}, {brinquedo}, {valor:.2f}")
+            print(f"{hora},{lista_codigosEngracados[i]},{brinquedo},{valor:.2f}")
             i += 1
     
-    print(impressos)
+def main():   
+    lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos, lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas = arquivos_para_lista()
+
+    logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos)
+
+    vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas)
+
+    lista_vendas_logs = logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos)
+
+    lista_vendas_tuplas = vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas)
+
+    lista_codigosEngracados = codigo_engracados(lista_codigos)
+
+    comparar(lista_vendas_tuplas, lista_vendas_logs, lista_codigosEngracados)
     
-
-
-
-
-lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos, lista_codigos, lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas = arquivos_para_lista()
-
-logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos)
-
-codigo_engracados(lista_codigos)
-
-vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas)
-
-lista_vendas_logs = logs_emVendas(lista_hora_logs, lista_valor_logs, lista_carros, lista_dinos)
-lista_vendas_tuplas = vendas_emTuplas(lista_hora_vendas, lista_brinquedos_vendas, lista_valor_vendas)
-lista_codigosEngracados = codigo_engracados(lista_codigos)
-comparar(lista_vendas_tuplas, lista_vendas_logs, lista_codigosEngracados)
+main()
