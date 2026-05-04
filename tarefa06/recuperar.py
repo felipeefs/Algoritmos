@@ -131,7 +131,8 @@ def main():
     apagados = valor_item(lista_preco_logs, horas_vagas, lista_hora_logs)
     
     "print(apagados)"
-    
+      
+      
     # talvez seja necessario criar uma função, porque se eles não tiveram a mesma quantidade em tamanho irá dar problema
     for i in range(len(horas_vagas)):
         print(f"{horas_vagas[i]},{lista_codigos_engracados[i]},{brinquedo[i]},{apagados[i]:.2f}")
