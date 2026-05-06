@@ -69,16 +69,60 @@ def soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista
         if soma_carro != 0: 
             lista_somaCarro.append(soma_carro)
             lista_horaCarro.append(hora)
-            
+
+    '''
     print(lista_horaCarro)
     print(lista_somaCarro)
 
     print(lista_horaDino)
     print(lista_somaDino)
+    '''
+    return lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino
 
 
-def ordem_descrescente():
-    "Pega as listas de valores e coloca em ordem descrescente de valores. Ao mesmo tempo que voce muda ela, voce muda as listas de lista_sem_repetição----- fazer algo em relação ao empate tambem"
+def ordem_descrescente(lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino):
+    "Pega as listas de valores e coloca em ordem descrescente de valores. Ao mesmo tempo que voce muda ela, voce muda as listas de lista_somaCarro e lista_somaDino----- fazer algo em relação ao empate tambem"
+
+    for i in range(len(lista_somaCarro)):
+        maior_indice = i
+        for j in range(i, len(lista_somaCarro)):
+            if lista_somaCarro[j] > lista_somaCarro[maior_indice]:
+                maior_indice = j
+        #Trocas Carros
+        maior_item = lista_somaCarro[maior_indice]
+        menor_item = lista_somaCarro[i]
+        hora_certa = lista_horaCarro[maior_indice]
+        hora_trocada = lista_horaCarro[i]
+
+        lista_somaCarro[i] = maior_item            
+        lista_horaCarro[i] = hora_certa
+        lista_somaCarro[maior_indice] = menor_item
+        lista_horaCarro[maior_indice] = hora_trocada
+
+        
+    for i in range(len(lista_somaDino)):
+        maior_indice = i
+        for j in range(i, len(lista_somaDino)):
+            if lista_somaDino[j] > lista_somaDino[maior_indice]:
+                maior_indice = j
+        #Trocas Dinos
+        maior_item = lista_somaDino[maior_indice]
+        menor_item = lista_somaDino[i]
+        hora_certa = lista_horaDino[maior_indice]
+        hora_trocada = lista_horaDino[i]
+
+        lista_somaDino[i] = maior_item            
+        lista_horaDino[i] = hora_certa
+        lista_somaDino[maior_indice] = menor_item
+        lista_horaDino[maior_indice] = hora_trocada
+        
+    return lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino
+
+
+
+def impressao():
+    pass
+
 
 
 
@@ -88,4 +132,10 @@ lista_sem_minutos = horas_sem_minutos(lista_horas)
 
 lista_sem_repeticao = horas_sem_repeticao(lista_sem_minutos)
                 
-soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista_valor_vendas)
+lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino = soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista_valor_vendas)
+
+lista_horaCarro_f, lista_somaCarro_f, lista_horaDino_f, lista_somaDino_f = ordem_descrescente(lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino)
+print(lista_horaCarro_f)
+print(lista_somaCarro_f)
+print(lista_horaDino_f)
+print(lista_somaDino_f)
