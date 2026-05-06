@@ -24,6 +24,16 @@ def horas_sem_minutos(lista_horas):
 
 def horas_sem_repeticao(lista_sem_minutos):
     '''Analisa todos os itens em lista sem minutos e adiona em uma lista sem repeti-las'''
+    lista_sem_repeticao = []
+    atual = lista_sem_minutos[0]
+    lista_sem_repeticao.append(atual)
+
+    for item in lista_sem_minutos:
+        if item != atual:
+            lista_sem_repeticao.append(item)
+            atual = item
+    print(lista_sem_repeticao)
+    return lista_sem_repeticao
 
     #return lista_sem_repeticao 
 
@@ -36,6 +46,7 @@ def ordem_descrescente():
 
 lista_horas, lista_brinquedos = arquivos_para_lista()
 
-horas_sem_minutos(lista_horas)
+lista_sem_minutos = horas_sem_minutos(lista_horas)
 
+horas_sem_repeticao(lista_sem_minutos)
                 
