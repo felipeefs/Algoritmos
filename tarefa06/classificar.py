@@ -22,8 +22,6 @@ def horas_sem_minutos(lista_horas):
         hora = item.split("h")
         lista_sem_minutos.append(hora[0])
         
-    print(lista_sem_minutos)
-
     return lista_sem_minutos
 
 def horas_sem_repeticao(lista_sem_minutos):
@@ -36,7 +34,6 @@ def horas_sem_repeticao(lista_sem_minutos):
         if item != atual:
             lista_sem_repeticao.append(item)
             atual = item
-    print(lista_sem_repeticao)
 
     return lista_sem_repeticao
 
@@ -118,24 +115,26 @@ def ordem_descrescente(lista_horaCarro, lista_somaCarro, lista_horaDino, lista_s
         
     return lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino
 
-
-
-def impressao():
+def impressoes(lista_horaCarro_f, lista_somaCarro_f, lista_horaDino_f, lista_somaDino_f):
     pass
 
+def main():
+    lista_horas, lista_brinquedos, lista_valor_vendas = arquivos_para_lista()
 
+    lista_sem_minutos = horas_sem_minutos(lista_horas)
 
+    lista_sem_repeticao = horas_sem_repeticao(lista_sem_minutos)
+                    
+    lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino = soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista_valor_vendas)
 
-lista_horas, lista_brinquedos, lista_valor_vendas = arquivos_para_lista()
+    lista_horaCarro_f, lista_somaCarro_f, lista_horaDino_f, lista_somaDino_f = ordem_descrescente(lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino)
 
-lista_sem_minutos = horas_sem_minutos(lista_horas)
+    print("Carros:")
+    for i in range(len(lista_somaCarro_f)):
+        print(f"{lista_horaCarro_f[i]}h: {lista_somaCarro_f[i]:.2f}")
 
-lista_sem_repeticao = horas_sem_repeticao(lista_sem_minutos)
-                
-lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino = soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista_valor_vendas)
+    print("\nDinossauros:")
+    for i in range(len(lista_somaDino_f)):
+        print(f"{lista_horaDino_f[i]}h: {lista_somaDino_f[i]:.2f}")
 
-lista_horaCarro_f, lista_somaCarro_f, lista_horaDino_f, lista_somaDino_f = ordem_descrescente(lista_horaCarro, lista_somaCarro, lista_horaDino, lista_somaDino)
-print(lista_horaCarro_f)
-print(lista_somaCarro_f)
-print(lista_horaDino_f)
-print(lista_somaDino_f)
+main()
