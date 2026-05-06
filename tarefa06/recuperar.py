@@ -112,25 +112,6 @@ def codigo_engracados(lista_codigos):
 
     return lista_codigosEngracados           
 
-
-    '''
-    lista_codigosEngracados = []
-    for i in range(1, len(lista_codigos)):
-        atual = int(lista_codigos[i-1])
-        proximo = int(lista_codigos[i])
-        while atual < proximo:
-            atual += 1
-            codigo_str = str(atual)
-            caracteres = len(codigo_str)
-            metad_caracteres = caracteres // 2
-
-            if codigo_str[0:metad_caracteres] == codigo_str[metad_caracteres:caracteres]:
-                lista_codigosEngracados.append(atual)
-
-    return lista_codigosEngracados           
-       '''     
-
-
 def comparar(lista_vendas_tuplas, lista_vendas_logs, lista_codigosEngracados):
     "Irá comparar toda essa nova lista criada pelos logs e se ela for diferente das que estão em vendas, ganhará um codigo engrçado para ser impressa"
     i = 0
