@@ -44,6 +44,8 @@ def soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista
     '''Analisa os itens em lista_sem_repeticao com o lista_sem_minutos, quando forem iguais, analisar o indice e ver se é um dino ou um carro. Se for dino adiciona em soma_dino, se carro: adiciona em soma_carro  ADICIONA EM UMA LISTA QUANDO TERMINAR DE SOMAR PARA CADA HORA.     Tambem, ao mesmo tempo que adiciona o valor na lista, adiciona o tempo em lista_carro_certa ou lista_dino_certa'''
     lista_somaDino = []
     lista_somaCarro = []
+    lista_horaDino = []
+    lista_horaCarro = []
 
     i = 0    
     for hora in lista_sem_repeticao:
@@ -56,20 +58,28 @@ def soma_valores(lista_sem_minutos, lista_sem_repeticao, lista_brinquedos, lista
                     soma_dino += float(lista_valor_vendas[i])
                 else: 
                     soma_carro += float(lista_valor_vendas[i])
+                    
             else:  
                 comparacao = False
                 break
             i +=1 #atualiza para o proximo se ainda forem iguais
-        
-        lista_somaDino.append(soma_dino)
-        lista_somaCarro.append(soma_carro)
-
+        if soma_dino != 0: 
+            lista_somaDino.append(soma_dino)
+            lista_horaDino.append(hora)
+        if soma_carro != 0: 
+            lista_somaCarro.append(soma_carro)
+            lista_horaCarro.append(hora)
+            
+    print(lista_horaCarro)
     print(lista_somaCarro)
+
+    print(lista_horaDino)
     print(lista_somaDino)
 
 
 def ordem_descrescente():
-    "Pega as listas de valores e coloca em ordem descrescente de valores. Ao mesmo tempo que voce muda ela, voce muda as listas de horas_certa, para melhorar a impressão ----- fazer algo em relação ao empate tambem"
+    "Pega as listas de valores e coloca em ordem descrescente de valores. Ao mesmo tempo que voce muda ela, voce muda as listas de lista_sem_repetição----- fazer algo em relação ao empate tambem"
+
 
 
 lista_horas, lista_brinquedos, lista_valor_vendas = arquivos_para_lista()
