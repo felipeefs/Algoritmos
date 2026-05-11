@@ -13,12 +13,8 @@ def entradas():
             linha = ((linha.strip()).split( ))
             matriz.append((linha))  #Ta adicionando cada linha em uma lista, depois essa lista é adicionada em matrizes
 
-    print(escala)
-    print(comentario)
-    print(proporcao)
-    print(branco)
-    print(matriz)
-    return matriz
+
+    return matriz, arquivo_entrada, arquivo_saida
 
 def encontra_maior_valor(matriz):
     '''Acha o maior valor da matriz, o branco .Se achar um branco(255), adiciona no contador_branco_ini)'''
@@ -90,25 +86,23 @@ def acha_brancos_pretos(matriz_propor):
 
     return contador_branco_fin, contador_preto_fin
 
-def novo_arquivo():
+def novo_arquivo(matriz_propor, arquivo_saida):
     ''' a partir da nova matriz, cria um arquivo novo, com as linhas alterada'''
+
+
     
 def main():
-    matriz = entradas()
+    matriz, arquivo_entrada, arquivo_saida = entradas()
     maior_valor, contador_branco_ini = encontra_maior_valor(matriz)
-    print(maior_valor)
-    print(contador_branco_ini)
 
     menor_valor, contador_preto_ini = encontra_menor_valor(matriz)
-    print(menor_valor)
-    print(contador_preto_ini)
 
     matriz_propor = nova_matriz(matriz, maior_valor,menor_valor)
-    print(matriz_propor)
 
     contador_branco_fin, contador_preto_fin = acha_brancos_pretos(matriz_propor)
-    print(contador_branco_fin)
-    print(contador_preto_fin)
+    
+    print(f"{arquivo_entrada}: {contador_preto_ini} pixels pretos e {contador_branco_ini} pixels brancos")
+    print(f"{arquivo_saida}: {contador_preto_fin} pixels pretos e {contador_branco_fin} pixels brancos")
 
 
 
