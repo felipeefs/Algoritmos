@@ -13,14 +13,29 @@ def entradas():
             linha = ((linha.strip()).split( ))
             matriz.append((linha))  #Ta adicionando cada linha em uma lista, depois essa lista é adicionada em matrizes
 
-
-
     print(escala)
     print(comentario)
     print(proporcao)
     print(branco)
     print(matriz)
 
+def maior_valor():
+    '''Acha o maior valor da matriz'''
+
+def menor_valor():
+    '''Acha o menor valor da matriz'''
+
+def proporcao_nova():
+    '''Cria uma nova proporcao com base no maior valor e no menor valor'''
+
+def nova_matriz():
+    '''Com base na nova proporcao, altera a matriz, em cada livra aplica-se essa nova proporção e substitui pela linha antiga'''
+
+def novo_arquivo():
+    ''' a partir da nova matriz, cria um arquivo novo, com as linhas alterada'''
+    
+def main():
+    pass
 
 
 
