@@ -21,8 +21,7 @@ def entradas():
     return matriz
 
 def encontra_maior_valor(matriz):
-    '''Acha o maior valor da matriz, o branco .Se achar um branco(255), adiciona no contador_branco_ini)
-     ESSA FUNÇÃO PODE SER USADA DE NOVO PARA CALCULAR A QUANTIDADE DE BRANCOS NA MATRIZ CORRIGIDA'''
+    '''Acha o maior valor da matriz, o branco .Se achar um branco(255), adiciona no contador_branco_ini)'''
     contador_branco_ini = 0
     maior_valor = int(matriz[0][0]) # adiciona o primeiro valor com base, para passar nos loops e se mudado
     m = len(matriz)
@@ -38,8 +37,7 @@ def encontra_maior_valor(matriz):
     return maior_valor, contador_branco_ini
 
 def encontra_menor_valor(matriz):
-    '''Acha o menor valor da matriz, o preto. Se achar um preto (0), adiciona no contador_preto_ini
-    ESSA FUNÇÃO PODE SER USADA DE NOVO PARA CALCULAR A QUANTIDADE DE PRETOS NA MATRIZ CORRIGIDA'''
+    '''Acha o menor valor da matriz, o preto. Se achar um preto (0), adiciona no contador_preto_ini'''
     contador_preto_ini = 0
     menor_valor = int(matriz[0][0]) # adiciona o primeiro valor com base, para passar nos loops e se mudado
     m = len(matriz)
@@ -64,10 +62,10 @@ def proporcao_nova(maior_valor, menor_valor, atual):
 def nova_matriz(matriz, maior_valor, menor_valor):
     '''Com base na nova proporcao, cria uma matriz, em cada linha da antiga aplica-se essa nova proporção para criar uma matriz_proporcional'''
     matriz_propor = []
-    linha = []
     m = len(matriz)
     for i in range(m):
         n = len(matriz[i])
+        linha = []
         matriz_propor.append(linha)
         for j in range(n):
             atual = int(matriz[i][j])
@@ -75,6 +73,22 @@ def nova_matriz(matriz, maior_valor, menor_valor):
             linha.append(corrigida)
 
     return matriz_propor
+
+def acha_brancos_pretos(matriz_propor):
+    ''' função que acha a quantidade de numeros brancos(255) e pretos(0) no matriz_propor com um contador'''
+    contador_branco_fin = 0
+    contador_preto_fin = 0
+    m = len(matriz_propor)
+    for i in range(m):
+        n = len(matriz_propor[i])
+        for j in range(n):
+            atual = matriz_propor[i][j]
+            if atual == 0:
+                contador_preto_fin += 1
+            if atual == 255: 
+                contador_branco_fin += 1
+
+    return contador_branco_fin, contador_preto_fin
 
 def novo_arquivo():
     ''' a partir da nova matriz, cria um arquivo novo, com as linhas alterada'''
@@ -91,6 +105,11 @@ def main():
 
     matriz_propor = nova_matriz(matriz, maior_valor,menor_valor)
     print(matriz_propor)
+
+    contador_branco_fin, contador_preto_fin = acha_brancos_pretos(matriz_propor)
+    print(contador_branco_fin)
+    print(contador_preto_fin)
+
 
 
 main()
