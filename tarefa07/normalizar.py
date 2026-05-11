@@ -28,9 +28,9 @@ def encontra_maior_valor(matriz):
     for i in range(m):
         n =  len(matriz[i])
         for j in range(n):
-            j = int(j)
-            if j > maior_valor:
-                maior_valor = j
+            atual = int(matriz[i][j])
+            if atual > maior_valor:
+                maior_valor = atual
 
     return maior_valor
 
