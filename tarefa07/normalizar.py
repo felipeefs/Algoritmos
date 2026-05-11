@@ -56,19 +56,20 @@ def encontra_menor_valor(matriz):
 
 def proporcao_nova(maior_valor, menor_valor, atual):
     '''Cria uma nova proporcao com base no maior valor e no menor valor'''
-    corrigida = ((atual - menor_valor) / (maior_valor - menor)) * 255
+    corrigida = ((atual - menor_valor) / (maior_valor - menor_valor)) * 255
+    corrigida = int(corrigida) #tira os decimais
 
     return corrigida
 
-def nova_matriz(maior_valor, menor_valor):
+def nova_matriz(matriz, maior_valor, menor_valor):
     '''Com base na nova proporcao, cria uma matriz, em cada linha da antiga aplica-se essa nova proporção para criar uma matriz_proporcional'''
     matriz_propor = []
     linha = []
     m = len(matriz)
     for i in range(m):
         n = len(matriz[i])
-        matriz.append(linha)
-        for j in range(n)
+        matriz_propor.append(linha)
+        for j in range(n):
             atual = int(matriz[i][j])
             corrigida = proporcao_nova(maior_valor, menor_valor, atual)
             linha.append(corrigida)
@@ -87,6 +88,9 @@ def main():
     menor_valor, contador_preto_ini = encontra_menor_valor(matriz)
     print(menor_valor)
     print(contador_preto_ini)
+
+    matriz_propor = nova_matriz(matriz, maior_valor,menor_valor)
+    print(matriz_propor)
 
 
 main()
