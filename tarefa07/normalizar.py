@@ -90,9 +90,13 @@ def novo_arquivo(matriz_propor, arquivo_saida, escala, comentario, proporcao, br
     ''' a partir da nova matriz, cria um arquivo novo, com as linhas alterada'''
     with open(arquivo_saida, "w") as arquivo:
         arquivo.write(escala)
+        arquivo.write("\n")
         arquivo.write(comentario)
+        arquivo.write("\n")
         arquivo.write(proporcao)
+        arquivo.write("\n")
         arquivo.write(branco)
+        arquivo.write("\n")
 
         for lista in matriz_propor:
             for numero in lista:
@@ -107,7 +111,6 @@ def main():
     menor_valor, contador_preto_ini = encontra_menor_valor(matriz)
 
     matriz_propor = nova_matriz(matriz, maior_valor,menor_valor)
-    print(matriz_propor)
 
     contador_branco_fin, contador_preto_fin = acha_brancos_pretos(matriz_propor)
     
