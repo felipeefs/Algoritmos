@@ -18,12 +18,25 @@ def entradas():
     print(proporcao)
     print(branco)
     print(matriz)
+    return matriz
 
-def maior_valor():
-    '''Acha o maior valor da matriz'''
+def encontra_maior_valor(matriz):
+    '''Acha o maior valor da matriz, o branco .Se achar um branco(255), adiciona no contador_branco)'''
+    contador_branco = 0
+    maior_valor = int(matriz[0][0]) # adiciona o primeiro valor com base, para passar nos loops e se mudado
+    m = len(matriz)
+    for i in range(m):
+        n =  len(matriz[i])
+        for j in range(n):
+            j = int(j)
+            if j > maior_valor:
+                maior_valor = j
 
-def menor_valor():
-    '''Acha o menor valor da matriz'''
+    return maior_valor
+
+def encontra_menor_valor(matriz):
+    '''Acha o menor valor da matriz, o preto. Se achar um preto (0), adiciona no contador_preto'''
+    contador_preto = 0
 
 def proporcao_nova():
     '''Cria uma nova proporcao com base no maior valor e no menor valor'''
@@ -35,8 +48,9 @@ def novo_arquivo():
     ''' a partir da nova matriz, cria um arquivo novo, com as linhas alterada'''
     
 def main():
-    pass
+    matriz = entradas()
+    maior_valor = encontra_maior_valor(matriz)
+    print(maior_valor)
 
 
-
-entradas()
+main()
