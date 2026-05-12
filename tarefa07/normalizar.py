@@ -118,5 +118,6 @@ def main():
     print(f"{arquivo_saida}: {contador_preto_fin} pixels pretos e {contador_branco_fin} pixels brancos")
 
     novo_arquivo(matriz_propor, arquivo_saida, escala, comentario, proporcao, branco)
-
-main()
+    
+if __name__ == "__main__": 
+    main()
