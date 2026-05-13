@@ -16,7 +16,7 @@ def normalizacao():
 
     return matriz_propor, largura, limiar, fator
 
-def contar_largura( matriz_propor, largura, i , j):
+def contar_largura( matriz_propor, largura):
     ''' com base no item atual do loop da matriz, acha os itens em volta desse atual com base na largura e adiciona em uma lista'''
     largura = int(largura)
     lista_largura = []
@@ -26,35 +26,34 @@ def contar_largura( matriz_propor, largura, i , j):
         n += 1  #somador das coluna
         m += 1 #somador das linha
 
-    indice_coluna = j-n
-    indice_linha = i-m 
-    while n > 0:
-        for k in range(largura):
-            indice_linha = i-m 
-            for k in range(largura):
-                item_atual = matriz_propor[indice_linha][indice_coluna]
-                lista_largura.append(item_atual)
-                j += 1 #pula uma coluna
-                indice_coluna = j + n
-            indice_linha = i + m #pula uma linha     
-        n -= 1
-        
-    return lista_largura
-
-def contar_limiar(limiar, matriz_propor, largura):
-    ''' Percorre os itens da matriz normalizada, chama a função contar_largura, analisa quantos itens são menores que o limiar e adiciona em uma lista'''
     m = len(matriz_propor)
     for i in range(m):
         n = len(matriz_propor[i])
         for j in range(n):
             atual = matriz_propor[i][j]
-            return i ,j
-            lista_largura = contar_largura(matriz_propor, largura, i, j)
-            #Analise dos itens menores que limiar
-            lista_menores = []
-            for item in lista_largura:
-                if item < limiar:
-                    lista_menores.append(item)
+            indice_coluna = j-n
+            indice_linha = i-m 
+            while n > 0:
+                for k in range(largura):
+                    indice_linha = i-m
+                    for k in range(largura):
+                        item_atual = matriz_propor[indice_linha][indice_coluna]
+                        lista_largura.append(item_atual)
+                        j += 1 #pula uma coluna
+                        indice_coluna = j + n
+                    indice_linha = i + m #pula uma linha     
+                n -= 1
+        
+    return lista_largura
+
+def contar_limiar(limiar, matriz_propor, largura):
+    ''' Percorre os itens da matriz normalizada, chama a função contar_largura, analisa quantos itens são menores que o limiar e adiciona em uma lista'''
+    lista_largura = contar_largura(matriz_propor, largura)
+    #Analise dos itens menores que limiar
+    lista_menores = []
+    for item in lista_largura:
+        if item < limiar:
+            lista_menores.append(item)
     return lista_menores
 
 def matriz_binarizada():
@@ -70,9 +69,9 @@ def main():
     print(limiar)
     #print(fator)
 
-    i, j, lista_menores = contar_limiar(limiar, matriz_propor, largura)
+    lista_menores = contar_limiar(limiar, matriz_propor, largura)
     
-    lista_largura = contar_largura(matriz_propor, largura, i, j)
+    lista_largura = contar_largura(matriz_propor, largura)
     print(lista_largura)
 
 main()
