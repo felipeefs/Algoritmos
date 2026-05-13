@@ -16,7 +16,7 @@ def normalizacao():
 
     return matriz_propor, largura, limiar, fator
 
-def contar_largura(atual, matriz_propor, largura, i , j):
+def contar_largura( matriz_propor, largura, i , j):
     ''' com base no item atual do loop da matriz, acha os itens em volta desse atual com base na largura e adiciona em uma lista'''
     largura = int(largura)
     lista_largura = []
@@ -26,7 +26,6 @@ def contar_largura(atual, matriz_propor, largura, i , j):
         n += 1  #somador das coluna
         m += 1 #somador das linha
 
-    item_atual= matriz_propor[i-m][j-n]    
     indice_coluna = j-n
     indice_linha = i-m 
     while n > 0:
@@ -49,12 +48,14 @@ def contar_limiar(limiar, matriz_propor, largura):
         n = len(matriz_propor[i])
         for j in range(n):
             atual = matriz_propor[i][j]
-            return atual, i ,j
-            lista_largura = contar_largura(atual, matriz_propor, largura, i, j)
-            '''Continuar'''
-            
-
-
+            return i ,j
+            lista_largura = contar_largura(matriz_propor, largura, i, j)
+            #Analise dos itens menores que limiar
+            lista_menores = []
+            for item in lista_largura:
+                if item < limiar:
+                    lista_menores.append(item)
+    return lista_menores
 
 def matriz_binarizada():
     '''analisa o tamanho da matriz com a porcentagem do fator, para verificar se esse atual irá virar preto: ja que ele depende do tamanho da lista dos números ao seu redor ----- > vai adicionando cada atual em uma linha, e essa linha e adicionada em uma matriz nova ao acabar o loop'''
@@ -65,13 +66,13 @@ def novo_arquivo():
 def main():
     matriz_propor, largura, limiar, fator = normalizacao()
     #print(matriz_propor)
-    print(largura)
+    #print(largura)
     print(limiar)
-    print(fator)
+    #print(fator)
 
-    atual, i, j = contar_limiar(limiar, matriz_propor, largura)
+    i, j, lista_menores = contar_limiar(limiar, matriz_propor, largura)
     
-    lista_largura = contar_largura(atual, matriz_propor, largura, i, j)
+    lista_largura = contar_largura(matriz_propor, largura, i, j)
     print(lista_largura)
 
 main()
