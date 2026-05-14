@@ -16,7 +16,7 @@ def normalizacao():
 def contar_largura(matriz_propor, largura):
     ''' com base no item atual do loop da matriz, acha os itens em volta desse atual com base na largura e adiciona em uma lista'''
 
-    
+    '''
     largura = int(largura)
     lista_largura = []
     soma_li = 0
@@ -43,18 +43,37 @@ def contar_largura(matriz_propor, largura):
                     print(lista_largura)
                     indice_linha += soma_li #pula uma linha     
                     cont_largura -= 1
+    
+'''
+    largura = int(largura)
+    matriz_largura = []
+    soma_li = 0
+    soma_co = 0
+    while soma_co + 2 < largura:  
+        soma_co += 1  #somador das coluna
+        soma_li += 1 #somador das linha
 
-    '''
     m = len(matriz_propor)
     for i in range(m):
         n = len(matriz_propor[i])
         for j in range(n):
             atual = matriz_propor[i][j]
-    '''
 
+            #DESCOBRE ITENS NA LARGURA:
 
-        
-    return lista_largura, atual
+            for l in range(largura):
+                i_linha = i-soma_li
+                lista_largura = []
+                matriz_largura.append(lista_largura)
+                for c in range(largura):
+                    j_coluna = j-soma_co
+                    percorrido = matriz_propor[i_linha][j_coluna]
+                    lista_largura.append(percorrido)
+                    soma_co -= 1 #Vai diminuindo, lembrando que ao diminuir, pelos sinais a subtração vai tranformar em uma soma
+                soma_li -= 1
+    
+    
+    return matriz_largura
 
 def contar_limiar(limiar, lista_largura):
     ''' Percorre os itens da matriz normalizada, chama a função contar_largura, analisa quantos itens são menores que o limiar e adiciona em uma lista'''
@@ -95,9 +114,8 @@ def main():
     #print(fator)
 
     
-    lista_largura, atual = contar_largura(matriz_propor, largura)
+    lista_largura = contar_largura(matriz_propor, largura)
     print(lista_largura)
-    print(atual)
 
     lista_menores = contar_limiar(limiar, lista_largura)
     print(lista_menores)
