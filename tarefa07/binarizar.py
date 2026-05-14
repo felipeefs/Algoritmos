@@ -33,12 +33,12 @@ def contar_largura(matriz_propor, largura):
             atual = matriz_propor[i][j]
 
             indice_linha = i-soma_li
-            while cont_largura > 0:
+            while cont_largura > 0: # esse contador não faz sentido
                 for l in range(largura):
                     indice_coluna = j-soma_co
                     for c in range(largura):
                         item_percorrido = matriz_propor[indice_linha][indice_coluna]
-                        lista_largura.append(item_percorrido)
+                        lista_largura.append(item_percorrido) # PROBLEMA A LISTA LARGURA SEMPRE MUDA PARA CADA ATUAL
                         indice_coluna += soma_co
                     print(lista_largura)
                     indice_linha += soma_li #pula uma linha     
@@ -68,8 +68,21 @@ def contar_limiar(limiar, lista_largura):
 
     return lista_menores
 
-def matriz_binarizada():
+def matriz_binarizada(lista_menores, atual, largura, fator):
     '''analisa o tamanho da matriz com a porcentagem do fator, para verificar se esse atual irá virar preto: ja que ele depende do tamanho da lista dos números ao seu redor ----- > vai adicionando cada atual em uma linha, e essa linha e adicionada em uma matriz nova ao acabar o loop'''
+
+    tamanho = len(lista_menores)
+    porcentagem = tamanho / largura
+
+    if porcentagem >= fator:
+        atual = 0 # preto
+    else:
+        atual = 255 # branco
+
+
+
+
+
 
 def novo_arquivo():
     pass
