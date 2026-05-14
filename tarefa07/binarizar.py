@@ -11,9 +11,6 @@ def normalizacao():
 
     matriz_propor = normalizar.nova_matriz(matriz, maior_valor,menor_valor)
 
-    print(contador_branco_ini)
-    print(contador_preto_ini)
-
     return matriz_propor, largura, limiar, fator
 
 def contar_largura(matriz_propor, largura):
@@ -22,12 +19,10 @@ def contar_largura(matriz_propor, largura):
     lista_largura = []
     soma_li = 0
     soma_co = 0 
-    contador = 0
-    while contador + 2 < largura:  #deixa o n (contador) no range para percorrer a matriz
+    cont_largura = largura
+    while soma_co + 2 < largura:  #deixa o n (cont_largura) no range para percorrer a matriz
         soma_co += 1  #somador das coluna
         soma_li += 1 #somador das linha
-        contador += 1
-    print(contador)
 
     m = len(matriz_propor)
     for i in range(m):
@@ -35,15 +30,15 @@ def contar_largura(matriz_propor, largura):
         for j in range(n):
             atual = matriz_propor[i][j]
             indice_linha = i-soma_li
-            while contador > 0:
+            while cont_largura > 0:
                 for l in range(largura):
                     indice_coluna = j-soma_co
                     for c in range(largura):
-                        item_atual = matriz_propor[indice_linha][indice_coluna]
-                        lista_largura.append(item_atual)
+                        item_percorrido = matriz_propor[indice_linha][indice_coluna]
+                        lista_largura.append(item_percorrido)
                         indice_coluna += soma_co
                     indice_linha += soma_li #pula uma linha     
-                contador -= 1
+                    cont_largura -= 1
         
     return lista_largura
 
