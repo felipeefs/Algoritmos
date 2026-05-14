@@ -27,20 +27,20 @@ def contar_largura(matriz_propor, largura):
         soma_co += 1  #somador das coluna
         soma_li += 1 #somador das linha
         contador += 1
+    print(contador)
 
     m = len(matriz_propor)
     for i in range(m):
         n = len(matriz_propor[i])
         for j in range(n):
             atual = matriz_propor[i][j]
-            indice_coluna = j-soma_co
             indice_linha = i-soma_li
             while contador > 0:
-                for k in range(largura):
-                    for l in range(largura):
+                for l in range(largura):
+                    indice_coluna = j-soma_co
+                    for c in range(largura):
                         item_atual = matriz_propor[indice_linha][indice_coluna]
                         lista_largura.append(item_atual)
-                        j += 1 #pula uma coluna
                         indice_coluna += soma_co
                     indice_linha += soma_li #pula uma linha     
                 contador -= 1
