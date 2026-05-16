@@ -60,15 +60,15 @@ def contar_largura(matriz_propor, largura):
     for i in range(m):
         n = len(matriz_propor[i])
         for j in range(n):
-            atual = matriz_propor[i][j]
-
+            #atual = matriz_propor[i][j]
+            
             #DESCOBRE ITENS NA LARGURA:
             lista_largura = []
             matriz_largura.append(lista_largura)
-            soma_co = somador
-            soma_li = somador
+            soma_li = somador #reseta as variaveis a cada item percorrido
             for k in range(largura):
                 i_linha = i - (soma_li)
+                soma_co = somador #reseta as variaveis a cada item percorrido
                 for c in range(largura):
                     j_coluna = j - (soma_co)
                     if 0 <= j_coluna < n and 0 <= i_linha < m:
