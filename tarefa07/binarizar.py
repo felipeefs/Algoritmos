@@ -29,7 +29,7 @@ def contar_largura(matriz_propor, largura):
             soma_li += 1 #somador das linha
             somador += 1
     print(somador)
-    
+
     m = len(matriz_propor)
     for i in range(m):
         n = len(matriz_propor[i])
@@ -53,21 +53,26 @@ def contar_largura(matriz_propor, largura):
     return matriz_largura
 
 def contar_limiar(limiar, matriz_largura):
-    ''' Percorre os itens da matriz normalizada, chama a função contar_largura, analisa quantos itens são menores que o limiar e adiciona em uma lista'''
+    ''' Percorre os itens da matriz largura, ve em cada lista dentro dessa matriz quais numeros são menores que o limiar e adicona em uma lista menores, que estará presente na matriz_menores'''
     #Analise dos itens menores que limiar
+    matriz_menores = []
+    limiar = int(limiar)
 
-
+    m = len(matriz_largura)
+    for i in range(m):
+        n = len(matriz_largura[i])
+        lista_menores = []
+        matriz_menores.append(lista_menores)
+        for j in range(n):
+            atual = matriz_largura[i][j]
+            if atual < limiar:
+                lista_menores.append(atual)
+    
+    return matriz_menores
 
 def matriz_binarizada(lista_menores, atual, largura, fator):
-    '''analisa o tamanho da matriz com a porcentagem do fator, para verificar se esse atual irá virar preto: ja que ele depende do tamanho da lista dos números ao seu redor ----- > vai adicionando cada atual em uma linha, e essa linha e adicionada em uma matriz nova ao acabar o loop'''
+    '''analisa o tamanho de cada lista em matriz_menores com a porcentagem do fator, para verificar se esse atual irá virar preto: ja que ele depende do tamanho da lista dos números ao seu redor ----- > vai adicionando cada atual em uma linha, e essa linha e adicionada em uma matriz nova ao acabar o loop'''
 
-    tamanho = len(lista_menores)
-    porcentagem = tamanho / largura
-
-    if porcentagem >= fator:
-        atual = 0 # preto
-    else:
-        atual = 255 # branco
 
 
 def novo_arquivo():
@@ -83,6 +88,9 @@ def main():
     
     matriz_largura = contar_largura(matriz_propor, largura)
     print(matriz_largura)
+
+    matriz_menores = contar_limiar(limiar, matriz_largura)
+    print(matriz_menores)
 
 
 main()
