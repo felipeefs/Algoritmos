@@ -16,52 +16,25 @@ def normalizacao():
 def contar_largura(matriz_propor, largura):
     ''' com base no item atual do loop da matriz, acha os itens em volta desse atual com base na largura e adiciona em uma lista'''
 
-    '''
     largura = int(largura)
-    lista_largura = []
-    soma_li = 0
-    soma_co = 0 
-    cont_largura = largura
-    while soma_co + 2 < largura:  #deixa o n (cont_largura) no range para percorrer a matriz
-        soma_co += 1  #somador das coluna
-        soma_li += 1 #somador das linha
-
-    m = len(matriz_propor)
-    for i in range(m):
-        n = len(matriz_propor[i])
-        for j in range(n):
-            atual = matriz_propor[i][j]
-
-            indice_linha = i-soma_li
-            while cont_largura > 0: # esse contador não faz sentido
-                for l in range(largura):
-                    indice_coluna = j-soma_co
-                    for c in range(largura):
-                        item_percorrido = matriz_propor[indice_linha][indice_coluna]
-                        lista_largura.append(item_percorrido) # PROBLEMA A LISTA LARGURA SEMPRE MUDA PARA CADA ATUAL
-                        indice_coluna += soma_co
-                    print(lista_largura)
-                    indice_linha += soma_li #pula uma linha     
-                    cont_largura -= 1
-    
-'''
-    largura = int(largura)
+    largura_cont = largura
     matriz_largura = []
     soma_li = 0
     soma_co = 0
     somador = 0
     if largura > 1:
-        while soma_co + 2 < largura:  
+        while largura_cont > 1:
+            largura_cont -= 2
             soma_co += 1  #somador das coluna
             soma_li += 1 #somador das linha
             somador += 1
+    print(somador)
     
     m = len(matriz_propor)
     for i in range(m):
         n = len(matriz_propor[i])
         for j in range(n):
             #atual = matriz_propor[i][j]
-            
             #DESCOBRE ITENS NA LARGURA:
             lista_largura = []
             matriz_largura.append(lista_largura)
@@ -71,7 +44,7 @@ def contar_largura(matriz_propor, largura):
                 soma_co = somador #reseta as variaveis a cada item percorrido
                 for c in range(largura):
                     j_coluna = j - (soma_co)
-                    if 0 <= j_coluna < n and 0 <= i_linha < m:
+                    if 0 <= j_coluna < n and 0 <= i_linha < m: # Se o indice for negativo, não existe esse item na matriz_propor
                         percorrido = matriz_propor[i_linha][j_coluna]
                         lista_largura.append(percorrido)
                     soma_co -= 1 #Vai diminuindo, lembrando que ao diminuir, pelos sinais a subtração vai tranformar em uma soma
@@ -79,17 +52,11 @@ def contar_largura(matriz_propor, largura):
     
     return matriz_largura
 
-def contar_limiar(limiar, lista_largura):
+def contar_limiar(limiar, matriz_largura):
     ''' Percorre os itens da matriz normalizada, chama a função contar_largura, analisa quantos itens são menores que o limiar e adiciona em uma lista'''
     #Analise dos itens menores que limiar
-    lista_menores = []
-    for item in lista_largura:
-        item = int(item)
-        limiar = int(limiar)
-        if item < limiar:
-            lista_menores.append(item)
 
-    return lista_menores
+
 
 def matriz_binarizada(lista_menores, atual, largura, fator):
     '''analisa o tamanho da matriz com a porcentagem do fator, para verificar se esse atual irá virar preto: ja que ele depende do tamanho da lista dos números ao seu redor ----- > vai adicionando cada atual em uma linha, e essa linha e adicionada em uma matriz nova ao acabar o loop'''
@@ -103,10 +70,6 @@ def matriz_binarizada(lista_menores, atual, largura, fator):
         atual = 255 # branco
 
 
-
-
-
-
 def novo_arquivo():
     pass
 
@@ -118,10 +81,8 @@ def main():
     #print(fator)
 
     
-    lista_largura = contar_largura(matriz_propor, largura)
-    print(lista_largura)
+    matriz_largura = contar_largura(matriz_propor, largura)
+    print(matriz_largura)
 
-    #lista_menores = contar_limiar(limiar, lista_largura)
-    #print(lista_menores)
 
 main()
