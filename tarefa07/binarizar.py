@@ -70,8 +70,27 @@ def contar_limiar(limiar, matriz_largura):
     
     return matriz_menores
 
-def matriz_binarizada(lista_menores, atual, largura, fator):
+def montar_matriz_binarizada(matriz_menores, largura, fator):
     '''analisa o tamanho de cada lista em matriz_menores com a porcentagem do fator, para verificar se esse atual irá virar preto: ja que ele depende do tamanho da lista dos números ao seu redor ----- > vai adicionando cada atual em uma linha, e essa linha e adicionada em uma matriz nova ao acabar o loop'''
+
+    matriz_binarizada = []
+    lista_cores = []
+    largura = int(largura)
+    fator = float(fator)
+    denominador = largura**2
+
+    m = len(matriz_menores)
+    for i in range(m):
+        n = len(matriz_menores[i])
+        porcentagem = n / denominador
+        if porcentagem >= fator:
+            lista_cores.append("0") #preto
+        else:
+            lista_cores.append("255") #branco
+
+    return lista_cores
+        
+
 
 
 
@@ -84,6 +103,7 @@ def main():
     #print(largura)
     print(limiar)
     #print(fator)
+    #print(matriz_propor)
 
     
     matriz_largura = contar_largura(matriz_propor, largura)
@@ -91,6 +111,9 @@ def main():
 
     matriz_menores = contar_limiar(limiar, matriz_largura)
     print(matriz_menores)
+
+    lista_cores = montar_matriz_binarizada(matriz_menores, largura, fator)
+    print(lista_cores)
 
 
 main()
