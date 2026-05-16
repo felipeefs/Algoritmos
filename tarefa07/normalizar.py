@@ -78,7 +78,7 @@ def acha_brancos_pretos(matriz_propor):
     for i in range(m):
         n = len(matriz_propor[i])
         for j in range(n):
-            atual = matriz_propor[i][j]
+            atual = int(matriz_propor[i][j])
             if atual == 0:
                 contador_preto_fin += 1
             if atual == 255: 

@@ -11,7 +11,7 @@ def normalizacao():
 
     matriz_propor = normalizar.nova_matriz(matriz, maior_valor,menor_valor)
 
-    return matriz_propor, largura, limiar, fator
+    return matriz_propor, largura, limiar, fator, arquivo_entrada, arquivo_saida, branco, matriz, proporcao, escala, comentario
 
 def contar_largura(matriz_propor, largura):
     ''' com base no item atual do loop da matriz, acha os itens em volta desse atual com base na largura e adiciona em uma lista'''
@@ -28,7 +28,6 @@ def contar_largura(matriz_propor, largura):
             soma_co += 1  #somador das coluna
             soma_li += 1 #somador das linha
             somador += 1
-    print(somador)
 
     m = len(matriz_propor)
     for i in range(m):
@@ -95,20 +94,32 @@ def montar_matriz_binarizada(matriz_propor, matriz_menores, largura, fator):
             linha.append(lista_cores[k])
             k += 1
 
-    return lista_cores, matriz_binarizada
-        
+    return matriz_binarizada
 
 
+def novo_arquivo_binarizado(matriz_binarizada, arquivo_saida, escala, comentario, proporcao, branco):
+    with open(arquivo_saida, "w") as arquivo:
+        arquivo.write(escala)
+        arquivo.write("\n")
+        arquivo.write(comentario)
+        arquivo.write("\n")
+        arquivo.write(proporcao)
+        arquivo.write("\n")
+        arquivo.write(branco)
+        arquivo.write("\n")
+
+        for lista in matriz_binarizada:
+            for numero in lista:
+                arquivo.write(str(numero + " "))
+            arquivo.write("\n")
 
 
-def novo_arquivo():
-    pass
 
 def main():
-    matriz_propor, largura, limiar, fator = normalizacao()
+    matriz_propor, largura, limiar, fator, arquivo_entrada, arquivo_saida, branco, matriz, proporcao, escala, comentario = normalizacao()
     #print(matriz_propor)
     #print(largura)
-    print(limiar)
+    #print(limiar)
     #print(fator)
     #print(matriz_propor)
 
@@ -119,9 +130,15 @@ def main():
     matriz_menores = contar_limiar(limiar, matriz_largura)
     #print(matriz_menores)
 
-    lista_cores, matriz_binarizada = montar_matriz_binarizada(matriz_propor, matriz_menores, largura, fator)
-    print(lista_cores)
-    print(matriz_binarizada)
+    matriz_binarizada = montar_matriz_binarizada(matriz_propor, matriz_menores, largura, fator)
+    #print(matriz_binarizada)
+
+    contador_branco_in, contador_preto_in = normalizar.acha_brancos_pretos(matriz)
+    print(f"{arquivo_entrada}: {contador_preto_in} pixels pretos e {contador_branco_in} pixels brancos")
+    contador_branco_fin, contador_preto_fin = normalizar.acha_brancos_pretos(matriz_binarizada)
+    print(f"{arquivo_saida}: {contador_preto_fin} pixels pretos e {contador_branco_fin} pixels brancos")
+
+    novo_arquivo_binarizado(matriz_binarizada, arquivo_saida, escala, comentario, proporcao, branco)
 
 
 main()
