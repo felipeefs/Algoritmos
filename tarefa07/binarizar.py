@@ -49,10 +49,13 @@ def contar_largura(matriz_propor, largura):
     matriz_largura = []
     soma_li = 0
     soma_co = 0
-    while soma_co + 2 < largura:  
-        soma_co += 1  #somador das coluna
-        soma_li += 1 #somador das linha
-
+    somador = 0
+    if largura > 1:
+        while soma_co + 2 < largura:  
+            soma_co += 1  #somador das coluna
+            soma_li += 1 #somador das linha
+            somador += 1
+    
     m = len(matriz_propor)
     for i in range(m):
         n = len(matriz_propor[i])
@@ -60,18 +63,19 @@ def contar_largura(matriz_propor, largura):
             atual = matriz_propor[i][j]
 
             #DESCOBRE ITENS NA LARGURA:
-
-            for l in range(largura):
-                i_linha = i-soma_li
-                lista_largura = []
-                matriz_largura.append(lista_largura)
+            lista_largura = []
+            matriz_largura.append(lista_largura)
+            soma_co = somador
+            soma_li = somador
+            for k in range(largura):
+                i_linha = i - (soma_li)
                 for c in range(largura):
-                    j_coluna = j-soma_co
-                    percorrido = matriz_propor[i_linha][j_coluna]
-                    lista_largura.append(percorrido)
+                    j_coluna = j - (soma_co)
+                    if 0 <= j_coluna < n and 0 <= i_linha < m:
+                        percorrido = matriz_propor[i_linha][j_coluna]
+                        lista_largura.append(percorrido)
                     soma_co -= 1 #Vai diminuindo, lembrando que ao diminuir, pelos sinais a subtração vai tranformar em uma soma
-                soma_li -= 1
-    
+                soma_li -= 1    
     
     return matriz_largura
 
@@ -117,7 +121,7 @@ def main():
     lista_largura = contar_largura(matriz_propor, largura)
     print(lista_largura)
 
-    lista_menores = contar_limiar(limiar, lista_largura)
-    print(lista_menores)
+    #lista_menores = contar_limiar(limiar, lista_largura)
+    #print(lista_menores)
 
 main()
