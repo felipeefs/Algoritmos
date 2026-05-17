@@ -25,7 +25,7 @@ def descobrir_centro(x, y, matriz_binarizada):
     m = len(matriz_binarizada)
 
     indice_jCentro = int(x)  #colunas
-    indice_iCentro = (m - 1) - int(y)  #linhas
+    indice_iCentro = (m - 1) - int(y)  #linhas (precisa inverter)
     ponto_central = matriz_binarizada[indice_iCentro][indice_jCentro]
 
     return ponto_central, indice_iCentro, indice_jCentro
@@ -84,25 +84,29 @@ def descobrir_numero_colonias(colonia_bacteria, n_medio):
     n_colonia = colonia_bacteria / int(n_medio)
     n_colonia = int(n_colonia)
 
-    return n_colonia
+    if n_colonia < 30:
+        mensagem = "Placa inadequada, dilua menos a amostra."
+    elif 300 > n_colonia > 30:
+        mensagem = "Placa adequada para contagem."
+    else:
+        mensagem = "Placa inadequada, dilua mais a amostra."
+
+       
+    return n_colonia, mensagem
 
 def main():
     arquivo_entrada, largura, limiar, fator, x, y, raio, n_medio = entradas()
 
     matriz_binarizada = binarizaracao(arquivo_entrada, largura, limiar, fator)
 
-    #print(matriz_binarizada)
-
     ponto_central, indice_iCentro, indice_jCentro = descobrir_centro(x, y, matriz_binarizada)
-    print(ponto_central)
 
     lista_distancias = descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro)
-    print(lista_distancias)
 
     colonia_bacteria = descobrir_colonia_bacterias(lista_distancias, raio)
-    print(colonia_bacteria)
 
-    n_colonia = descobrir_numero_colonias(colonia_bacteria, n_medio)
-    print(n_colonia)
+    n_colonia, mensagem = descobrir_numero_colonias(colonia_bacteria, n_medio)
 
+    print(f"Número de colônias estimado: {n_colonia}")
+    print(mensagem)
 main()
