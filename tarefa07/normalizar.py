@@ -81,7 +81,7 @@ def acha_brancos_pretos(matriz_propor):
             atual = int(matriz_propor[i][j])
             if atual == 0:
                 contador_preto_fin += 1
-            if atual == 255: 
+            elif atual == 255: 
                 contador_branco_fin += 1
 
     return contador_branco_fin, contador_preto_fin

@@ -64,7 +64,7 @@ def contar_limiar(limiar, matriz_largura):
         matriz_menores.append(lista_menores)
         for j in range(n):
             atual = matriz_largura[i][j]
-            if atual < limiar:
+            if atual <= limiar:
                 lista_menores.append(atual)
     
     return matriz_menores
@@ -94,6 +94,7 @@ def montar_matriz_binarizada(matriz_propor, matriz_menores, largura, fator):
             linha.append(lista_cores[k])
             k += 1
 
+
     return matriz_binarizada
 
 
@@ -117,21 +118,12 @@ def novo_arquivo_binarizado(matriz_binarizada, arquivo_saida, escala, comentario
 
 def main():
     matriz_propor, largura, limiar, fator, arquivo_entrada, arquivo_saida, branco, matriz, proporcao, escala, comentario = normalizacao()
-    #print(matriz_propor)
-    #print(largura)
-    #print(limiar)
-    #print(fator)
-    #print(matriz_propor)
 
-    
     matriz_largura = contar_largura(matriz_propor, largura)
-    #print(matriz_largura)
 
     matriz_menores = contar_limiar(limiar, matriz_largura)
-    #print(matriz_menores)
 
     matriz_binarizada = montar_matriz_binarizada(matriz_propor, matriz_menores, largura, fator)
-    #print(matriz_binarizada)
 
     contador_branco_in, contador_preto_in = normalizar.acha_brancos_pretos(matriz)
     print(f"{arquivo_entrada}: {contador_preto_in} pixels pretos e {contador_branco_in} pixels brancos")
