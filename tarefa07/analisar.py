@@ -21,10 +21,12 @@ def binarizaracao(arquivo_entrada, largura, limiar, fator):
     return matriz_binarizada # Lembrar que todos os itens aqui estão como string
 
 def descobrir_centro(x, y, matriz_binarizada):
-    ''' A partir das coordenadas x e y, descobre-se o ponto central da matriz'''
-    indice_iCentro = int(x) #colunas
-    indice_jCentro = int(y) #linhas
-    ponto_central = matriz_binarizada[indice_jCentro][indice_iCentro]
+    '''A partir das coordenadas x e y, descobre-se o ponto central da matriz'''
+    m = len(matriz_binarizada)
+
+    indice_jCentro = int(x)  #colunas
+    indice_iCentro = (m - 1) - int(y)  #linhas
+    ponto_central = matriz_binarizada[indice_iCentro][indice_jCentro]
 
     return ponto_central, indice_iCentro, indice_jCentro
 
@@ -34,32 +36,32 @@ def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro):
 
     m = len(matriz_binarizada)
     for i in range(m):
-        dist_x = 0 #Vai somando a distancia em x
+        dist_y = 0 #Vai somando a distancia em y
         indice_i = i
         n = len(matriz_binarizada[i])
         #CALCULO DA DISTANCIA EM X:
-        if indice_i < indice_jCentro:
-            while indice_i < indice_jCentro:
+        if indice_i < indice_iCentro:
+            while indice_i < indice_iCentro:
                 indice_i += 1
-                dist_x += 1
+                dist_y += 1
         else: 
-            while indice_i > indice_jCentro:
+            while indice_i > indice_iCentro:
                 indice_i -= 1
-                dist_x += 1
+                dist_y += 1
 
         for j in range(n):
-            dist_y = 0 #Vai somando a distancia em y
+            dist_x = 0 #Vai somando a distancia em y
             indice_j = j
             atual = matriz_binarizada[i][j]
             #CALCULO DA DISTANCIA EM Y:
-            if indice_j < indice_iCentro:
-                while indice_j < indice_iCentro:
+            if indice_j < indice_jCentro:
+                while indice_j < indice_jCentro:
                     indice_j += 1
-                    dist_y += 1
+                    dist_x += 1
             else: 
-                while indice_j > indice_iCentro:
+                while indice_j > indice_jCentro:
                     indice_j -= 1
-                    dist_y += 1
+                    dist_x += 1
 
             if atual == "0":
                 distancia = math.sqrt((dist_x**2) + (dist_y**2))
