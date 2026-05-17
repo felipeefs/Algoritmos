@@ -22,28 +22,28 @@ def binarizaracao(arquivo_entrada, largura, limiar, fator):
 
 def descobrir_centro(x, y, matriz_binarizada):
     ''' A partir das coordenadas x e y, descobre-se o ponto central da matriz'''
-    indice_iCentro = int(x) 
-    indice_jCentro = int(y)
-    ponto_central = matriz_binarizada[indice_iCentro][indice_jCentro]
+    indice_iCentro = int(x) #colunas
+    indice_jCentro = int(y) #linhas
+    ponto_central = matriz_binarizada[indice_jCentro][indice_iCentro]
 
     return ponto_central, indice_iCentro, indice_jCentro
 
 def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro):
     ''' Para cada ponto da matriz, descobrir sua distancia em x e y do ponto central, com base nisso, usa-se teo. de pitagoras para descobrir a distancia desse pixel ao centro -----> adiciona cada distancia em uma lista de distancias'''
     lista_distancias = []
-    m = len(matriz_binarizada)
 
+    m = len(matriz_binarizada)
     for i in range(m):
         dist_x = 0 #Vai somando a distancia em x
         indice_i = i
         n = len(matriz_binarizada[i])
         #CALCULO DA DISTANCIA EM X:
-        if indice_i < indice_iCentro:
-            while indice_i < indice_iCentro:
+        if indice_i < indice_jCentro:
+            while indice_i < indice_jCentro:
                 indice_i += 1
                 dist_x += 1
         else: 
-            while indice_i > indice_iCentro:
+            while indice_i > indice_jCentro:
                 indice_i -= 1
                 dist_x += 1
 
@@ -52,12 +52,12 @@ def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro):
             indice_j = j
             atual = matriz_binarizada[i][j]
             #CALCULO DA DISTANCIA EM Y:
-            if indice_j < indice_jCentro:
-                while indice_j < indice_jCentro:
+            if indice_j < indice_iCentro:
+                while indice_j < indice_iCentro:
                     indice_j += 1
                     dist_y += 1
             else: 
-                while indice_j > indice_jCentro:
+                while indice_j > indice_iCentro:
                     indice_j -= 1
                     dist_y += 1
 
@@ -86,6 +86,7 @@ def descobrir_numero_colonias(colonia_bacteria, n_medio):
 
 def main():
     arquivo_entrada, largura, limiar, fator, x, y, raio, n_medio = entradas()
+
     matriz_binarizada = binarizaracao(arquivo_entrada, largura, limiar, fator)
 
     #print(matriz_binarizada)
