@@ -31,27 +31,19 @@ def descobrir_centro(x, y, matriz_binarizada):
     return ponto_central, indice_iCentro, indice_jCentro
 
 def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro, raio):
-    ''' Para cada ponto da matriz, descobrir sua distancia em x e y do ponto central, com base nisso, usa-se teo. de pitagoras para descobrir a distancia desse pixel ao centro -----> adiciona cada distancia em uma lista de distancias'''
-    lista_distancias = []
+    ''' Para cada ponto da matriz, descobrir sua distancia em x e y do ponto central, com base nisso, usa-se teo. de pitagoras para descobrir a distancia desse pixel ao centro -----> verifica se essa distancia é menor que o raio e soma-se em um contador de bacterias'''
     colonia_bacteria = 0
 
     m = len(matriz_binarizada)
     for i in range(m):
         dist_y = 0 #Vai somando a distancia em y
-        indice_i = i
         n = len(matriz_binarizada[i])
-        #CALCULO DA DISTANCIA EM X:
-        
-        dist_y = indice_iCentro - i
-       
+        dist_y = indice_iCentro - i  #CALCULO DA DISTANCIA EM X
 
         for j in range(n):
             dist_x = 0 #Vai somando a distancia em y
-            indice_j = j
             atual = matriz_binarizada[i][j]
-            #CALCULO DA DISTANCIA EM Y:
-            dist_x = indice_jCentro - j
-
+            dist_x = indice_jCentro - j #CALCULO DA DISTANCIA EM Y
 
             if atual == "0":
                 distancia = math.sqrt((dist_x**2) + (dist_y**2))
@@ -59,16 +51,7 @@ def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro, raio)
                     colonia_bacteria += 1
 
     return colonia_bacteria
-
-def descobrir_colonia_bacterias(lista_distancias, raio):
-    '''Verifica na lista de distancia se a distancia é menor igual ao raio, caso for, a bacteria é valida'''
-    colonia_bacteria = 0
-    for distancia in lista_distancias:
-        if distancia <= int(raio):
-            colonia_bacteria += 1
-
-    return colonia_bacteria            
-
+      
 def descobrir_numero_colonias(colonia_bacteria, n_medio):
     ''' Faz uma divisão do numero de bacterias com o n_medio, e verifica se precisa de diluição ou não'''
     n_colonia = colonia_bacteria / int(n_medio)
@@ -90,8 +73,6 @@ def main():
     matriz_binarizada = binarizaracao(arquivo_entrada, largura, limiar, fator)
 
     ponto_central, indice_iCentro, indice_jCentro = descobrir_centro(x, y, matriz_binarizada)
-
-    #lista_distancias = descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro)
 
     colonia_bacteria =  descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro, raio)
 
