@@ -7,7 +7,7 @@ def entradas():
     x, y, raio = input().split()
     n_medio = input()
 
-    return arquivo_entrada, largura, limiar, fator, x, y, raio
+    return arquivo_entrada, largura, limiar, fator, x, y, raio, n_medio
 
 def binarizaracao(arquivo_entrada, largura, limiar, fator):
     matriz_propor, branco, matriz, proporcao, escala, comentario = binarizar.normalizacao(arquivo_entrada)
@@ -50,6 +50,7 @@ def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro):
         for j in range(n):
             dist_y = 0 #Vai somando a distancia em y
             indice_j = j
+            atual = matriz_binarizada[i][j]
             #CALCULO DA DISTANCIA EM Y:
             if indice_j < indice_jCentro:
                 while indice_j < indice_jCentro:
@@ -60,19 +61,31 @@ def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro):
                     indice_j -= 1
                     dist_y += 1
 
-            distancia = math.sqrt((dist_x**2) + (dist_y**2))
-            lista_distancias.append(distancia)
+            if atual == "0":
+                distancia = math.sqrt((dist_x**2) + (dist_y**2))
+                lista_distancias.append(distancia)
 
     return lista_distancias
 
-def descobrir_colonia_bacterias():
+def descobrir_colonia_bacterias(lista_distancias, raio):
     '''Verifica na lista de distancia se a distancia é menor igual ao raio, caso for, a bacteria é valida'''
+    colonia_bacteria = 0
+    for distancia in lista_distancias:
+        if distancia <= int(raio):
+            colonia_bacteria += 1
 
-def descobrir_numero_colonias():
+    return colonia_bacteria            
+
+
+def descobrir_numero_colonias(colonia_bacteria, n_medio):
     ''' Faz uma divisão do numero de bacterias com o n_medio, e verifica se precisa de diluição ou não'''
+    n_colonia = colonia_bacteria / int(n_medio)
+    n_colonia = int(n_colonia)
+
+    return n_colonia
 
 def main():
-    arquivo_entrada, largura, limiar, fator, x, y, raio = entradas()
+    arquivo_entrada, largura, limiar, fator, x, y, raio, n_medio = entradas()
     matriz_binarizada = binarizaracao(arquivo_entrada, largura, limiar, fator)
 
     #print(matriz_binarizada)
@@ -82,5 +95,11 @@ def main():
 
     lista_distancias = descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro)
     print(lista_distancias)
+
+    colonia_bacteria = descobrir_colonia_bacterias(lista_distancias, raio)
+    print(colonia_bacteria)
+
+    n_colonia = descobrir_numero_colonias(colonia_bacteria, n_medio)
+    print(n_colonia)
 
 main()
