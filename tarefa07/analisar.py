@@ -41,28 +41,17 @@ def descobrir_distancia(matriz_binarizada, indice_iCentro, indice_jCentro, raio)
         indice_i = i
         n = len(matriz_binarizada[i])
         #CALCULO DA DISTANCIA EM X:
-        if indice_i < indice_iCentro:
-            while indice_i < indice_iCentro:
-                indice_i += 1
-                dist_y += 1
-        else: 
-            while indice_i > indice_iCentro:
-                indice_i -= 1
-                dist_y += 1
+        
+        dist_y = indice_iCentro - i
+       
 
         for j in range(n):
             dist_x = 0 #Vai somando a distancia em y
             indice_j = j
             atual = matriz_binarizada[i][j]
             #CALCULO DA DISTANCIA EM Y:
-            if indice_j < indice_jCentro:
-                while indice_j < indice_jCentro:
-                    indice_j += 1
-                    dist_x += 1
-            else: 
-                while indice_j > indice_jCentro:
-                    indice_j -= 1
-                    dist_x += 1
+            dist_x = indice_jCentro - j
+
 
             if atual == "0":
                 distancia = math.sqrt((dist_x**2) + (dist_y**2))
@@ -79,7 +68,6 @@ def descobrir_colonia_bacterias(lista_distancias, raio):
             colonia_bacteria += 1
 
     return colonia_bacteria            
-
 
 def descobrir_numero_colonias(colonia_bacteria, n_medio):
     ''' Faz uma divisão do numero de bacterias com o n_medio, e verifica se precisa de diluição ou não'''
