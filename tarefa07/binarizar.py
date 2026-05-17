@@ -1,9 +1,14 @@
 import normalizar
 
-def normalizacao():
-    ''' recebe as funções do normalizar.py para normalizar as matrizes do novo arquivo, tambem devolve a largura, limiar e o nivel de fator'''
-    matriz, arquivo_entrada, arquivo_saida, escala, comentario, proporcao, branco = normalizar.entradas()
+def entradas():
+    arquivo_entrada, arquivo_saida= normalizar.entradas()
     largura, limiar, fator = input().split()
+
+    return arquivo_entrada, arquivo_saida, largura, limiar, fator
+
+def normalizacao(arquivo_entrada, arquivo_saida, largura, limiar, fator):
+    ''' recebe as funções do normalizar.py para normalizar as matrizes do novo arquivo, tambem devolve a largura, limiar e o nivel de fator'''
+    matriz, escala, comentario, proporcao, branco = normalizar.criar_matriz(arquivo_entrada)
 
     maior_valor, contador_branco_ini = normalizar.encontra_maior_valor(matriz)
 
@@ -11,7 +16,7 @@ def normalizacao():
 
     matriz_propor = normalizar.nova_matriz(matriz, maior_valor,menor_valor)
 
-    return matriz_propor, largura, limiar, fator, arquivo_entrada, arquivo_saida, branco, matriz, proporcao, escala, comentario
+    return matriz_propor, branco, matriz, proporcao, escala, comentario
 
 def contar_largura(matriz_propor, largura):
     ''' com base no item atual do loop da matriz, acha os itens em volta desse atual com base na largura e adiciona em uma lista'''
@@ -117,7 +122,9 @@ def novo_arquivo_binarizado(matriz_binarizada, arquivo_saida, escala, comentario
 
 
 def main():
-    matriz_propor, largura, limiar, fator, arquivo_entrada, arquivo_saida, branco, matriz, proporcao, escala, comentario = normalizacao()
+    arquivo_entrada, arquivo_saida, largura, limiar, fator = entradas()
+
+    matriz_propor, branco, matriz, proporcao, escala, comentario = normalizacao(arquivo_entrada, arquivo_saida, largura, limiar, fator)
 
     matriz_largura = contar_largura(matriz_propor, largura)
 
@@ -132,5 +139,5 @@ def main():
 
     novo_arquivo_binarizado(matriz_binarizada, arquivo_saida, escala, comentario, proporcao, branco)
 
-
-main()
+if __name__ == "__main__": 
+    main()

@@ -3,6 +3,9 @@ def entradas():
     arquivo_entrada = input()
     arquivo_saida = input()
 
+    return arquivo_entrada, arquivo_saida
+
+def criar_matriz(arquivo_entrada):
     with open(arquivo_entrada) as arquivo:
         escala = arquivo.readline().strip()
         comentario = arquivo.readline().strip()
@@ -14,7 +17,7 @@ def entradas():
             matriz.append((linha))  #Ta adicionando cada linha em uma lista, depois essa lista é adicionada em matrizes
 
 
-    return matriz, arquivo_entrada, arquivo_saida, escala, comentario, proporcao, branco
+    return matriz, escala, comentario, proporcao, branco
 
 def encontra_maior_valor(matriz):
     '''Acha o maior valor da matriz, o branco .Se achar um branco(255), adiciona no contador_branco_ini)'''
@@ -105,7 +108,10 @@ def novo_arquivo(matriz_propor, arquivo_saida, escala, comentario, proporcao, br
 
     
 def main():
-    matriz, arquivo_entrada, arquivo_saida, escala, comentario, proporcao, branco = entradas()
+    arquivo_entrada, arquivo_saida= entradas()
+
+    matriz, escala, comentario, proporcao, branco = criar_matriz(arquivo_entrada)
+
     maior_valor, contador_branco_ini = encontra_maior_valor(matriz)
 
     menor_valor, contador_preto_ini = encontra_menor_valor(matriz)
