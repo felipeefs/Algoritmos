@@ -6,7 +6,7 @@ def entradas():
 
     return arquivo_entrada, arquivo_saida, largura, limiar, fator
 
-def normalizacao(arquivo_entrada, arquivo_saida, largura, limiar, fator):
+def normalizacao(arquivo_entrada):
     ''' recebe as funções do normalizar.py para normalizar as matrizes do novo arquivo, tambem devolve a largura, limiar e o nivel de fator'''
     matriz, escala, comentario, proporcao, branco = normalizar.criar_matriz(arquivo_entrada)
 
@@ -124,7 +124,7 @@ def novo_arquivo_binarizado(matriz_binarizada, arquivo_saida, escala, comentario
 def main():
     arquivo_entrada, arquivo_saida, largura, limiar, fator = entradas()
 
-    matriz_propor, branco, matriz, proporcao, escala, comentario = normalizacao(arquivo_entrada, arquivo_saida, largura, limiar, fator)
+    matriz_propor, branco, matriz, proporcao, escala, comentario = normalizacao(arquivo_entrada)
 
     matriz_largura = contar_largura(matriz_propor, largura)
 
