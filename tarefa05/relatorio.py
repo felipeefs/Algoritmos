@@ -1,4 +1,5 @@
 import telemetria
+import math
 
 def trajetoria():
     v_max, leituras = telemetria.ler_trajetoria()
@@ -16,7 +17,7 @@ def distancia_total(reconstruidas):
     for i in range(1, len(reconstruidas)):
         t1, x1, y1 = reconstruidas[i-1]
         t2, x2, y2 = reconstruidas[i]
-        distancia = telemetria.distancia(x1, y1, x2, y2)
+        distancia = telemetria.distancia(x1, y1, x2, y2) #Chama função da telemetria
         distancias.append(distancia)
 
     distancia_percorrida = 0
@@ -31,12 +32,27 @@ def distancia_daPartida(reconstruidas):
     t1, x1, y1 = reconstruidas[0]
     t2, x2 ,y2 = reconstruidas[ultimo_indice]
 
-    distancia_extrema = telemetria.distancia(x1,y1,x2,y2)
+    distancia_extrema = telemetria.distancia(x1,y1,x2,y2) #Chama função da telemetria
 
     return distancia_extrema
 
-def velocidade_maxima():
+def velocidade_maxima(reconstruidas):
     ''' Calcula a velocidade média entre dois pontos, armazena em uma lista e retorna a maior '''
+
+    velocidades = []
+    for i in range(1, len(reconstruidas)):
+        ta, xa, ya = reconstruidas[i-1]
+        t, x, y = reconstruidas[i]
+        v_med = math.sqrt((x - xa)**2 + (y - ya)**2) / (t - ta)
+        velocidades.append(v_med)
+
+    maior_vel = velocidades[0]
+    for velocidade in velocidades:
+        if velocidade > maior_vel:
+            maior_vel = velocidade
+
+    return velocidades, maior_vel
+
 
 def variacao_velocidade():
     ''' Recebe a lista de velocidades médias da função velociade_maxima e usa a função max_variacao de telemetria para calcular a maior variação das velocidades médias'''
@@ -54,5 +70,8 @@ def main():
 
     distancia_extrema = distancia_daPartida(reconstruidas)
     print(distancia_extrema)
+
+    velocidades, maior_velo = velocidade_maxima(reconstruidas)
+    print(maior_velo)
 
 main()

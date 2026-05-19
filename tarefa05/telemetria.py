@@ -70,7 +70,7 @@ def interpolar(xa, ya, ta, xb, yb, tb, t):
     Exemplo: interpolar(0, 0, 0, 10, 10, 4, 2) devolve 5.0, 5.0.
     """
     x = xa + ((xb - xa) * ((t - ta) / (tb - ta)))
-    y = xa + ((yb - ya) * ((t - ta) / (tb - ta)))
+    y = ya + ((yb - ya) * ((t - ta) / (tb - ta)))
     return x, y
 
 
@@ -100,8 +100,7 @@ def reconstruir(leituras, corrompidas):
                 j += 1   
             tb, xb, yb = leituras[j]
 
-            x_corri = xa + ((xb - xa) * ((t - ta) / (tb - ta)))
-            y_corri = ya + ((yb - ya) * ((t - ta) / (tb - ta)))
+            x_corri, y_corri = interpolar(xa, ya, ta, xb, yb, tb, t)
             nova_tupla = (t, x_corri, y_corri)
             corrigida.append(nova_tupla)
             
