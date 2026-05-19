@@ -60,9 +60,15 @@ def variacao_velocidade(velocidades):
                                                                         
     return maior_variacao_velocidades
 
-
-def distancia_aoDestino():
+def distancia_aoDestino(reconstruidas, x_d, y_d):
     ''' Recebe a ultima distancia da trajetória corrigida e usa a função distancia() para calcular a distancia euclediana com a posição do destino da sonda ''' 
+    ultimo_indice = len(reconstruidas) -1
+    t, x, y = reconstruidas[ultimo_indice]
+    x_d = float(x_d)
+    y_d = float(y_d)
+    distancia_destino = telemetria.distancia(x, y, x_d, y_d)
+
+    return distancia_destino
 
 def posicao_estimada():
     '''Recebe as duas ultimas posições da trajetoria e calcula qual será a estimativa da proxima por (𝑥𝑛+(𝑥𝑛−𝑥𝑛−1),𝑦𝑛+(𝑦𝑛−𝑦𝑛−1)). '''
@@ -80,5 +86,8 @@ def main():
 
     maior_variacao_velocidades = variacao_velocidade(velocidades)
     print(maior_variacao_velocidades)
+
+    distancia_destino = distancia_aoDestino(reconstruidas, x_d, y_d)
+    print(distancia_destino)
 
 main()
