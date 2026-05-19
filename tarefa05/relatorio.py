@@ -4,16 +4,26 @@ def trajetoria():
     v_max, leituras = telemetria.ler_trajetoria()
     x_d, y_d = input().split()
     corrompidas_detectadas = telemetria.detectar_corrompidas(leituras, v_max)
-    reconstrucao = telemetria.reconstruir(leituras, corrompidas_detectadas)
-    print(reconstrucao)
+    reconstruidas = telemetria.reconstruir(leituras, corrompidas_detectadas)
+    print(reconstruidas)
 
-    return reconstrucao, x_d, y_d
+    return reconstruidas, x_d, y_d
 
-trajetoria()
-
-def distancia_total():
-    ''' Recebe a tupla com as distancias corrigidas e calcula a distância euclediana com a função distancia entre cada par de distâncias
+def distancia_total(reconstruidas):
+    ''' Recebe a tupla com as distancias corrigidas e calcula a distância euclediana com a função distancia entre cada par de distâncias e soma todas elas
     '''
+    distancias = []
+    for i in range(1, len(reconstruidas)):
+        t1, x1, y1 = reconstruidas[i-1]
+        t2, x2, y2 = reconstruidas[i]
+        distancia = telemetria.distancia(x1, y1, x2, y2)
+        distancias.append(distancia)
+
+    distancia_percorrida = 0
+    for distancia in distancias:
+        distancia_percorrida += distancia
+    
+    return distancia_percorrida
 
 def distancia_daPartida():        
     ''' Acha qual é a primeira e a ultima posição, e usa a função distancia() para calcular a distancia euclediana entre elas '''
@@ -31,4 +41,8 @@ def posicao_estimada():
     '''Recebe as duas ultimas posições da trajetoria e calcula qual será a estimativa da proxima por (𝑥𝑛+(𝑥𝑛−𝑥𝑛−1),𝑦𝑛+(𝑦𝑛−𝑦𝑛−1)). '''
 
 def main():
-    pass
+    reconstruidas, x_d, y_d = trajetoria()
+    distancia_percorrida = distancia_total(reconstruidas)
+    print(distancia_percorrida)
+
+main()
