@@ -70,8 +70,20 @@ def distancia_aoDestino(reconstruidas, x_d, y_d):
 
     return distancia_destino
 
-def posicao_estimada():
+def posicao_estimada(reconstruidas):
     '''Recebe as duas ultimas posições da trajetoria e calcula qual será a estimativa da proxima por (𝑥𝑛+(𝑥𝑛−𝑥𝑛−1),𝑦𝑛+(𝑦𝑛−𝑦𝑛−1)). '''
+    ultimo_indice = len(reconstruidas) -1
+    penultimo_indice = len(reconstruidas) -2
+
+    tn, xn, yn = reconstruidas[ultimo_indice]
+    tn1, xn1, yn1 = reconstruidas[penultimo_indice]
+
+    x_estimado = (xn + (xn - xn1))
+    y_estimado = (yn + (yn - yn1))
+
+    return x_estimado, y_estimado
+
+
 
 def main():
     reconstruidas, x_d, y_d = trajetoria()
@@ -90,4 +102,7 @@ def main():
     distancia_destino = distancia_aoDestino(reconstruidas, x_d, y_d)
     print(distancia_destino)
 
+    x_estimado, y_estimado = posicao_estimada(reconstruidas)
+    print(x_estimado)
+    print(y_estimado)
 main()
