@@ -1,5 +1,7 @@
 import telemetria
 
-def distancia_total(distancia, corrigida):
-    for i in range(corrigida)//2:
+def trajetoria():
+    v_max, leituras = telemetria.ler_trajetoria()
+    corrompidas_detectadas = telemetria.detectar_corrompidas(leituras, v_max)
+    reconstrucao = telemetria.reconstruir(leituras, corrompidas_detectadas)
         

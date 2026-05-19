@@ -33,9 +33,6 @@ def distancia(x1, y1, x2, y2):
     distancia = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
     return distancia
     
-
-
-
 def detectar_corrompidas(leituras, v_max):
     """
     Recebe uma lista de tuplas (t, x, y) representando as leituras
@@ -62,8 +59,6 @@ def detectar_corrompidas(leituras, v_max):
                 corrompidas.append(False)
                 ta, xa, ya = t, x, y #Se não é corrompida o t_a, x_a e y_a recebem a posição atual que é valida
     return corrompidas
-
-
 
 def interpolar(xa, ya, ta, xb, yb, tb, t):
     """
@@ -94,7 +89,7 @@ def reconstruir(leituras, corrompidas):
     ta, xa, ya = leituras[0]
     
     for i in range(len(leituras)):
-        if not corrompidas[i]:
+        if not corrompidas[i]: # Se for False
             corrigida.append(leituras[i])
             ta, xa ,ya = leituras[i]        #Atualização das varialveis "a"
             
