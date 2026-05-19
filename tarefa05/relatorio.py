@@ -6,7 +6,6 @@ def trajetoria():
     x_d, y_d = input().split()
     corrompidas_detectadas = telemetria.detectar_corrompidas(leituras, v_max)
     reconstruidas = telemetria.reconstruir(leituras, corrompidas_detectadas)
-    print(reconstruidas)
 
     return reconstruidas, x_d, y_d
 
@@ -84,25 +83,24 @@ def posicao_estimada(reconstruidas):
     return x_estimado, y_estimado
 
 
-
 def main():
     reconstruidas, x_d, y_d = trajetoria()
     distancia_percorrida = distancia_total(reconstruidas)
-    print(distancia_percorrida)
+    print(f"Distância total percorrida: {distancia_percorrida:.2f}")
 
     distancia_extrema = distancia_daPartida(reconstruidas)
-    print(distancia_extrema)
+    print(f"Distância ao ponto de partida: {distancia_extrema:.2f}")
 
     velocidades, maior_velo = velocidade_maxima(reconstruidas)
-    print(maior_velo)
+    print(f"Velocidade máxima: {maior_velo:.2f}")
 
     maior_variacao_velocidades = variacao_velocidade(velocidades)
-    print(maior_variacao_velocidades)
+    print(f"Variação máxima de velocidade: {maior_variacao_velocidades:.2f}")
 
     distancia_destino = distancia_aoDestino(reconstruidas, x_d, y_d)
-    print(distancia_destino)
+    print(f"Distância ao destino: {distancia_destino:.2f}")
 
     x_estimado, y_estimado = posicao_estimada(reconstruidas)
-    print(x_estimado)
-    print(y_estimado)
+    print(f"Próxima posição estimada: {x_estimado:.2f} {y_estimado:.2f}")
+
 main()
