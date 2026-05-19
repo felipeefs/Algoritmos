@@ -25,8 +25,15 @@ def distancia_total(reconstruidas):
     
     return distancia_percorrida
 
-def distancia_daPartida():        
+def distancia_daPartida(reconstruidas):        
     ''' Acha qual é a primeira e a ultima posição, e usa a função distancia() para calcular a distancia euclediana entre elas '''
+    ultimo_indice = len(reconstruidas) -1
+    t1, x1, y1 = reconstruidas[0]
+    t2, x2 ,y2 = reconstruidas[ultimo_indice]
+
+    distancia_extrema = telemetria.distancia(x1,y1,x2,y2)
+
+    return distancia_extrema
 
 def velocidade_maxima():
     ''' Calcula a velocidade média entre dois pontos, armazena em uma lista e retorna a maior '''
@@ -44,5 +51,8 @@ def main():
     reconstruidas, x_d, y_d = trajetoria()
     distancia_percorrida = distancia_total(reconstruidas)
     print(distancia_percorrida)
+
+    distancia_extrema = distancia_daPartida(reconstruidas)
+    print(distancia_extrema)
 
 main()
