@@ -54,8 +54,12 @@ def velocidade_maxima(reconstruidas):
     return velocidades, maior_vel
 
 
-def variacao_velocidade():
+def variacao_velocidade(velocidades):
     ''' Recebe a lista de velocidades médias da função velociade_maxima e usa a função max_variacao de telemetria para calcular a maior variação das velocidades médias'''
+    maior_variacao_velocidades = telemetria.max_variacao(velocidades)
+                                                                        
+    return maior_variacao_velocidades
+
 
 def distancia_aoDestino():
     ''' Recebe a ultima distancia da trajetória corrigida e usa a função distancia() para calcular a distancia euclediana com a posição do destino da sonda ''' 
@@ -73,5 +77,8 @@ def main():
 
     velocidades, maior_velo = velocidade_maxima(reconstruidas)
     print(maior_velo)
+
+    maior_variacao_velocidades = variacao_velocidade(velocidades)
+    print(maior_variacao_velocidades)
 
 main()

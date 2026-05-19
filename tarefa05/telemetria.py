@@ -117,14 +117,14 @@ def max_variacao(valores):
     pois |5.0 - 2.0| = 3.0 é a maior variação consecutiva.
     """
     lista_subtracao = []
-    for i in range(len(valores) -1 ):
+    for i in range(len(valores) -1):
         j = i + 1
         if valores[i] < valores[j]:
             subtracao = valores[j] - valores [i]
         else:
             subtracao = valores[i] - valores [j]
         lista_subtracao.append(subtracao)
-    
+    '''
     diferenca = 0
     for i in range(len(lista_subtracao) - 1):
         j = i + 1
@@ -132,6 +132,11 @@ def max_variacao(valores):
             diferenca = lista_subtracao[i]
         else:
             diferenca = lista_subtracao[j]
-
-    return diferenca
+    '''
+    maior_diferenca = lista_subtracao[0]
+    for item in lista_subtracao:
+        if item > maior_diferenca:
+            maior_diferenca = item
+            
+    return maior_diferenca
             
