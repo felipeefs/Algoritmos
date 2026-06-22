@@ -4,6 +4,11 @@ de artigos. Reveja as instruções no enunciado da tarefa. Todos os dados da
 coleção de artigos são passados para as funções por meio de um único parâmetro
 colecao. Se sua coleção precisar guardar tipos distintos de dados, então você
 pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
+
+
+Com base no dados dos arquivos dos arquivos.json cria dicionarios para cada id, em que as chaves serão: id, titulo, autores, palavra-chave, ano, referencias.
+
+Quando for necessário buscar por palavras-chaves será necessário usar coleções (para realizar as operações booleanas)
 """
 
 import json
@@ -12,20 +17,41 @@ from types import SimpleNamespace
 
 def criar_colecao():
     # FIXME: modifique conforme a sua descrição acima
+    '''colecao = SimpleNamespace({'key': 0})
     colecao = SimpleNamespace()
-    colecao.dado1 = ...
+    colecao.dado1 = ... #dado seria uma chave, e os ... seriam os valores
     colecao.dado2 = ...
     ...
+    colecao.id = ...
+    colecao.titulo = ...
+    colecao.autores = ...
+    colecao.palavras = ...
+    colecao.ano = ...
+    colecao.referencias = ...'''
+    
+    colecao = {
+        "id": None,
+        "titulo": None,
+        "autores": None,
+        "palavras-chave": None,
+        "ano": None, 
+        "referencias": None
+    }
+
     return colecao
 
+criar_colecao()
 
 def obter_nome_artigo(colecao, id_artigo):
+
+    
     pass
 
 
 def carregar_arquivo(colecao, nome_arquivo):
     with open(nome_arquivo) as arquivo:
         lista_artigos = json.load(arquivo)
+
 
     # FIXME: carregue a lista de artigos lidos na sua coleção
     ...
