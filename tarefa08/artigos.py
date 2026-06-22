@@ -23,17 +23,10 @@ def criar_colecao():
     colecao.dado2 = ...
     ...'''
     colecao.lista_dic = []
-    colecao.conj_palChaves = set()
+    colecao.conj_palavras = set()
 
+    '''melhor criar uma coleçao para cada item la colecao. '''
 
-    '''colecao = {
-        "id": None,
-        "titulo": None,
-        "autores": None,
-        "palavras-chave": None,
-        "ano": None, 
-        "referencias": None
-    }'''
     print(colecao)
     return colecao
 
@@ -47,13 +40,21 @@ def obter_nome_artigo(colecao, id_artigo):
 def carregar_arquivo(colecao, nome_arquivo):
     with open(nome_arquivo) as arquivo:
         lista_artigos = json.load(arquivo)
+        
     #print(lista_artigos)
     # FIXME: carregue a lista de artigos lidos na sua coleção
     ...
 
     for item in lista_artigos:
-        colecao.lista_dic.append(item)
+        colecao.lista_dic.append(item) #adiciona todos os dicionarios na lista que esta na colecao
+
+    for item in colecao.lista_dic: 
+        for i in item["palavras-chave"]:
+            if i not in colecao.conj_palavras:
+                colecao.conj_palavras.add(i)
+
     print(colecao.lista_dic)
+    print(colecao.conj_palavras)
 
 def obter_numero_artigos(colecao):
     pass
