@@ -9,6 +9,8 @@ pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
 -Com base no dados dos arquivos dos arquivos.json cria uma lista com dicionarios para cada id, em que as chaves serão: id, titulo, autores, palavra-chave, ano, referencias.
 -Uma coleção que guarda as palavras chaves (para realizar as operações booleanas)
 -Um dicionario para com os nomes dos autores (para verificar quantas vezes mencionadoss)
+-Uma coleção para os IDs
+-Uma coleção para as referencias aparecidas
 """
 
 import json
@@ -74,16 +76,33 @@ def carregar_arquivo(colecao, nome_arquivo):
     print(colecao.conj_id)
     print(colecao.conj_ref)
 
+
 def obter_numero_artigos(colecao):
-    pass
+    '''Pega a lista de dicionarios, e descobre quantos elementos há nela, essa quantidade representa a quantidade de artigos'''
+    numero_artigos = (len(colecao.lista_dic))
+
+    return numero_artigos
 
 
 def obter_palavras(colecao):
-    pass
+    '''A partir do conjunto de todas as palavras-chaves, as deixa em ordem alfabetica'''
+    palavras = sorted(colecao.conj_palavras)
+
+    return palavras
 
 
 def obter_principais_autores(colecao):
-    pass
+    '''Como se fosse um histograma, a cada vez que o autor for citado, é somado 1 a sua multiplicidade'''
+    dic_autores = colecao.dic_autores
+    for autor, valor in dic_autores.items():
+        print(autor)
+        for item in colecao.lista_dic:
+            for i in item["autores"]:
+                if i == autor:
+                    #print(i)
+                    dic_autores[autor] += 1 #o valor de cada chave de autor recebe um cada vez que ele aparece
+        
+    print(dic_autores)
 
 
 def obter_referencias_orfas(colecao):
@@ -126,5 +145,13 @@ def gravar_arquivo(colecao, nome_arquivo):
 def main():
     colecao = criar_colecao()
     carregar_arquivo(colecao, "dados/artigos1.json")
+
+    numero_artigos= obter_numero_artigos(colecao)
+    print(numero_artigos)
+
+    palavras = obter_palavras(colecao)
+    print(palavras)
+
+    obter_principais_autores(colecao)
 
 main()
