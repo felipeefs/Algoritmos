@@ -93,16 +93,24 @@ def obter_palavras(colecao):
 
 def obter_principais_autores(colecao):
     '''Como se fosse um histograma, a cada vez que o autor for citado, é somado 1 a sua multiplicidade'''
-    dic_autores = colecao.dic_autores
-    for autor, valor in dic_autores.items():
-        print(autor)
+    for autor, valor in colecao.dic_autores.items():
         for item in colecao.lista_dic:
             for i in item["autores"]:
                 if i == autor:
-                    #print(i)
-                    dic_autores[autor] += 1 #o valor de cada chave de autor recebe um cada vez que ele aparece
-        
-    print(dic_autores)
+                    colecao.dic_autores[autor] += 1 #o valor de cada chave de autor recebe um cada vez que ele aparece
+
+    #Devolve a chave o valor, no qual a dupla apresenta maior valor (em caso de empate mostrar em ordem alfabetica)
+    numero = 0
+    principais_autores = set()
+    for autor, valor in colecao.dic_autores.items():
+        if valor > numero:
+            numero = valor
+
+    for autor, valor in colecao.dic_autores.items():
+        if valor == numero:
+            principais_autores.add(autor)
+   
+    return numero, principais_autores
 
 
 def obter_referencias_orfas(colecao):
