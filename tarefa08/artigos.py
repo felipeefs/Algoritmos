@@ -11,6 +11,7 @@ pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
 -Um dicionario para com os nomes dos autores (para verificar quantas vezes mencionadoss)
 -Uma coleção para os IDs
 -Uma coleção para as referencias aparecidas
+-Um dicionario para citacoes, em que citacoes serao adicionadas conforme passa o ID
 """
 
 import json
@@ -24,14 +25,9 @@ def criar_colecao():
     colecao.dic_autores = {}
     colecao.conj_id = set()
     colecao.conj_ref = set()
+    colecao.dic_citacoes = {}
 
     return colecao
-
-
-def obter_nome_artigo(colecao, id_artigo):
-
-    
-    pass
 
 
 def carregar_arquivo(colecao, nome_arquivo):
@@ -119,12 +115,30 @@ def obter_referencias_orfas(colecao):
     referencias_orfas = sorted(referencias_orfas)
 
     return referencias_orfas
-    
 
+    
+def obter_nome_artigo(colecao, id_artigo):
+    '''Funciona junto com a função buscar_citacoes'''
+    for item in colecao.lista_dic:
+        if item["id"] == id_artigo:
+            return item["titulo"]
 
 def buscar_citacoes(colecao, id_artigo):
-    pass
+    for indice, item in enumerate(colecao.lista_dic):
+        for i in item["referencias"]:
+            if id_artigo == i:
+                #descobrir id do artigo a partir do indice
+                dic_atual = colecao.lista_dic[indice]
+                id_artigo_atual = dic_atual["id"]
+                nome_artigo = obter_nome_artigo(colecao, id_artigo_atual)
 
+                colecao.dic_citacoes[id_artigo_atual] = nome_artigo
+    lista_artigos = []
+    for chave, valor in colecao.dic_citacoes.items():
+        lista_artigos.append(f"{chave}: {valor}")
+                
+    return lista_artigos
+    
 
 def buscar_palavras(colecao, consulta):
     pass
@@ -171,4 +185,9 @@ def main():
 
     referencias_orfas = obter_referencias_orfas(colecao)
     print(referencias_orfas)
-main()'''
+
+    teste_dic_citacoes, lista_artigos = buscar_citacoes(colecao, 112342)
+    print(teste_dic_citacoes)
+    print(lista_artigos)
+main()
+'''
