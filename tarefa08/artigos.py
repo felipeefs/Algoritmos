@@ -25,7 +25,6 @@ def criar_colecao():
     colecao.conj_id = set()
     colecao.conj_ref = set()
 
-    print(colecao)
     return colecao
 
 
@@ -69,13 +68,13 @@ def carregar_arquivo(colecao, nome_arquivo):
             if i not in colecao.conj_ref:
                 colecao.conj_ref.add(i)
     
-
+'''
     print(colecao.lista_dic)
     print(colecao.conj_palavras)
     print(colecao.dic_autores)
     print(colecao.conj_id)
     print(colecao.conj_ref)
-
+'''
 
 def obter_numero_artigos(colecao):
     '''Pega a lista de dicionarios, e descobre quantos elementos há nela, essa quantidade representa a quantidade de artigos'''
@@ -117,6 +116,7 @@ def obter_principais_autores(colecao):
 def obter_referencias_orfas(colecao):
     '''Como foi criado um conjunto para todos os IDs, e um conjunto para as referencias; pode-se verificar a diferenca entre elas para ver qual ref não aparece'''
     referencias_orfas = colecao.conj_ref - colecao.conj_id
+    referencias_orfas = sorted(referencias_orfas)
 
     return referencias_orfas
     
@@ -154,7 +154,7 @@ def gravar_arquivo(colecao, nome_arquivo):
     with open(nome_arquivo, "w") as arquivo:
         json.dump(lista_artigos, arquivo, indent=2, ensure_ascii=False)
 
-
+'''
 def main():
     colecao = criar_colecao()
     carregar_arquivo(colecao, "dados/artigos1.json")
@@ -171,3 +171,4 @@ def main():
 
     referencias_orfas = obter_referencias_orfas(colecao)
     print(referencias_orfas)
+main()'''
