@@ -55,11 +55,24 @@ def carregar_arquivo(colecao, nome_arquivo):
         for i in item["autores"]:
             if i not in colecao.dic_autores:
                 colecao.dic_autores[i] = 0
+
+    #Adiciona IDs em um conjunto
+    for item in colecao.lista_dic:
+        if item["id"] not in colecao.conj_id:
+            colecao.conj_id.add(item["id"])
+
+    #Adiciona as referencias em um conjunto
+    for item in colecao.lista_dic:
+        for i in item["referencias"]:
+            if i not in colecao.conj_ref:
+                colecao.conj_ref.add(i)
     
 
     print(colecao.lista_dic)
     print(colecao.conj_palavras)
     print(colecao.dic_autores)
+    print(colecao.conj_id)
+    print(colecao.conj_ref)
 
 def obter_numero_artigos(colecao):
     pass
