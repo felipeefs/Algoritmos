@@ -6,9 +6,9 @@ colecao. Se sua coleção precisar guardar tipos distintos de dados, então voc�
 pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
 
 
-Com base no dados dos arquivos dos arquivos.json cria uma lista com dicionarios para cada id, em que as chaves serão: id, titulo, autores, palavra-chave, ano, referencias.
-
-Quando for necessário buscar por palavras-chaves será necessário usar coleções (para realizar as operações booleanas)
+-Com base no dados dos arquivos dos arquivos.json cria uma lista com dicionarios para cada id, em que as chaves serão: id, titulo, autores, palavra-chave, ano, referencias.
+-Uma coleção que guarda as palavras chaves (para realizar as operações booleanas)
+-Um dicionario para com os nomes dos autores (para verificar quantas vezes mencionadoss)
 """
 
 import json
@@ -16,16 +16,12 @@ from types import SimpleNamespace
 
 
 def criar_colecao():
-    # FIXME: modifique conforme a sua descrição acima
-    #colecao = SimpleNamespace({'key': 0})
     colecao = SimpleNamespace()
-    '''colecao.dado1 = ... #dado seria uma chave, e os ... seriam os valores
-    colecao.dado2 = ...
-    ...'''
     colecao.lista_dic = []
     colecao.conj_palavras = set()
-
-    '''melhor criar uma coleçao para cada item la colecao. '''
+    colecao.dic_autores = {}
+    colecao.conj_id = set()
+    colecao.conj_ref = set()
 
     print(colecao)
     return colecao
@@ -38,23 +34,32 @@ def obter_nome_artigo(colecao, id_artigo):
 
 
 def carregar_arquivo(colecao, nome_arquivo):
-    with open(nome_arquivo) as arquivo:
-        lista_artigos = json.load(arquivo)
-        
-    #print(lista_artigos)
     # FIXME: carregue a lista de artigos lidos na sua coleção
     ...
 
-    for item in lista_artigos:
-        colecao.lista_dic.append(item) #adiciona todos os dicionarios na lista que esta na colecao
+    with open(nome_arquivo) as arquivo:
+        lista_artigos = json.load(arquivo)
 
+    #Adiciona todos os dicionarios na lista que esta       
+    for item in lista_artigos:
+        colecao.lista_dic.append(item) 
+
+    #Adicona todas as palavras chaves em um conjunto
     for item in colecao.lista_dic: 
         for i in item["palavras-chave"]:
             if i not in colecao.conj_palavras:
                 colecao.conj_palavras.add(i)
 
+    #Adiciona cada autor em um dicionario especifico (para depois calcular suas ocorrencia)
+    for item in colecao.lista_dic:
+        for i in item["autores"]:
+            if i not in colecao.dic_autores:
+                colecao.dic_autores[i] = 0
+    
+
     print(colecao.lista_dic)
     print(colecao.conj_palavras)
+    print(colecao.dic_autores)
 
 def obter_numero_artigos(colecao):
     pass
