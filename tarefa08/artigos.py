@@ -109,12 +109,17 @@ def obter_principais_autores(colecao):
     for autor, valor in colecao.dic_autores.items():
         if valor == numero:
             principais_autores.add(autor)
-   
+    principais_autores = sorted(principais_autores)
+
     return numero, principais_autores
 
 
 def obter_referencias_orfas(colecao):
-    pass
+    '''Como foi criado um conjunto para todos os IDs, e um conjunto para as referencias; pode-se verificar a diferenca entre elas para ver qual ref não aparece'''
+    referencias_orfas = colecao.conj_ref - colecao.conj_id
+
+    return referencias_orfas
+    
 
 
 def buscar_citacoes(colecao, id_artigo):
@@ -160,6 +165,9 @@ def main():
     palavras = obter_palavras(colecao)
     print(palavras)
 
-    obter_principais_autores(colecao)
+    numero, principais_autores = obter_principais_autores(colecao)
+    print(numero)
+    print(principais_autores)
 
-main()
+    referencias_orfas = obter_referencias_orfas(colecao)
+    print(referencias_orfas)
