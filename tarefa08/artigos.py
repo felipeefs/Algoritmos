@@ -11,6 +11,7 @@ pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
 -Um dicionario para com os nomes dos autores (para verificar quantas vezes mencionadoss)
 -Uma coleção para os IDs
 -Uma coleção para as referencias aparecidas
+-Cria um dicionario para adicionar palavra-chave (chave), e um conjunto de IDs (valor) 
 """
 
 import json
@@ -24,7 +25,7 @@ def criar_colecao():
     colecao.dic_autores = {}
     colecao.conj_id = set()
     colecao.conj_ref = set()
-    colecao.dic_citacoes = {}
+    colecao.dic_chave = {}
 
     return colecao
 
@@ -122,6 +123,11 @@ def obter_nome_artigo(colecao, id_artigo):
         if item["id"] == id_artigo:
             return item["titulo"]
 
+def achar_id_artigo_atual(indice, colecao):
+    dic_atual = colecao.lista_dic[indice]
+    id_artigo_atual = dic_atual["id"]
+
+    return id_artigo_atual
 
 def buscar_citacoes(colecao, id_artigo):
     lista_artigos = []
@@ -129,23 +135,31 @@ def buscar_citacoes(colecao, id_artigo):
         for i in item["referencias"]:
             if id_artigo == i:
                 #descobrir id do artigo a partir do indice
-                dic_atual = colecao.lista_dic[indice]
-                id_artigo_atual = dic_atual["id"]
+                id_artigo_atual = achar_id_artigo_atual(indice, colecao)
                 lista_artigos.append(id_artigo_atual)
     lista_artigos = sorted(lista_artigos)
-    #colecao.dic_citacoes = sorted(colecao.dic_citacoes)      
-
-    #citacoes_ordenadas = dict(reversed(colecao.dic_citacoes.items()))
-    '''lista_artigos = []
-    for chave, valor in sorted(colecao.dic_citacoes.items()):
-        lista_artigos.append(f"{chave}: {valor}")
-    print(lista_artigos)'''
+                
     return lista_artigos
     
 
 def buscar_palavras(colecao, consulta):
-    pass
+    '''com base em um novo dicionario de palavras chaves, acha todos os ids de dicionarios que possuem essa palavra chave a adicona um conjunto desses ids nos valores --- depois faz a interceção para verificar quais ids possuem as mesmas palavras'''
 
+    for palavra in consulta:
+        conj_ids = set()
+        for indice, item in enumerate(colecao.lista_dic):
+            for i in item["palavras-chave"]:
+                if i == palavra:
+                    id_atual = achar_id_artigo_atual(indice, colecao)
+                    conj_ids.add(id_atual)
+        colecao.dic_chave[palavra] = conj_ids
+
+    ids_finais = colecao.dic_chave[consulta[0]] & colecao.dic_chave[consulta[1]]
+
+    return ids_finais
+
+#esvaziar conjunto no fina
+     
 
 def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referencias):
     pass
@@ -177,19 +191,23 @@ def main():
     carregar_arquivo(colecao, "dados/artigos1.json")
 
     numero_artigos= obter_numero_artigos(colecao)
-    print(numero_artigos)
+    #print(numero_artigos)
 
     palavras = obter_palavras(colecao)
-    print(palavras)
+    #print(palavras)
 
     numero, principais_autores = obter_principais_autores(colecao)
-    print(numero)
-    print(principais_autores)
+    #print(numero)
+    #print(principais_autores)
 
     referencias_orfas = obter_referencias_orfas(colecao)
-    print(referencias_orfas)
+    #print(referencias_orfas)
 
     lista_artigos = buscar_citacoes(colecao, 112342)
-    for i in lista_artigos:
-        print(i)
+    lista_artigos= reversed(lista_artigos)
+   
+
+    consulta = ["Algoritmos", "Inteligência Artificial"]
+    buscar_palavras(colecao, consulta)
+
 main()'''
