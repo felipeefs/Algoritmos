@@ -11,7 +11,6 @@ pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
 -Um dicionario para com os nomes dos autores (para verificar quantas vezes mencionadoss)
 -Uma coleção para os IDs
 -Uma coleção para as referencias aparecidas
--Um dicionario para citacoes, em que citacoes serao adicionadas conforme passa o ID
 """
 
 import json
@@ -123,20 +122,24 @@ def obter_nome_artigo(colecao, id_artigo):
         if item["id"] == id_artigo:
             return item["titulo"]
 
+
 def buscar_citacoes(colecao, id_artigo):
+    lista_artigos = []
     for indice, item in enumerate(colecao.lista_dic):
         for i in item["referencias"]:
             if id_artigo == i:
                 #descobrir id do artigo a partir do indice
                 dic_atual = colecao.lista_dic[indice]
                 id_artigo_atual = dic_atual["id"]
-                nome_artigo = obter_nome_artigo(colecao, id_artigo_atual)
+                lista_artigos.append(id_artigo_atual)
+    lista_artigos = sorted(lista_artigos)
+    #colecao.dic_citacoes = sorted(colecao.dic_citacoes)      
 
-                colecao.dic_citacoes[id_artigo_atual] = nome_artigo
-    lista_artigos = []
-    for chave, valor in colecao.dic_citacoes.items():
+    #citacoes_ordenadas = dict(reversed(colecao.dic_citacoes.items()))
+    '''lista_artigos = []
+    for chave, valor in sorted(colecao.dic_citacoes.items()):
         lista_artigos.append(f"{chave}: {valor}")
-                
+    print(lista_artigos)'''
     return lista_artigos
     
 
@@ -186,8 +189,7 @@ def main():
     referencias_orfas = obter_referencias_orfas(colecao)
     print(referencias_orfas)
 
-    teste_dic_citacoes, lista_artigos = buscar_citacoes(colecao, 112342)
-    print(teste_dic_citacoes)
-    print(lista_artigos)
-main()
-'''
+    lista_artigos = buscar_citacoes(colecao, 112342)
+    for i in lista_artigos:
+        print(i)
+main()'''
