@@ -143,18 +143,24 @@ def buscar_citacoes(colecao, id_artigo):
     
 
 def buscar_palavras(colecao, consulta):
-    '''com base em um novo dicionario de palavras chaves, acha todos os ids de dicionarios que possuem essa palavra chave a adicona um conjunto desses ids nos valores --- depois faz a interceção para verificar quais ids possuem as mesmas palavras'''
+    '''com base em um novo dicionario de palavras chaves, acha todos os ids de dicionarios que possuem essa palavra chave a adicona um conjunto desses ids nos valor do dicionario --- depois faz a interceção para verificar quais ids possuem as mesmas palavras'''
+    m = (len(consulta))
+    for i in range(m):
+        n = len(consulta[i])
+        for j in range(n):
+            conj_ids = set()
+            palavra = consulta[i][j]
 
-    for palavra in consulta:
-        conj_ids = set()
-        for indice, item in enumerate(colecao.lista_dic):
-            for i in item["palavras-chave"]:
-                if i == palavra:
-                    id_atual = achar_id_artigo_atual(indice, colecao)
-                    conj_ids.add(id_atual)
-        colecao.dic_chave[palavra] = conj_ids
+            for indice, item in enumerate(colecao.lista_dic):
+                for k in item["palavras-chave"]:
+                    if k == palavra:
+                        id_atual = achar_id_artigo_atual(indice, colecao)
+                        conj_ids.add(id_atual)
+            colecao.dic_chave[palavra] = conj_ids
+    #print(colecao.dic_chave)
 
-    ids_finais = colecao.dic_chave[consulta[0]] & colecao.dic_chave[consulta[1]]
+    ids_finais = colecao.dic_chave[consulta[0][0]] & colecao.dic_chave[consulta[0][1]]
+    #print(ids_finais)
 
     return ids_finais
 
@@ -207,7 +213,11 @@ def main():
     lista_artigos= reversed(lista_artigos)
    
 
-    consulta = ["Algoritmos", "Inteligência Artificial"]
+    consulta = [
+        ["Algoritmos", "Inteligência Artificial"],
+        ["Banco de Dados"]
+    ]
+
     buscar_palavras(colecao, consulta)
 
 main()'''
