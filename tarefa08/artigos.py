@@ -178,7 +178,7 @@ def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referenci
         if dic["id"] == id_artigo:
             return False
 
-    #adiciona novo dicionario  
+    #adiciona novo dicionario
     novo_dic["id"] = id_artigo
     novo_dic["titulo"] = titulo
     novo_dic["autores"] = autores
@@ -186,6 +186,7 @@ def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referenci
     novo_dic["ano"] = ano
     novo_dic["referencias"] = referencias
     colecao.lista_dic.append(novo_dic) #adicionando
+
     return True
 
 def remover_artigo(colecao, id_artigo):
@@ -210,13 +211,34 @@ def alterar_palavras(colecao, id_artigo, palavras_novas):
 
 
 def alterar_referencias(colecao, id_artigo, referencias_novas):
-    pass
-
+    '''Procura o dicionario na lista, em que o id_artigo corresponde ao id do dicionario e muda as referencias desse id'''
+    for dic in colecao.lista_dic:
+        if dic["id"] == id_artigo:
+            dic["referencias"] = referencias_novas
+            return True
+    
+    return False
 
 def gravar_arquivo(colecao, nome_arquivo):
-    # FIXME: prepare uma lista de arquivos no formato do arquivo JSON
-    lista_artigos = ...
-    ...
+    '''O proprio colecao.lista_dic é uma lista de artigos/dicionarios, porém não está em ordem crescente, usa-se um algoritmo de ordenção para arrumar'''
+    n = len(colecao.lista_dic)    
+
+    for i in range(n):
+        menor_indice = i
+        for j in range(i+1, n):
+            id_atual = achar_id_artigo_atual(j, colecao)
+            id_menor = achar_id_artigo_atual(menor_indice, colecao)
+            if id_atual < id_menor:
+                menor_indice = j
+        
+        lista_menor = colecao.lista_dic[menor_indice]
+        lista_atual = colecao.lista_dic[i]
+
+        colecao.lista_dic[i] = lista_menor
+        colecao.lista_dic[menor_indice] = lista_atual
+        
+
+    lista_artigos = colecao.lista_dic 
 
     with open(nome_arquivo, "w") as arquivo:
         json.dump(lista_artigos, arquivo, indent=2, ensure_ascii=False)
@@ -249,5 +271,7 @@ def main():
     ]
 
     buscar_palavras(colecao, consulta)
+
+    
 
 main()'''
