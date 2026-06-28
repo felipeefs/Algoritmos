@@ -144,12 +144,15 @@ def buscar_citacoes(colecao, id_artigo):
 
 def buscar_palavras(colecao, consulta):
     '''com base em um novo dicionario de palavras chaves, acha todos os ids de dicionarios que possuem essa palavra chave a adicona um conjunto desses ids nos valor do dicionario --- depois faz a interceção para verificar quais ids possuem as mesmas palavras'''
+    matriz_ids = []
     m = (len(consulta))
     for i in range(m):
+        cont = 0
         n = len(consulta[i])
         for j in range(n):
             conj_ids = set()
             palavra = consulta[i][j]
+            cont +=1
 
             for indice, item in enumerate(colecao.lista_dic):
                 for k in item["palavras-chave"]:
@@ -157,12 +160,30 @@ def buscar_palavras(colecao, consulta):
                         id_atual = achar_id_artigo_atual(indice, colecao)
                         conj_ids.add(id_atual)
             colecao.dic_chave[palavra] = conj_ids
-    #print(colecao.dic_chave)
+        if cont >= 0:
+            matriz_ids.append(colecao.dic_chave[consulta[i][cont-2]] & colecao.dic_chave[consulta[i][cont-1]])
+            print(j)
+            print(colecao.dic_chave[consulta[i][j-1]])
+            print(colecao.dic_chave[consulta[i][j]])
 
-    ids_finais = colecao.dic_chave[consulta[0][0]] & colecao.dic_chave[consulta[0][1]]
-    #print(ids_finais)
+        else:
+            matriz_ids.append(colecao.dic_chave[consulta[i][j]])
+            print(colecao.dic_chave[consulta[i][j]])
+            print(i)
+            print(j)
 
-    return ids_finais
+    
+    ids_finais = set()
+    for i in range(len(matriz_ids)):
+        for j in range(len(matriz_ids[i])):
+            ids_finais.add(matriz_ids[i][j])
+    print(colecao.dic_chave)
+
+    #matriz_ids = colecao.dic_chave[consulta[0][0]] & colecao.dic_chave[consulta[0][1]]
+
+    print(ids_finais)
+    print(matriz_ids)
+    return matriz_ids
 
 #esvaziar conjunto no fina
      
@@ -191,7 +212,7 @@ def gravar_arquivo(colecao, nome_arquivo):
     with open(nome_arquivo, "w") as arquivo:
         json.dump(lista_artigos, arquivo, indent=2, ensure_ascii=False)
 
-'''
+
 def main():
     colecao = criar_colecao()
     carregar_arquivo(colecao, "dados/artigos1.json")
@@ -215,9 +236,9 @@ def main():
 
     consulta = [
         ["Algoritmos", "Inteligência Artificial"],
-        ["Banco de Dados"]
+        ["Bancos de Dados"]
     ]
 
     buscar_palavras(colecao, consulta)
 
-main()'''
+main()
