@@ -171,8 +171,22 @@ def buscar_palavras(colecao, consulta):
      
 
 def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referencias):
-    pass
+    '''Cria um dicionario vazio, vai adicionando os novos parametros nesse dicionario que será implementado na lista final de dicionario (colecao.lista_dic), se for adiciona returna True, se não for retorna False'''
+    novo_dic = {}
+    #verifica se o id já existe no dicionario
+    for item in colecao.lista_dic:
+        if item["id"] == id_artigo:
+            return False
 
+    #adiciona novo dicionario  
+    novo_dic["id"] = id_artigo
+    novo_dic["titulo"] = titulo
+    novo_dic["autores"] = autores
+    novo_dic["palavras-chaves"] = palavras
+    novo_dic["ano"] = ano
+    novo_dic["referencias"] = referencias
+    colecao.lista_dic.append(novo_dic) #adicionando
+    return True
 
 def remover_artigo(colecao, id_artigo):
     pass
