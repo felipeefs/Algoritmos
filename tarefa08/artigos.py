@@ -182,9 +182,9 @@ def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referenci
     novo_dic["id"] = id_artigo
     novo_dic["titulo"] = titulo
     novo_dic["autores"] = autores
-    novo_dic["palavras-chaves"] = palavras
+    novo_dic["palavras-chave"] = sorted(palavras)
     novo_dic["ano"] = ano
-    novo_dic["referencias"] = referencias
+    novo_dic["referencias"] = sorted(referencias)
     colecao.lista_dic.append(novo_dic) #adicionando
 
     return True
@@ -192,9 +192,9 @@ def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referenci
 def remover_artigo(colecao, id_artigo):
     '''Percorre a lista de dicionarios procurando o id_artigo, se ele estiver presente em um dicionario: remove esse dicionario e devolve True, se não devolve False'''
 
-    for dic in colecao.lista_dic:
+    for indece, dic in enumerate(colecao.lista_dic):
         if dic["id"] == id_artigo:
-            del dic
+            del colecao.lista_dic[indece]
             return True
 
     return False
@@ -204,7 +204,7 @@ def alterar_palavras(colecao, id_artigo, palavras_novas):
     '''Procura o dicionario na lista, em que o id_artigo corresponde ao id do dicionario e muda as palavras-chaves desse id'''
     for dic in colecao.lista_dic:
         if dic["id"] == id_artigo:
-            dic["palavras-chaves"] = palavras_novas
+            dic["palavras-chave"] = sorted(palavras_novas)
             return True
     
     return False
@@ -214,7 +214,7 @@ def alterar_referencias(colecao, id_artigo, referencias_novas):
     '''Procura o dicionario na lista, em que o id_artigo corresponde ao id do dicionario e muda as referencias desse id'''
     for dic in colecao.lista_dic:
         if dic["id"] == id_artigo:
-            dic["referencias"] = referencias_novas
+            dic["referencias"] = sorted(referencias_novas)
             return True
     
     return False
