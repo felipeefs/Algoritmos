@@ -31,29 +31,29 @@ def carregar_arquivo(colecao, nome_arquivo):
         lista_artigos = json.load(arquivo)
 
     #Adiciona todos os dicionarios na lista que esta       
-    for item in lista_artigos:
-        colecao.lista_dic.append(item) 
+    for dic in lista_artigos:
+        colecao.lista_dic.append(dic) 
 
     #Adicona todas as palavras chaves em um conjunto
-    for item in colecao.lista_dic: 
-        for i in item["palavras-chave"]:
+    for dic in colecao.lista_dic: 
+        for i in dic["palavras-chave"]:
             if i not in colecao.conj_palavras:
                 colecao.conj_palavras.add(i)
 
     #Adiciona cada autor em um dicionario especifico (para depois calcular suas ocorrencia)
-    for item in colecao.lista_dic:
-        for i in item["autores"]:
+    for dic in colecao.lista_dic:
+        for i in dic["autores"]:
             if i not in colecao.dic_autores:
                 colecao.dic_autores[i] = 0
 
     #Adiciona IDs em um conjunto
-    for item in colecao.lista_dic:
-        if item["id"] not in colecao.conj_id:
-            colecao.conj_id.add(item["id"])
+    for dic in colecao.lista_dic:
+        if dic["id"] not in colecao.conj_id:
+            colecao.conj_id.add(dic["id"])
 
     #Adiciona as referencias em um conjunto
-    for item in colecao.lista_dic:
-        for i in item["referencias"]:
+    for dic in colecao.lista_dic:
+        for i in dic["referencias"]:
             if i not in colecao.conj_ref:
                 colecao.conj_ref.add(i)
     
@@ -82,8 +82,8 @@ def obter_palavras(colecao):
 def obter_principais_autores(colecao):
     '''Como se fosse um histograma, a cada vez que o autor for citado, é somado 1 a sua multiplicidade'''
     for autor, valor in colecao.dic_autores.items():
-        for item in colecao.lista_dic:
-            for i in item["autores"]:
+        for dic in colecao.lista_dic:
+            for i in dic["autores"]:
                 if i == autor:
                     colecao.dic_autores[autor] += 1 #o valor de cada chave de autor recebe um cada vez que ele aparece
 
@@ -112,9 +112,9 @@ def obter_referencias_orfas(colecao):
     
 def obter_nome_artigo(colecao, id_artigo):
     '''Funciona junto com a função buscar_citacoes'''
-    for item in colecao.lista_dic:
-        if item["id"] == id_artigo:
-            return item["titulo"]
+    for dic in colecao.lista_dic:
+        if dic["id"] == id_artigo:
+            return dic["titulo"]
 
 def achar_id_artigo_atual(indice, colecao):
     '''Função criada para achar o id atual com base no indice em que o dicionario está na sua lista'''
@@ -126,8 +126,8 @@ def achar_id_artigo_atual(indice, colecao):
 def buscar_citacoes(colecao, id_artigo):
     '''A partir de id_artigo, descobre percorrendo a lista de dicionarios o id do dicionario (a partir de uma nova função) daquele que cita esse id_artigo'''
     lista_artigos = []
-    for indice, item in enumerate(colecao.lista_dic):
-        for i in item["referencias"]:
+    for indice, dic in enumerate(colecao.lista_dic):
+        for i in dic["referencias"]:
             if id_artigo == i:
                 #descobrir id do artigo a partir do indice
                 id_artigo_atual = achar_id_artigo_atual(indice, colecao)
@@ -149,8 +149,8 @@ def buscar_palavras(colecao, consulta):
             palavra = consulta[i][j]
             cont +=1
 
-            for indice, item in enumerate(colecao.lista_dic):
-                for k in item["palavras-chave"]:
+            for indice, dic in enumerate(colecao.lista_dic):
+                for k in dic["palavras-chave"]:
                     if k == palavra:
                         id_atual = achar_id_artigo_atual(indice, colecao)
                         conj_ids.add(id_atual)
@@ -174,8 +174,8 @@ def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referenci
     '''Cria um dicionario vazio, vai adicionando os novos parametros nesse dicionario que será implementado na lista final de dicionario (colecao.lista_dic), se for adiciona returna True, se não for retorna False'''
     novo_dic = {}
     #verifica se o id já existe no dicionario
-    for item in colecao.lista_dic:
-        if item["id"] == id_artigo:
+    for dic in colecao.lista_dic:
+        if dic["id"] == id_artigo:
             return False
 
     #adiciona novo dicionario  
@@ -189,7 +189,14 @@ def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referenci
     return True
 
 def remover_artigo(colecao, id_artigo):
-    pass
+    '''Percorre a lista de dicionarios procurando o id_artigo, se ele estiver presente em um dicionario: remove esse dicionario e devolve True, se não devolve False'''
+
+    for dic in colecao.lista_dic:
+        if dic["id"] == id_artigo:
+            del dic
+            return True
+
+    return False
 
 
 def alterar_palavras(colecao, id_artigo, palavras_novas):
