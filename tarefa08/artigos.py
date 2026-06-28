@@ -200,7 +200,13 @@ def remover_artigo(colecao, id_artigo):
 
 
 def alterar_palavras(colecao, id_artigo, palavras_novas):
-    pass
+    '''Procura o dicionario na lista, em que o id_artigo corresponde ao id do dicionario e muda as palavras-chaves desse id'''
+    for dic in colecao.lista_dic:
+        if dic["id"] == id_artigo:
+            dic["palavras-chaves"] = palavras_novas
+            return True
+    
+    return False
 
 
 def alterar_referencias(colecao, id_artigo, referencias_novas):
