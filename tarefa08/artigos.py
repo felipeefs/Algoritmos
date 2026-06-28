@@ -1,11 +1,4 @@
 """
-FIXME: Descreva AQUI sucinta e objetivamente como você irá representar a coleção
-de artigos. Reveja as instruções no enunciado da tarefa. Todos os dados da
-coleção de artigos são passados para as funções por meio de um único parâmetro
-colecao. Se sua coleção precisar guardar tipos distintos de dados, então você
-pode utilizar um objeto do tipo SimpleNamespace, como no exemplo abaixo.
-
-
 -Com base no dados dos arquivos dos arquivos.json cria uma lista com dicionarios para cada id, em que as chaves serão: id, titulo, autores, palavra-chave, ano, referencias.
 -Uma coleção que guarda as palavras chaves (para realizar as operações booleanas)
 -Um dicionario para com os nomes dos autores (para verificar quantas vezes mencionadoss)
@@ -124,12 +117,14 @@ def obter_nome_artigo(colecao, id_artigo):
             return item["titulo"]
 
 def achar_id_artigo_atual(indice, colecao):
+    '''Função criada para achar o id atual com base no indice em que o dicionario está na sua lista'''
     dic_atual = colecao.lista_dic[indice]
     id_artigo_atual = dic_atual["id"]
 
     return id_artigo_atual
 
 def buscar_citacoes(colecao, id_artigo):
+    '''A partir de id_artigo, descobre percorrendo a lista de dicionarios o id do dicionario (a partir de uma nova função) daquele que cita esse id_artigo'''
     lista_artigos = []
     for indice, item in enumerate(colecao.lista_dic):
         for i in item["referencias"]:
@@ -160,33 +155,19 @@ def buscar_palavras(colecao, consulta):
                         id_atual = achar_id_artigo_atual(indice, colecao)
                         conj_ids.add(id_atual)
             colecao.dic_chave[palavra] = conj_ids
+
         if cont >= 0:
             matriz_ids.append(colecao.dic_chave[consulta[i][cont-2]] & colecao.dic_chave[consulta[i][cont-1]])
-            #print(j)
-            #print(colecao.dic_chave[consulta[i][j-1]])
-            #print(colecao.dic_chave[consulta[i][j]])
-
         else:
             matriz_ids.append(colecao.dic_chave[consulta[i][j]])
-            #print(colecao.dic_chave[consulta[i][j]])
-            #print(i)
-            #print(j)
 
-    
+    #Como os conjuntos não podem ser acessador por indices, itera a matriz:
     ids_finais = []
     for lista in matriz_ids:
         for id in lista:
             if id not in ids_finais:
                 ids_finais.append(id)
-    #print(colecao.dic_chave)
-
-    #matriz_ids = colecao.dic_chave[consulta[0][0]] & colecao.dic_chave[consulta[0][1]]
-
-    #print(ids_finais)
-    #print(matriz_ids)
     return ids_finais
-
-#esvaziar conjunto no fina
      
 
 def inserir_artigo(colecao, id_artigo, titulo, autores, ano, palavras, referencias):
@@ -213,7 +194,7 @@ def gravar_arquivo(colecao, nome_arquivo):
     with open(nome_arquivo, "w") as arquivo:
         json.dump(lista_artigos, arquivo, indent=2, ensure_ascii=False)
 
-
+'''
 def main():
     colecao = criar_colecao()
     carregar_arquivo(colecao, "dados/artigos1.json")
@@ -242,4 +223,4 @@ def main():
 
     buscar_palavras(colecao, consulta)
 
-main()
+main()'''
