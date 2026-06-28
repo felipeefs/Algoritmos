@@ -143,7 +143,7 @@ def buscar_citacoes(colecao, id_artigo):
     
 
 def buscar_palavras(colecao, consulta):
-    '''com base em um novo dicionario de palavras chaves, acha todos os ids de dicionarios que possuem essa palavra chave a adicona um conjunto desses ids nos valor do dicionario --- depois faz a interceção para verificar quais ids possuem as mesmas palavras'''
+    '''Com base em um novo dicionario de palavras chaves; acha todos os ids de dicionarios que possuem essa palavra chave a adicona um conjunto desses ids nos valor do dicionario ---> depois faz a interceção para verificar quais ids possuem as mesmas palavras'''
     matriz_ids = []
     m = (len(consulta))
     for i in range(m):
@@ -162,28 +162,29 @@ def buscar_palavras(colecao, consulta):
             colecao.dic_chave[palavra] = conj_ids
         if cont >= 0:
             matriz_ids.append(colecao.dic_chave[consulta[i][cont-2]] & colecao.dic_chave[consulta[i][cont-1]])
-            print(j)
-            print(colecao.dic_chave[consulta[i][j-1]])
-            print(colecao.dic_chave[consulta[i][j]])
+            #print(j)
+            #print(colecao.dic_chave[consulta[i][j-1]])
+            #print(colecao.dic_chave[consulta[i][j]])
 
         else:
             matriz_ids.append(colecao.dic_chave[consulta[i][j]])
-            print(colecao.dic_chave[consulta[i][j]])
-            print(i)
-            print(j)
+            #print(colecao.dic_chave[consulta[i][j]])
+            #print(i)
+            #print(j)
 
     
-    ids_finais = set()
-    for i in range(len(matriz_ids)):
-        for j in range(len(matriz_ids[i])):
-            ids_finais.add(matriz_ids[i][j])
-    print(colecao.dic_chave)
+    ids_finais = []
+    for lista in matriz_ids:
+        for id in lista:
+            if id not in ids_finais:
+                ids_finais.append(id)
+    #print(colecao.dic_chave)
 
     #matriz_ids = colecao.dic_chave[consulta[0][0]] & colecao.dic_chave[consulta[0][1]]
 
-    print(ids_finais)
-    print(matriz_ids)
-    return matriz_ids
+    #print(ids_finais)
+    #print(matriz_ids)
+    return ids_finais
 
 #esvaziar conjunto no fina
      
