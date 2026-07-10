@@ -3,16 +3,13 @@ def achar_maximo(lista_num, n):
         return lista_num[0]
     elif n == 2:
         if lista_num[n-1] > lista_num[n-2]:
-            maior = lista_num[n-1]
-        else:
-            maior = lista_num[n-2]
-        return maior
-    else:
-        maior_pri = achar_maximo(lista_num[0:n-(n//2)], (n//2))
-        if maior_pri > lista_num[n-1]:
-            return maior_pri
-        else:
             return lista_num[n-1]
+        else:
+            return lista_num[n-2]
+    else:
+        meio = n//2
+        achar_maximo(lista_num[0:meio], meio)
+        achar_maximo(lista_num[0:meio+1], meio+1)
             
 def main():
     numeros = input()
