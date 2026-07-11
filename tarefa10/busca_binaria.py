@@ -1,7 +1,7 @@
 def frequencia(list_num, x, n):
     #Caso básico:
     if n == 1:
-        if x == list_num[n-1]:
+        if x == int(list_num[n-1]):
             return 1
         else:
             return 0
