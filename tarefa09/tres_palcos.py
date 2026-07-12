@@ -1,16 +1,23 @@
+
+
+
 def criar_colecao():
     n = int(input())
 
-    dic = {}
+    programacao = []
     for n in range(n):
         banda, duracao = input().split(" ")
-        dic[banda] = int(duracao)
+
+        dic = {}
+        dic["banda"] = banda
+        dic["duracao"] = int(duracao)
+        programacao.append(dic)
         
-    return n, dic
+    return n, programacao
 
 def main():
-    n, dic = criar_colecao()
+    n, programacao = criar_colecao()
     print(n)
-    print(dic)
+    print(programacao)
 
 main()
