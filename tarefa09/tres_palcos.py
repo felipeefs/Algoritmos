@@ -3,7 +3,7 @@ def achar_propramacao(bandas,duracoes, n):
     ponto1 = 1
     ponto2 = 2
 
-    dur_1 = 0
+    '''dur_1 = 0
     while ponto1 <= n - 1:
         for item1 in duracoes[0:ponto1]:
             #print(item1)
@@ -15,20 +15,49 @@ def achar_propramacao(bandas,duracoes, n):
                 for item3 in duracoes[ponto2:n+1]:
                     dur_3 += item3
 
-                    duracao = 10000
-                    print(dur_1)
-                    if dur_1 < dur_2 and dur_1 < dur_3 and dur_1 < duracao and dur_1 != 0:
-                        duracao = dur_1
-                    elif dur_2 < dur_1 and dur_2 < dur_3 and dur_2 < duracao and dur_2 != 0:
-                        duracao = dur_2
-                    elif dur_3 < dur_1 and dur_3 < dur_2 and dur_3 < duracao and dur_3 != 0:
-                        duracao = dur_3
+            menor_duracao = 10000
+            print(dur_1, dur_2, dur_3)
+            if dur_1 < dur_2 and dur_1 < dur_3 and dur_1 < menor_duracao and dur_1 != 0:
+                menor_duracao = dur_1
+            elif dur_2 < dur_1 and dur_2 < dur_3 and dur_2 < menor_duracao and dur_2 != 0:
+                menor_duracao = dur_2
+            elif dur_3 < dur_1 and dur_3 < dur_2 and dur_3 < menor_duracao and dur_3 != 0:
+                menor_duracao = dur_3
 
             dur_1 = 0
             ponto1 += 1
             ponto2 = ponto1 + 1 #ponto2 nunca pode ficar antes do ponto1 
+'''
+    while ponto1 <= n-1:
+        dur_1 = 0
+        for item1 in duracoes[0:ponto1]:
+            dur_1 += item1
 
-    print(dur_1, dur_2, dur_3, duracao)
+        dur_2 = 0
+        for item2 in duracoes[ponto1:ponto2]:
+            dur_2 += item2
+
+        dur_3 = 0
+        for item3 in duracoes[ponto2: n]:
+            dur_3 += item3
+
+           
+        menor_duracao = 10000
+        print(dur_1, dur_2, dur_3)
+        if dur_1 < dur_2 and dur_1 < dur_3 and dur_1 < menor_duracao and dur_1 != 0:
+            menor_duracao = dur_1
+        elif dur_2 < dur_1 and dur_2 < dur_3 and dur_2 < menor_duracao and dur_2 != 0:
+            menor_duracao = dur_2           
+        elif dur_3 < dur_1 and dur_3 < dur_2 and dur_3 < menor_duracao and dur_3 != 0:
+            menor_duracao = dur_3
+        
+        ponto1 +=1
+        ponto2 = ponto1 + 1
+
+
+
+
+    print(dur_1, dur_2, dur_3, menor_duracao)
 
 def criar_colecao():
     '''Cria uma lista, programacao, e adiciona um dicionario para cada banda com seu tempo de duração'''
@@ -37,9 +66,9 @@ def criar_colecao():
     bandas = []
     duracoes = []
     for n in range(n):
-        banda, duracao = input().split(" ")        
+        banda, menor_duracao = input().split(" ")        
         bandas.append(banda)
-        duracoes.append(int(duracao))
+        duracoes.append(int(menor_duracao))
     return n, bandas, duracoes
 
 def main():
