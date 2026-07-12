@@ -5,13 +5,13 @@ def achar_propramacao(programacao, n):
     ponto1 = 1
     ponto2 = 2
 
-    while ponto1 <= n - 3:
+    while ponto1 <= n - 2:
         for bandas1 in programacao[0: ponto1]:
             print(bandas1)
             dur_palco1 = 0
             dur_palco1 += bandas1["duracao"]
             for bandas2 in programacao[ponto1: ponto2]:
-                print(bandas2)
+                #print(bandas2)
                 dur_palco2 = 0
                 dur_palco2 += bandas2["duracao"]
                 for bandas3 in programacao[ponto2: n-1]:
@@ -26,7 +26,8 @@ def achar_propramacao(programacao, n):
                         duracao_idea = dur_palco1
                 ponto2+=1
             ponto1 += 1
-            ponto2 = 0
+            ponto2 = ponto2 - 2
+            
                 
 
     print(dur_palco1, dur_palco2, dur_palco3, duracao_idea)
