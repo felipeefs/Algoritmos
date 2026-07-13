@@ -1,7 +1,7 @@
 def achar_propramacao(bandas,duracoes, n):
     '''Com base na quantidade de showns, testa os diferentes casos de possiveis showns a serem realizados, fixando um dois pontos na lista e descobrindo se tem menor duração possivel'''
     ponto1 = 1
-    ponto2 = 2
+    ponto2 = ponto1 + 1
 
     '''dur_1 = 0
     while ponto1 <= n - 1:
@@ -33,13 +33,12 @@ def achar_propramacao(bandas,duracoes, n):
         for item1 in duracoes[0:ponto1]:
             dur_1 += item1
 
+        dur_3 = 0
         dur_2 = 0
         for item2 in duracoes[ponto1:ponto2]:
             dur_2 += item2
-
-        dur_3 = 0
-        for item3 in duracoes[ponto2: n]:
-            dur_3 += item3
+            for item3 in duracoes[ponto2: n+1]:
+                dur_3 += item3
 
            
         menor_duracao = 10000

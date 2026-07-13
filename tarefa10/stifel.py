@@ -14,6 +14,8 @@ def memorizacao(n, k):
         return 1
     else:
         stifel = fatorial(n) // (fatorial(k)) * (fatorial(n-k))
+    
+    return stifel
 
 
 def main():
