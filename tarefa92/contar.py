@@ -33,6 +33,22 @@ def pintador(matriz, i, j, m, n):
                     pintador(matriz, i_linha, j_coluna, m, n) #O recurso com o indice da linha e coluna atual
             soma_co -=1
         soma_li -= 1
+    '''
+
+    NOVA TENTATIVA MAS NAO DEU TEMPO
+    if matriz[i-1][j] == 0 and 0<= i-1 < n and 0 <= j < m:
+        pintador(matriz, i-1, j, m, n)
+        matriz[i-1][j] = 255
+    if matriz[i][j-1] == 0 and 0<= i < n and 0 <= j-1 < m:
+        pintador(matriz, i , j - 1, m, n)
+        matriz[i][j-1] = 255
+    if matriz[i][j+1] == 0 and 0<= i < n and 0 <= j+1 < m:
+        pintador(matriz, i , j + 1, m, n)
+        matriz[i][j+1] = 255
+    if matriz[i+1][j] == 0 and 0<= i+1 < n and 0 <= j < m:
+        pintador(matriz, i+1 , j, m, n)
+        matriz[i+1][j] = 255
+'''
 
 
 def achar_colonias(matriz):
@@ -48,7 +64,6 @@ def achar_colonias(matriz):
                 matriz[i][j] = 255
                 pintador(matriz, i, j, m, n) #O recurso, que verifica se os pixels em volta também são pretos
 
-    print(matriz)
 
     return contador
 
