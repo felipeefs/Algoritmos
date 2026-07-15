@@ -1,26 +1,33 @@
-def frequencia(list_num, x, n):
+def frequencia(list_num, x, inicio, fim):
     #Caso básico:
-    if n == 1:
-        if x == int(list_num[n-1]):
-            return 1
-        else:
-            return 0
+    if inicio > fim:
+        return 0
+    
+    meio = (inicio + fim) // 2
+
+    if x == int(list_num[meio]):
+        return 1
+        
     #Caso geral
+    elif x > int(list_num[meio]):
+        freq = frequencia(list_num, x, meio + 1, fim)
+        return freq 
     else:
-        freq = frequencia(list_num, x, n-1)
-        if int(list_num[n-1]) == x:
-            return freq + 1
-        else:
-            return freq
+        freq = frequencia(list_num, x, inicio, meio - 1)
+        return freq 
+
 
 def main():
     numeros = input()
     list_num = numeros.split(" ")
     n = len(list_num)
 
+    inicio = 0
+    fim = n-1
+
     x = int(input())
 
-    freq = frequencia(list_num, x, n)
+    freq = frequencia(list_num, x, inicio, fim)
     print(freq)
 
 main()
